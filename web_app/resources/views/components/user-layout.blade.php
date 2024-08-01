@@ -10,6 +10,11 @@
     <title>User Dashboard</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    
+    <!-- Light Gallery Plugin Css -->
+<link rel="stylesheet" href="assets/plugins/light-gallery/css/lightgallery.css">
+<link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css" />
     <link rel="stylesheet" href="assets/plugins/charts-c3/plugin.css" />
 
@@ -90,6 +95,21 @@
 
     <script src="assets/bundles/mainscripts.bundle.js"></script>
     <script src="assets/js/pages/index.js"></script>
+
+    {{-- page specific library --}}
+    <script src="assets/bundles/datatablescripts.bundle.js"></script>
+    <script src="assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+<script src="assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+    <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+
+    <script src="assets/plugins/light-gallery/js/lightgallery-all.min.js"></script> <!-- Light Gallery Plugin Js -->
+<script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts -->
+<script src="assets/js/pages/medias/image-gallery.js"></script>
+<script src="assets/js/pages/calendar/calendar.js"></script>
 </body>
 
 
