@@ -59,26 +59,27 @@
                                 alt="User"></a>
                         <div class="detail">
                             <h4>Michael</h4>
-                            <small>User</small>
+                            <small>Super Admin</small>
                         </div>
                     </div>
                 </li>
                 <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-folder"></i><span>Collections</span></a>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-accounts"></i><span>Users</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i><span>Classes</span></a>
+                </li>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-book"></i><span>Subjects</span></a>
+                </li>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
                 </li>
                 <li class="open"><a href="index.html"><i class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
-                </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
                 </li>
             </ul>
         </div>
     </aside>
 
     @yield('content')
-
 
     <!-- Jquery Core Js -->
     <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
