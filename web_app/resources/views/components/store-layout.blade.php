@@ -21,6 +21,29 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .header-area .header-top .header-info-right .shopping-card::before {
+            position: absolute;
+            content: "3";
+            width: 24px;
+            height: 24px;
+            background: #FF1616;
+            color: #fff;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 30px;
+            font-size: 12px;
+            top: -8px;
+            right: -8px;
+            -webkit-transition: all .3s ease-out 0s;
+            -moz-transition: all .3s ease-out 0s;
+            -ms-transition: all .3s ease-out 0s;
+            -o-transition: all .3s ease-out 0s;
+            transition: all .3s ease-out 0s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +63,7 @@
 
                                         <form action="#" class="form-box">
                                             <input type="text" name="Search"
-                                                placeholder="Search book by author or publisher">
+                                                placeholder="Search book by name">
                                             <div class="search-icon">
                                                 <i class="ti-search"></i>
                                             </div>
@@ -48,12 +71,10 @@
                                     </div>
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Track Order</a></li>
                                             <li class="shopping-card">
-                                                <a href="cart.html"><img src="assets/img/icon/cart.svg" alt></a>
+                                                <a href="{{route('cart')}}"><img src="assets/img/icon/cart.svg" alt></a>
                                             </li>
-                                            <li><a href="login.html" class="btn header-btn">Sign in</a></li>
+                                            <li><a href="{{route('login')}}" class="btn header-btn">Sign in</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -67,27 +88,25 @@
                             <div class="col-xl-12">
 
                                 <div class="logo2">
-                                    <a href="index.html"><img src="assets/img/logo/logo.png" alt></a>
+                                    <a href="{{route('home')}}"><img src="assets/img/logo/logo.png" alt></a>
                                 </div>
 
                                 <div class="main-menu text-center d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="categories.html">Categories</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="#">Pages</a>
+                                            <li><a href="{{route('home')}}">Home</a></li>
+                                            <li><a href="{{route('store')}}">Store</a></li>
+                                            <li><a href="{{route('about')}}">About</a></li>
+                                            <li><a href="#">Category</a>
                                                 <ul class="submenu">
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="cart.html">Cart</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="book-details.html">book Details</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
+                                                    <li><a href="#">Mathematics</a></li>
+                                                    <li><a href="#">English Language</a></li>
+                                                    <li><a href="#">Chemistry</a></li>
+                                                    <li><a href="#">Agricultural Science</a></li>
+                                                    <li><a href="#">Biology</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="contact.html">Contect</a></li>
+                                            <li><a href="{{route('contact')}}">Contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -116,7 +135,7 @@
                                 <div class="single-footer-caption mb-30">
 
                                     <div class="footer-logo mb-25">
-                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt></a>
+                                        <a href="{{route('home')}}"><img src="assets/img/logo/logo2_footer.png" alt></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -126,7 +145,7 @@
                                     </div>
 
                                     <div class="footer-social">
-                                        <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook"></i></a>
+                                        <a href="#"><i class="fab fa-facebook"></i></a>
                                         <a href="#"><i class="fab fa-instagram"></i></a>
                                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                                         <a href="#"><i class="fab fa-youtube"></i></a>
@@ -148,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        {{-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
                                     <h4>&nbsp;</h4>
@@ -161,17 +180,17 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
                                     <h4>Site Map</h4>
                                     <ul class="mb-20">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">FAQs</a></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="{{route('home')}}">Home</a></li>
+                                        <li><a href="{{route('about')}}">About Us</a></li>
+                                        <li><a href="{{route('store')}}">Store</a></li>
+                                        <li><a href="{{route('login')}}">Login</a></li>
+                                        <li><a href="{{route('contact')}}">Contact</a></li>
                                     </ul>
                                 </div>
                             </div>

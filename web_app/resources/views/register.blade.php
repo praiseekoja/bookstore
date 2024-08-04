@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="register-footer">
-                    <p> Already have an account? <a href="login.html"> Login</a> here</p>
+                    <p> Already have an account? <a href="{{ route('login') }}"> Login</a> here</p>
                     <button class="submit-btn3">Sign Up</button>
                 </div>
             </div>

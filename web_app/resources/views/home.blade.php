@@ -284,7 +284,7 @@
                             <div class="col-xl-12">
                                 <div class="section-tittle d-flex justify-content-between align-items-center mb-40">
                                     <h2 class="mb-0">Featured This Week</h2>
-                                    <a href="#" class="browse-btn">View All</a>
+                                    <a href="{{ route('store') }}" class="browse-btn">View All</a>
                                 </div>
                             </div>
                         </div>
@@ -1319,35 +1319,12 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="more-btn text-center mt-15">
-                            <a href="#" class="border-btn border-btn2 more-btn2">Browse More</a>
+                            <a href="{{ route('store') }}" class="border-btn border-btn2 more-btn2">Browse More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
-        <section class="container">
-            <div class="row align-items-center justify-content-between">
-                <div class="col-xl-6 col-lg-6">
-                    <div class="wantToWork-area w-padding2 mb-30" data-background="assets/img/gallery/wants-bg1.jpg">
-                        <h2>The History<br> of Phipino</h2>
-                        <div class="linking">
-                            <a href="#" class="btn wantToWork-btn">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="wantToWork-area w-padding2 mb-30" data-background="assets/img/gallery/wants-bg2.jpg">
-                        <h2>Wilma Mumduya</h2>
-                        <div class="linking">
-                            <a href="#" class="btn wantToWork-btn">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
 
         <x-newsletter></x-newsletter>
 

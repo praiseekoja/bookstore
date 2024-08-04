@@ -81,7 +81,7 @@
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
-                                <h3><a>[email&#160;protected]</a></h3>
+                                <h3><a>email@address.com</a></h3>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>

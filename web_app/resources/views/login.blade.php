@@ -29,7 +29,7 @@
             </div>
 
             <div class="login-footer">
-                <p>Don’t have an account? <a href="register.html">Sign Up</a> here</p>
+                <p>Don’t have an account? <a href="{{ route('register') }}">Sign Up</a> here</p>
                 <button class="submit-btn3">Login</button>
             </div>
         </div>

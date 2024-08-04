@@ -53,6 +53,9 @@ Route::get('/auth/register', function () {
 })->name('register');
 
 
+Route::get('/cart', function () {
+    return view('register');
+})->name('cart');
 
 
 
