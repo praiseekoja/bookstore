@@ -9,18 +9,18 @@
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
     <title>User Dashboard</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 
     <!-- Light Gallery Plugin Css -->
-<link rel="stylesheet" href="assets/plugins/light-gallery/css/lightgallery.css">
-<link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css" />
-    <link rel="stylesheet" href="assets/plugins/charts-c3/plugin.css" />
+    <link rel="stylesheet" href="{{ url('assets/plugins/light-gallery/css/lightgallery.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/plugins/fullcalendar/fullcalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('assets/plugins/charts-c3/plugin.css') }}" />
 
-    <link rel="stylesheet" href="assets/plugins/morrisjs/morris.min.css" />
+    <link rel="stylesheet" href="{{ url('assets/plugins/morrisjs/morris.min.css') }}" />
     <!-- Custom Css -->
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="{{ url('assets/css/style.min.css') }}">
 </head>
 
 <body class="theme-blush">
@@ -36,7 +36,7 @@
                     </div>
                 </a></li>
 
-                <li><a href="javascript:void(0);" title="Dark Mode">
+            <li><a href="javascript:void(0);" title="Dark Mode">
                     <div class="light_dark" style="top: -18px; left: 2px; position: relative;">
                         <div class="radio mb-0">
                             <input type="radio" name="radio1" id="darktheme" value="dark">
@@ -68,15 +68,16 @@
                         </div>
                     </div>
                 </li>
-                <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+                <li class="active open"><a href="{{route('user.dashboard', '$user->username')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
+                <li class="open"><a href="{{route('user.library', '$user->username')}}"><i class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
+                <li class="open"><a href="{{route('user.profile', '$user->username')}}"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
+                <li class="open"><a href="{{route('user.transaction', '$user->username')}}"><i
+                            class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
+                <li class="open"><a href="{{route('user.watchlist', '$user->username')}}"><i class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
                 </li>
             </ul>
         </div>
@@ -86,30 +87,30 @@
 
 
     <!-- Jquery Core Js -->
-    <script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
-    <script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- slimscroll, waves Scripts Plugin Js -->
+    <script src="{{ url('assets/bundles/libscripts.bundle.js') }}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
+    <script src="{{ url('assets/bundles/vendorscripts.bundle.js') }}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
 
-    <script src="assets/bundles/jvectormap.bundle.js"></script> <!-- JVectorMap Plugin Js -->
-    <script src="assets/bundles/sparkline.bundle.js"></script> <!-- Sparkline Plugin Js -->
-    <script src="assets/bundles/c3.bundle.js"></script>
+    <script src="{{ url('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
+    <script src="{{ url('assets/bundles/sparkline.bundle.js') }}"></script> <!-- Sparkline Plugin Js -->
+    <script src="{{ url('assets/bundles/c3.bundle.js') }}"></script>
 
-    <script src="assets/bundles/mainscripts.bundle.js"></script>
-    <script src="assets/js/pages/index.js"></script>
+    <script src="{{ url('assets/bundles/mainscripts.bundle.js') }}"></script>
+    <script src="{{ url('assets/js/pages/index.js') }}"></script>
 
     {{-- page specific library --}}
-    <script src="assets/bundles/datatablescripts.bundle.js"></script>
-    <script src="assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
-<script src="assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
-<script src="assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
-<script src="assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
-<script src="assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
-<script src="assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
-    <script src="assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="{{ url('assets/bundles/datatablescripts.bundle.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/buttons.flash.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ url('assets/plugins/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
+    <script src="{{ url('assets/js/pages/tables/jquery-datatable.js') }}"></script>
 
-    <script src="assets/plugins/light-gallery/js/lightgallery-all.min.js"></script> <!-- Light Gallery Plugin Js -->
-<script src="assets/bundles/fullcalendarscripts.bundle.js"></script><!--/ calender javascripts -->
-<script src="assets/js/pages/medias/image-gallery.js"></script>
-<script src="assets/js/pages/calendar/calendar.js"></script>
+    <script src="{{ url('assets/plugins/light-gallery/js/lightgallery-all.min.js') }}"></script> <!-- Light Gallery Plugin Js -->
+    <script src="{{ url('assets/bundles/fullcalendarscripts.bundle.js') }}"></script><!--/ calender javascripts -->
+    <script src="{{ url('assets/js/pages/medias/image-gallery.js') }}"></script>
+    <script src="{{ url('assets/js/pages/calendar/calendar.js') }}"></script>
 </body>
 
 
