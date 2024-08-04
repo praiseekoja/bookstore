@@ -6,10 +6,10 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-7 col-md-6 col-sm-12">
-                        <h2>Add Subject</h2>
+                        <h2>Add Book</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
-                            <li class="breadcrumb-item">Subject</li>
+                            <li class="breadcrumb-item">Book</li>
                             <li class="breadcrumb-item active">Add</li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
@@ -18,7 +18,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="profile.html" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
+                        <a href="#" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
                     </div>
                 </div>
             </div>
@@ -27,23 +27,37 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h2><strong>Add</strong> Subject</h2>
+                                <h2><strong>Add</strong> Book</h2>
                             </div>
                             <div class="body">
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Subject Name">
+                                            <input type="text" class="form-control" placeholder="Book Name">
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Subject Description"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder=" Book Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group">
+                                            <select rows="4" class="form-control no-resize" >
+                                                <option value="Select Subject"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group">
+                                            <select rows="4" class="form-control no-resize" >
+                                                <option value="Select Class"></option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary">Add Subject</button>
+                                        <button class="btn btn-primary">Add Book</button>
                                     </div>
                                 </div>
                             </div>
