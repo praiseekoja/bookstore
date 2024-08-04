@@ -43,12 +43,12 @@ Route::get('/contact', function () {
 })->name('contact');
 
 
-Route::get('/auth/login', function () {
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 
-Route::get('/auth/register', function () {
+Route::get('/register', function () {
     return view('register');
 })->name('register');
 
