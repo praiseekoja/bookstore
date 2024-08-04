@@ -23,9 +23,9 @@
             <div class="container-fluid">
                 <div class="row clearfix">
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="card widget_2 big_icon domains">
+                        <div class="card widget_2 big_icon book">
                             <div class="body">
-                                <h6>Collections</h6>
+                                <h6>Library</h6>
                                 <h2>20 <small class="info">of 200k</small></h2>
 
                             </div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="card widget_2 big_icon sales">
+                        <div class="card widget_2 big_icon credit-card">
                             <div class="body">
                                 <h6>Spent</h6>
                                 <h2>39k</h2>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="card widget_2 big_icon traffic">
+                        <div class="card widget_2 big_icon watch">
                             <div class="body">
                                 <h6>Watchlist</h6>
                                 <h2>8</h2>

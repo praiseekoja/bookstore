@@ -10,7 +10,7 @@
     <title>User Dashboard</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-    
+
     <!-- Light Gallery Plugin Css -->
 <link rel="stylesheet" href="assets/plugins/light-gallery/css/lightgallery.css">
 <link rel="stylesheet" href="assets/plugins/fullcalendar/fullcalendar.min.css">
@@ -70,7 +70,7 @@
                 </li>
                 <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-folder"></i><span>Collections</span></a>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
                 </li>
                 <li class="open"><a href="index.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
                 </li>

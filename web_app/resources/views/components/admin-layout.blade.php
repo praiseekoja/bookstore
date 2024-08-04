@@ -48,8 +48,8 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a href="index.html"><img src="assets/images/logo.svg" width="25" alt="Aero"><span
-                    class="m-l-10">Aero</span></a>
+            <a href="index.html"><img src="assets/images/logo.svg" width="25" alt="Hidden Fact"><span
+                    class="m-l-10">Hidden Fact</span></a>
         </div>
         <div class="menu">
             <ul class="list">
@@ -69,7 +69,7 @@
                 </li>
                 <li class="open"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i><span>Classes</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-book"></i><span>Subjects</span></a>
+                <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-bookmark"></i><span>Subjects</span></a>
                 </li>
                 <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
                 </li>
