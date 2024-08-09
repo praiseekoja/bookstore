@@ -11,15 +11,17 @@
                 <span>Login</span>
                 <p>Enter Login details to get access</p>
             </div>
+        <form action="{{ route('login') }}" method="post">
 
+        
             <div class="input-box">
                 <div class="single-input-fields">
                     <label>Username or Email Address</label>
-                    <input type="text" placeholder="Username / Email address">
+                    <input type="text" placeholder="Username / Email address" >
                 </div>
                 <div class="single-input-fields">
                     <label>Password</label>
-                    <input type="password" placeholder="Enter Password">
+                    <input type="password" placeholder="Enter Password" name="password">
                 </div>
                 <div class="single-input-fields login-check">
                     <input type="checkbox" id="fruit1" name="keep-log">
@@ -32,6 +34,7 @@
                 <p>Don’t have an account? <a href="{{ route('register') }}">Sign Up</a> here</p>
                 <button class="submit-btn3">Login</button>
             </div>
+        </form>
         </div>
     </div>
 
