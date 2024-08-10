@@ -3,6 +3,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\WishlistController;
+use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\API\ClassController;
+use App\Http\Controllers\API\SubjectController;
+use App\Http\Controllers\API\TransactionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +23,41 @@ use App\Http\Controllers\API\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/email/{email}', [AuthController::class, 'checkEmail']);
+    Route::get('/username/{username}', [AuthController::class, 'checkUsername']);
+    Route::get('/forget-password/{user}', [AuthController::class, 'forgetPassword']);
+    Route::patch('/change-password', [AuthController::class, 'changePassword']);
+    Route::patch('/change-email', [AuthController::class, 'changeEmail']);
+    Route::patch('/register', [AuthController::class, 'register']);
 });
 
-Route::post('/auth/register', [AuthController::class, 'register']);
+
+Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [UserController::class, 'getUsers']);
+    Route::get('/{userId}', [UserController::class, 'getUser'])->whereUuid("userId");
+    Route::patch('/{userId}', [UserController::class, 'UpdateUser'])->whereUuid("userId");
+});
+
+
+Route::prefix('class')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [ClassController::class, 'getClasses']);
+    Route::get('/{id}', [ClassController::class, 'getClass']);
+    Route::post('/', [ClassController::class, 'create']);
+    Route::patch('/{id}', [ClassController::class, 'UpdateClass']);
+    Route::delete('/{id}', [ClassController::class, 'deleteClass']);
+});
+
+Route::prefix('subject')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [SubjectController::class, 'getSubjects']);
+    Route::get('/{id}', [SubjectController::class, 'getSubject']);
+    Route::post('/', [SubjectController::class, 'create']);
+    Route::patch('/{id}', [SubjectController::class, 'UpdateSubject']);
+    Route::delete('/{id}', [SubjectController::class, 'deleteSubject']);
+});
+
+
+// Route::post('/dev', [AuthController::class, 'createDev']);
+

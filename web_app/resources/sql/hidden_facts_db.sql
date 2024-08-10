@@ -51,17 +51,18 @@ DROP TABLE IF EXISTS `auth`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auth` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `userId` varchar(36) NOT NULL,
   `username` varchar(75) NOT NULL,
   `email` varchar(75) NOT NULL,
-  `remember_token` varchar(205) NOT NULL,
   `password` text NOT NULL,
   `deviceId` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`userId`),
+  PRIMARY KEY (`id`,`userId`),
   UNIQUE KEY `username_UNIQUE` (`username`),
-  UNIQUE KEY `email_UNIQUE` (`email`)
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  KEY `userId_idx` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,7 +127,7 @@ CREATE TABLE `cart` (
   KEY `cart_book_idx` (`book`),
   KEY `cart_user_idx` (`user`),
   CONSTRAINT `cart_book` FOREIGN KEY (`book`) REFERENCES `book` (`book_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `cart_user` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `cartUser` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,6 +164,32 @@ CREATE TABLE `class` (
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dev_credentials`
+--
+
+DROP TABLE IF EXISTS `dev_credentials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dev_credentials` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dev_credentials`
+--
+
+LOCK TABLES `dev_credentials` WRITE;
+/*!40000 ALTER TABLE `dev_credentials` DISABLE KEYS */;
+INSERT INTO `dev_credentials` VALUES (1,'Ayo','2024-08-10 10:08:52',NULL),(2,'Praise','2024-08-10 10:08:52',NULL),(3,'Collins','2024-08-10 10:08:52',NULL);
+/*!40000 ALTER TABLE `dev_credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +247,7 @@ CREATE TABLE `personal_access_tokens` (
 
 LOCK TABLES `personal_access_tokens` WRITE;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
-INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials',NULL,'Ayo:Dev','8fb0a3f0f46c118e37409b90e435d084804a3e725e87c0bb8af8a4c36fc4602f','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34'),(2,'App\\Models\\DevCredentials',NULL,'Praise:Dev','abf887b20c68b6b08107f00f30e4578a9e9594f30aee9c1da08bfee11e80fd7e','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34'),(3,'App\\Models\\DevCredentials',NULL,'Collins:Dev','1e66ec3685f550cced1029dcb454647820293effeab98a0979dc24802d64d8e6','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34');
+INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials','1','Ayo:Dev','bbdfd05d464818004d440caa206fac7578ec9eb78b76bf8db74d2427734f7440','[\"*\"]','2024-08-10 09:10:46',NULL,'2024-08-10 08:00:08','2024-08-10 09:10:46'),(2,'App\\Models\\DevCredentials','2','Praise:Dev','1a1a70f9a2d7ce17833cd4baabfaa44b1a64720293fd61f869c88b46e8a624e4','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(3,'App\\Models\\DevCredentials','3','Collins:Dev','b5c3d219dcda49c5bd206da7d69de48b25b07e16594492a389b9e39f8536399c','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +269,7 @@ CREATE TABLE `profile` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `authUser_idx` (`userId`),
-  CONSTRAINT `authUser` FOREIGN KEY (`userId`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `auth_user` FOREIGN KEY (`userId`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -297,7 +324,7 @@ CREATE TABLE `transaction` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `transUser_idx` (`user`),
-  CONSTRAINT `transUser` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `trans_user` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -324,10 +351,10 @@ CREATE TABLE `wishlist` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `userRef_idx` (`user_id`),
   KEY `bookRef_idx` (`book_ref`),
+  KEY `wish_user_idx` (`user_id`),
   CONSTRAINT `bookRef` FOREIGN KEY (`book_ref`) REFERENCES `book` (`book_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `userRef` FOREIGN KEY (`user_id`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `wish_user` FOREIGN KEY (`user_id`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -349,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-10  4:16:26
+-- Dump completed on 2024-08-10 11:28:43
