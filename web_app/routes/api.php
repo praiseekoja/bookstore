@@ -31,7 +31,7 @@ Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
     Route::get('/forget-password/{user}', [AuthController::class, 'forgetPassword']);
     Route::patch('/change-password', [AuthController::class, 'changePassword']);
     Route::patch('/change-email', [AuthController::class, 'changeEmail']);
-    Route::patch('/register', [AuthController::class, 'register']);
+    Route::patch('/chamge-username', [AuthController::class, 'changeUsername']);
 });
 
 

@@ -22,7 +22,6 @@ class AuthController extends Controller
         ]);
 
         $userId = Str::orderedUuid();
-        $user = new User();
 
         $user = User::create([
             'id' => $userId, 'email' => $credentials['email'],
@@ -37,11 +36,11 @@ class AuthController extends Controller
 
         $token = $user->createToken($credentials['username'], ['*'], now()->addYear());
 
-        return [
+        return response([
             'User' => $user,
             'User_details' => $profile,
             'token' => $token->plainTextToken
-        ];
+        ], 200);
     }
 
     function login(Request $request) {
@@ -50,22 +49,91 @@ class AuthController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        $user = User::where('username', $credentials['user'])
-        ->where('email', $credentials['user'])
-        ->join('profile', 'auth.userId', '=', 'profile.userId')
+        $user = User::whereRaw('username = ? or email = ?', array($credentials['user'], $credentials['user']))
         ->firstOr(function (){
-            abort(404, 'User not found');
+            return response(['message' => 'User not found'], 404);
         });
 
         if ($user != null && Hash::check($credentials['password'], $user->password)) {
+
             $token = $user->createToken($user->username, ['*'], now()->addYear());
-            return [
+            $profile = Profile::where('userId', $user->userId)->first();
+
+            return response([
                 'user' => $user,
+                'user_details' => $profile,
                 'token' => $token
-            ];
+            ], 200);
         }
 
-        about(401, 'Password not correct');
+        return response(['message' => 'Password not correct'], 401);
+    }
+
+    function checkEmail(Request $request, $email) {
+        $user = User::where('email', $email)
+        ->select(['email'])
+        ->firstOR(function (){
+            //404 not found
+            return response(['message' => 'Email address not found'], 404);
+        });
+
+        //200 found
+        return response(['message' => 'Email address already exist'], 200);
+    }
+
+    function checkUsername(Request $request, $username) {
+        $user = User::where('username', $email)
+        ->select(['username'])
+        ->firstOR(function (){
+            //404 not found
+            return response(['message' => 'Username not found'], 404);
+        });
+
+        //200 found
+        return response(['message' => 'Username already exist'], 200);
+    }
+
+    function forgetPassword(Request $request, $user) {
+
+    }
+
+    function changePassword(Request $request) {
+        $credentials = $request->validate([
+            'old_password' => 'required|string|min:8',
+            'password' => 'required|string|min:8'
+        ]);
+
+        if(Hash::check($credentials['old_password'], $request->user()->password)){
+            $request->user()->password = Hash::make($credentials['password']);
+            $request->user()->save();
+
+            return response(['Password changed successfully'], 200);
+        }
+
+        return response(['Old password is invalid'], 401);
+    }
+
+    function changeEmail(Request $request) {
+        $credentials = $request->validate([
+            'email' => 'required|unique:auth,email|string',
+        ]);
+
+        $request->user()->email = $credentials['email'];
+        $request->user()->save();
+
+        return response(['Email address changed successfully'], 200);
+    }
+
+    function changeUsername(Request $request) {
+        $credentials = $request->validate([
+            'username' => 'required|unique:auth,username|string'
+        ]);
+
+        $request->user()->username = $credentials['username'];
+        $request->user()->save();
+
+        return response(['Username changed successfully'], 200);
+
     }
 
     // function createDev(Request $request) {
