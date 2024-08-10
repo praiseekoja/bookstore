@@ -49,15 +49,17 @@ class AuthController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        $user = User::whereRaw('username = ? or email = ?', array($credentials['user'], $credentials['user']))
-        ->firstOr(function (){
-            return response(['message' => 'User not found'], 404);
-        });
+        $user = User::whereRaw('auth.username = ? or auth.email = ?', array($credentials['user'], $credentials['user']))
+        ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+        ->first();
 
-        if ($user != null && Hash::check($credentials['password'], $user->password)) {
+        if($user == null)
+            return response(['message' => 'User not found'], 404);
+
+        if (Hash::check($credentials['password'], $user->password)) {
 
             $token = $user->createToken($user->username, ['*'], now()->addYear());
-            $profile = Profile::where('userId', $user->userId)->first();
+            // $profile = Profile::where('userId', $user->userId)->first();
 
             return response([
                 'user' => $user,
@@ -72,10 +74,10 @@ class AuthController extends Controller
     function checkEmail(Request $request, $email) {
         $user = User::where('email', $email)
         ->select(['email'])
-        ->firstOR(function (){
-            //404 not found
+        ->first();
+
+        if($user == null)
             return response(['message' => 'Email address not found'], 404);
-        });
 
         //200 found
         return response(['message' => 'Email address already exist'], 200);
@@ -84,10 +86,10 @@ class AuthController extends Controller
     function checkUsername(Request $request, $username) {
         $user = User::where('username', $email)
         ->select(['username'])
-        ->firstOR(function (){
-            //404 not found
+        ->first();
+
+        if($user == null)
             return response(['message' => 'Username not found'], 404);
-        });
 
         //200 found
         return response(['message' => 'Username already exist'], 200);
