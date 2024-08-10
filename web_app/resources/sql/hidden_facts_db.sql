@@ -28,8 +28,8 @@ CREATE TABLE `admin` (
   `email` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` text NOT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`adminId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,10 +54,11 @@ CREATE TABLE `auth` (
   `userId` varchar(36) NOT NULL,
   `username` varchar(75) NOT NULL,
   `email` varchar(75) NOT NULL,
+  `remember_token` varchar(205) NOT NULL,
   `password` text NOT NULL,
   `deviceId` varchar(45) NOT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -87,8 +88,8 @@ CREATE TABLE `book` (
   `descr` text,
   `class_id` int DEFAULT NULL,
   `subject_id` int DEFAULT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`book_id`),
   KEY `classId_idx` (`class_id`),
   KEY `subjectId_idx` (`subject_id`),
@@ -119,8 +120,8 @@ CREATE TABLE `cart` (
   `format` varchar(15) NOT NULL DEFAULT 'softcopy',
   `book` varchar(36) DEFAULT NULL,
   `user` varchar(36) NOT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `cart_book_idx` (`book`),
   KEY `cart_user_idx` (`user`),
@@ -149,8 +150,8 @@ CREATE TABLE `class` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `descr` text,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -162,6 +163,65 @@ CREATE TABLE `class` (
 LOCK TABLES `class` WRITE;
 /*!40000 ALTER TABLE `class` DISABLE KEYS */;
 /*!40000 ALTER TABLE `class` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2019_12_14_000001_create_personal_access_tokens_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials',NULL,'Ayo:Dev','8fb0a3f0f46c118e37409b90e435d084804a3e725e87c0bb8af8a4c36fc4602f','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34'),(2,'App\\Models\\DevCredentials',NULL,'Praise:Dev','abf887b20c68b6b08107f00f30e4578a9e9594f30aee9c1da08bfee11e80fd7e','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34'),(3,'App\\Models\\DevCredentials',NULL,'Collins:Dev','1e66ec3685f550cced1029dcb454647820293effeab98a0979dc24802d64d8e6','[\"*\"]',NULL,NULL,'2024-08-10 02:11:34','2024-08-10 02:11:34');
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -178,8 +238,8 @@ CREATE TABLE `profile` (
   `tel` varchar(15) DEFAULT NULL,
   `address` text,
   `userId` varchar(36) NOT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `authUser_idx` (`userId`),
   CONSTRAINT `authUser` FOREIGN KEY (`userId`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -206,8 +266,8 @@ CREATE TABLE `subject` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `descr` text,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -233,8 +293,8 @@ CREATE TABLE `transaction` (
   `cost` decimal(19,2) NOT NULL,
   `details` json NOT NULL,
   `user` varchar(36) DEFAULT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `transUser_idx` (`user`),
   CONSTRAINT `transUser` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE SET NULL ON UPDATE CASCADE
@@ -261,8 +321,8 @@ CREATE TABLE `wishlist` (
   `id` int NOT NULL AUTO_INCREMENT,
   `book_ref` varchar(36) DEFAULT NULL,
   `user_id` varchar(36) DEFAULT NULL,
-  `date_created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_updated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `userRef_idx` (`user_id`),
   KEY `bookRef_idx` (`book_ref`),
@@ -289,4 +349,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-08 11:34:28
+-- Dump completed on 2024-08-10  4:16:26
