@@ -38,7 +38,8 @@ Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [UserController::class, 'getUsers']);
     Route::get('/{userId}', [UserController::class, 'getUser'])->whereUuid("userId");
-    Route::patch('/{userId}', [UserController::class, 'UpdateUser'])->whereUuid("userId");
+    Route::patch('', [UserController::class, 'UpdateUser']);
+    // Route::patch('/{userId}', [UserController::class, 'UpdateUser'])->whereUuid("userId");
 });
 
 
