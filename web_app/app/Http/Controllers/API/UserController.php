@@ -19,18 +19,18 @@ class UserController extends Controller
         if($user == null)
             return response(['message' => 'User not found'], 404);
 
-            return response(['message' => 'User found', 'user' => $user], 200);
+            return response(['message' => 'User found', 'data' => $user], 200);
     }
 
     function getUsers(Request $request) {
         $user = User::leftjoin('profile', 'auth.userId', '=', 'profile.userId')
-        ->take(50)
+        ->take(100)
         ->get();
 
         if($user == null)
             return response(['message' => 'No users found'], 404);
 
-            return response(['message' => 'Users found', 'user' => $user], 200);
+            return response(['message' => 'Users found', 'data' => $user], 200);
     }
 
     function updateUser(Request $request) {

@@ -46,7 +46,7 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
 Route::prefix('class')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [ClassController::class, 'getClasses']);
     Route::get('/{id}', [ClassController::class, 'getClass']);
-    Route::post('/', [ClassController::class, 'create']);
+    Route::post('', [ClassController::class, 'create']);
     Route::patch('/{id}', [ClassController::class, 'UpdateClass']);
     Route::delete('/{id}', [ClassController::class, 'deleteClass']);
 });
@@ -54,9 +54,21 @@ Route::prefix('class')->middleware(['auth:sanctum'])->group(function () {
 Route::prefix('subject')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [SubjectController::class, 'getSubjects']);
     Route::get('/{id}', [SubjectController::class, 'getSubject']);
-    Route::post('/', [SubjectController::class, 'create']);
+    Route::post('', [SubjectController::class, 'create']);
     Route::patch('/{id}', [SubjectController::class, 'UpdateSubject']);
     Route::delete('/{id}', [SubjectController::class, 'deleteSubject']);
+});
+
+Route::prefix('transaction')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [TransactiontController::class, 'getTransactions']);
+    Route::post('', [TransactionController::class, 'create']);
+    // Route::delete('/{id}', [TransactionController::class, 'deleteTransaction']);
+});
+
+Route::prefix('saved-items')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [WishlistController::class, 'getWishlist']);
+    Route::post('', [WishlistController::class, 'create']);
+    Route::delete('/{id}', [WishlistController::class, 'deleteWishlist']);
 });
 
 
