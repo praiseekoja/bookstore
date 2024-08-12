@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Book Shop</title>
+    <title>Hidden Facts - Book Shop</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/icon/favicon.png">
@@ -97,7 +97,16 @@
                                             <li><a href="{{route('home')}}">Home</a></li>
                                             <li><a href="{{route('store')}}">Store</a></li>
                                             <li><a href="{{route('about')}}">About</a></li>
-                                            <li><a href="#">Category</a>
+                                            <li><a href="#">Classes</a>
+                                                <ul class="submenu">
+                                                    <li><a href="#">Mathematics</a></li>
+                                                    <li><a href="#">English Language</a></li>
+                                                    <li><a href="#">Chemistry</a></li>
+                                                    <li><a href="#">Agricultural Science</a></li>
+                                                    <li><a href="#">Biology</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Subjects</a>
                                                 <ul class="submenu">
                                                     <li><a href="#">Mathematics</a></li>
                                                     <li><a href="#">English Language</a></li>
