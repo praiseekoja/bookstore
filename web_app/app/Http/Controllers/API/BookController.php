@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -59,6 +60,23 @@ class BookController extends Controller
 
     function getBooks(Request $request) {
         $books = Book::leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+        ->leftjoin('class', 'book.class_id', '=', 'class.id')
+        ->take(100)
+        ->get();
+
+        if($books == null)
+            return response(['message' => 'No book found'], 404);
+
+        return response(['message' => 'Books found', 'data' => $books], 200);
+    }
+
+    function findBooks(Request $request) {
+        $query = $request->query('query', '');
+
+        $books = Book::where('book.title', 'LIKE', "%{$query}%")
+        ->orWhere('subject.subject_name', 'LIKE', "%{$query}%")
+        ->orWhere('class.class_name', 'LIKE', "%{$query}%")
+        ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
         ->leftjoin('class', 'book.class_id', '=', 'class.id')
         ->take(100)
         ->get();

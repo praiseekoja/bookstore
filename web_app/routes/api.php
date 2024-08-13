@@ -75,6 +75,7 @@ Route::prefix('saved-items')->middleware(['auth:sanctum'])->group(function () {
 Route::prefix('book')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [BookController::class, 'getBooks']);
     Route::get('{id}', [BookController::class, 'getBook']);
+    Route::get('/search', [BookController::class, 'findBooks']);
     Route::post('', [BookController::class, 'create']);
     Route::patch('/{id}', [BookController::class, 'updateBook']);
     Route::delete('/{id}', [BookController::class, 'deleteBook']);
