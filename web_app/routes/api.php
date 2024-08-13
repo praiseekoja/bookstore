@@ -72,5 +72,22 @@ Route::prefix('saved-items')->middleware(['auth:sanctum'])->group(function () {
 });
 
 
+Route::prefix('book')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [BookController::class, 'getBooks']);
+    Route::get('{id}', [BookController::class, 'getBook']);
+    Route::post('', [BookController::class, 'create']);
+    Route::patch('/{id}', [BookController::class, 'updateBook']);
+    Route::delete('/{id}', [BookController::class, 'deleteBook']);
+});
+
+
+Route::prefix('cart')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('', [CartController::class, 'getCart']);
+    Route::post('', [CartController::class, 'create']);
+    Route::patch('{id}', [CartController::class, 'updateCart']);
+    Route::delete('/{id}', [CartController::class, 'deleteCart']);
+});
+
+
 // Route::post('/dev', [AuthController::class, 'createDev']);
 

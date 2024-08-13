@@ -10,4 +10,13 @@ class ClassModel extends Model
     use HasFactory;
 
     protected $table = 'class';
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'updated_at',
+    ];
 }

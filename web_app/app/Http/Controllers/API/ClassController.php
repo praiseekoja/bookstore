@@ -17,7 +17,7 @@ class ClassController extends Controller
         ]);
 
         $result = DB::table('class')->insert([
-            'name' => $data['name'],
+            'class_name' => $data['name'],
             'descr' => $data['descr']
         ]);
 
@@ -36,7 +36,7 @@ class ClassController extends Controller
         if($classes == null)
             return response(['message' => 'No class found'], 404);
 
-            return response(['message' => 'Classes found', 'data' => $classes], 200);
+        return response(['message' => 'Classes found', 'data' => $classes], 200);
     }
 
     function getClass(Request $request, $id) {
@@ -44,8 +44,8 @@ class ClassController extends Controller
 
         if($class == null)
             return response(['message' => 'No class found'], 404);
-        else
-            return response(['message' => 'class found', 'data' => $class], 200);
+
+        return response(['message' => 'class found', 'data' => $class], 200);
     }
 
     function updateClass(Request $request, $id) {
@@ -56,7 +56,7 @@ class ClassController extends Controller
 
         ClassModel::where('id', $id)
         ->update([
-            'name' => $data['name'],
+            'class_name' => $data['name'],
             'descr' => $data['descr']
         ]);
 

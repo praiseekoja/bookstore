@@ -17,7 +17,7 @@ class SubjectController extends Controller
         ]);
 
         $result = DB::table('subject')->insert([
-            'name' => $data['name'],
+            'subject_name' => $data['name'],
             'descr' => $data['descr']
         ]);
 
@@ -56,7 +56,7 @@ class SubjectController extends Controller
 
         Subject::where('id', $id)
         ->update([
-            'name' => $data['name'],
+            'subject_name' => $data['name'],
             'descr' => $data['descr']
         ]);
 
