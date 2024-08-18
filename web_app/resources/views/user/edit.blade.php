@@ -8,8 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Profile Edit</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Aero</a></li>
-                            <li class="breadcrumb-item">Pages</li>
+                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Hidden Facts</a></li>
                             <li class="breadcrumb-item">Profile</li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ul>
@@ -34,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Username">
+                                            <input type="text" value="{{ $user->username }}" class="form-control" placeholder="Username">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
@@ -61,32 +60,27 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name">
+                                            <input type="text" value="{{ $user->first_name }}" class="form-control" placeholder="First Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name">
+                                            <input type="text" value="{{ $user->last_name }}" class="form-control" placeholder="Last Name">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12">
+                                    <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="City">
+                                            <input type="tel" value="{{ $user->tel }}" class="form-control" placeholder="Mobile Number">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-12">
+                                    <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="E-mail">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Country">
+                                            <input type="text" value="{{ $user->email }}" class="form-control" placeholder="E-mail">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder="Address Line 1"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

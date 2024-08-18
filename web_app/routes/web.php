@@ -180,21 +180,13 @@ Route::get('/user/{username}/library', [UserSpaceController::class, 'showLibrary
 Route::get('/user/dashboard', [UserSpaceController::class, 'showDashboard'])->name('user.dashboard');
 
 
-Route::get('/user/{username}/transactions', function () {
-    return view('user.transactions');
-})->name('user.transaction');
+Route::get('/user/{username}/transactions', [UserSpaceController::class, 'showTransaction'])->name('user.transaction');
 
 
-Route::get('/user/{username}/watchlist', function () {
-    return view('user.watchlist');
-})->name('user.watchlist');
+Route::get('/user/{username}/watchlist', [UserSpaceController::class, 'showWishlist'])->name('user.watchlist');
 
 
-Route::get('/user/{username}/update', function () {
-    return view('user.edit');
-})->name('user.edit');
+Route::get('/user/{username}/update', [UserSpaceController::class, 'showProfileEdit'])->name('user.edit');
 
 
-Route::get('/user/{username}', function () {
-    return view('user.profile');
-})->name('user.profile');
+Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->name('user.profile');
