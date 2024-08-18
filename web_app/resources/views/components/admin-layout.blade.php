@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>User Dashboard</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="{{ url('assets/plugins/charts-c3/plugin.css') }}" />
 
     <link rel="stylesheet" href="{{ url('assets/plugins/morrisjs/morris.min.css') }}" />
+    <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{ url('assets/css/style.min.css') }}">
 </head>
@@ -98,6 +100,10 @@
 
     <script src="{{ url('assets/bundles/mainscripts.bundle.js') }}"></script>
     <script src="{{ url('assets/js/pages/index.js') }}"></script>
+
+    <script src="{{ url('assets/js/blockUI.js') }}"></script>
+    <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ url('assets/js/custom.js') }}"></script>
 
     {{-- page specific library --}}
     <script src="{{ url('assets/bundles/datatablescripts.bundle.js') }}"></script>

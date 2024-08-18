@@ -31,7 +31,7 @@ CREATE TABLE `admin` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `auth` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `userId_idx` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +72,7 @@ CREATE TABLE `auth` (
 
 LOCK TABLES `auth` WRITE;
 /*!40000 ALTER TABLE `auth` DISABLE KEYS */;
+INSERT INTO `auth` VALUES (1,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','yay','yay@gmail.com','$2y$12$yc3bLiuRNBExSC3.Vr6UceVzLEi9mivdUGHv3oCK21hfsEfJv9w0i','','2024-08-10 09:30:11','2024-08-10 09:30:11');
 /*!40000 ALTER TABLE `auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,6 +88,8 @@ CREATE TABLE `book` (
   `title` varchar(75) NOT NULL,
   `price` decimal(12,2) NOT NULL,
   `descr` text,
+  `thumbnail` text,
+  `book_file` text NOT NULL,
   `class_id` int DEFAULT NULL,
   `subject_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -96,7 +99,7 @@ CREATE TABLE `book` (
   KEY `subjectId_idx` (`subject_id`),
   CONSTRAINT `classId` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `subjectId` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +120,7 @@ DROP TABLE IF EXISTS `cart`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cart` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `qty` int unsigned NOT NULL,
+  `qty` int unsigned NOT NULL DEFAULT '1',
   `format` varchar(15) NOT NULL DEFAULT 'softcopy',
   `book` varchar(36) DEFAULT NULL,
   `user` varchar(36) NOT NULL,
@@ -149,12 +152,12 @@ DROP TABLE IF EXISTS `class`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `class` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `class_name` varchar(45) NOT NULL,
   `descr` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +241,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +250,7 @@ CREATE TABLE `personal_access_tokens` (
 
 LOCK TABLES `personal_access_tokens` WRITE;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
-INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials','1','Ayo:Dev','bbdfd05d464818004d440caa206fac7578ec9eb78b76bf8db74d2427734f7440','[\"*\"]','2024-08-10 09:10:46',NULL,'2024-08-10 08:00:08','2024-08-10 09:10:46'),(2,'App\\Models\\DevCredentials','2','Praise:Dev','1a1a70f9a2d7ce17833cd4baabfaa44b1a64720293fd61f869c88b46e8a624e4','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(3,'App\\Models\\DevCredentials','3','Collins:Dev','b5c3d219dcda49c5bd206da7d69de48b25b07e16594492a389b9e39f8536399c','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08');
+INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials','1','Ayo:Dev','bbdfd05d464818004d440caa206fac7578ec9eb78b76bf8db74d2427734f7440','[\"*\"]','2024-08-17 11:16:13',NULL,'2024-08-10 08:00:08','2024-08-17 11:16:13'),(2,'App\\Models\\DevCredentials','2','Praise:Dev','1a1a70f9a2d7ce17833cd4baabfaa44b1a64720293fd61f869c88b46e8a624e4','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(3,'App\\Models\\DevCredentials','3','Collins:Dev','b5c3d219dcda49c5bd206da7d69de48b25b07e16594492a389b9e39f8536399c','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(4,'App\\Models\\User','1','yay','9e5738990f4558de82c3e30767d313a3ca9f1233a4d02489a0294dc2e17e9d86','[\"*\"]',NULL,'2025-08-10 09:30:11','2024-08-10 09:30:11','2024-08-10 09:30:11'),(5,'App\\Models\\User','1','yay','a76d07352662e491cf4563f79d5ca53188be2f98779ec0aa3f28354c1a5c3004','[\"*\"]',NULL,'2025-08-17 03:39:21','2024-08-17 03:39:21','2024-08-17 03:39:21'),(6,'App\\Models\\User','1','yay','036931ed638a5977ec64cd80a201e84bca0b68f39385bb8e0525eb58106033ba','[\"*\"]',NULL,'2025-08-17 10:58:51','2024-08-17 10:58:51','2024-08-17 10:58:51'),(7,'App\\Models\\User','1','yay','77376057b7f580f1c121dce96b21289f4feba50a4de53dab2c93e49dfbdb28b7','[\"*\"]',NULL,'2025-08-17 11:00:17','2024-08-17 11:00:17','2024-08-17 11:00:17'),(8,'App\\Models\\User','1','yay','1913d2abb91d019f1d3b3fac11a7fe68becb007784cd4d0206134031fa9aea73','[\"*\"]',NULL,'2025-08-17 19:30:20','2024-08-17 19:30:20','2024-08-17 19:30:20'),(9,'App\\Models\\User','1','yay','ab5ec23dcd10caf043409f0d3858f8c009a20ea6e2a300031554f062d7c4095a','[\"*\"]',NULL,'2025-08-17 19:31:33','2024-08-17 19:31:33','2024-08-17 19:31:33'),(10,'App\\Models\\User','1','yay','32b603b738a5506139e8c5bec232262cb91d47554acef35c2bc7ce84a19d58a2','[\"*\"]',NULL,'2025-08-17 19:32:15','2024-08-17 19:32:15','2024-08-17 19:32:15'),(11,'App\\Models\\User','1','yay','6632b68dc79acafe19be3f8a026abb29befb4283e26903849f15eed56ed93afe','[\"*\"]',NULL,'2025-08-17 19:34:10','2024-08-17 19:34:10','2024-08-17 19:34:10'),(12,'App\\Models\\User','1','yay','5ebcb2e619eebdd75b66d6091434ef2906a80120f4d3e42e2112c7f15731a71e','[\"*\"]',NULL,'2025-08-18 07:10:50','2024-08-18 07:10:51','2024-08-18 07:10:51');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,6 +266,7 @@ CREATE TABLE `profile` (
   `first_name` varchar(75) NOT NULL,
   `last_name` varchar(75) NOT NULL,
   `tel` varchar(15) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
   `address` text,
   `userId` varchar(36) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -270,7 +274,7 @@ CREATE TABLE `profile` (
   PRIMARY KEY (`id`),
   KEY `authUser_idx` (`userId`),
   CONSTRAINT `auth_user` FOREIGN KEY (`userId`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,6 +283,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (1,'Ay','AJ',NULL,NULL,NULL,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','2024-08-10 09:30:11','2024-08-10 09:30:11');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,12 +296,12 @@ DROP TABLE IF EXISTS `subject`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subject` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `subject_name` varchar(45) NOT NULL,
   `descr` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -338,6 +343,67 @@ LOCK TABLES `transaction` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_collections`
+--
+
+DROP TABLE IF EXISTS `user_collections`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_collections` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `userId` varchar(36) NOT NULL,
+  `book_id` varchar(36) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `coll_user_idx` (`userId`),
+  KEY `cool_book_idx` (`book_id`),
+  CONSTRAINT `coll_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `coll_user` FOREIGN KEY (`userId`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_collections`
+--
+
+LOCK TABLES `user_collections` WRITE;
+/*!40000 ALTER TABLE `user_collections` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_collections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `video_links`
+--
+
+DROP TABLE IF EXISTS `video_links`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `video_links` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `video_link` text NOT NULL,
+  `subject_id` int DEFAULT NULL,
+  `class_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `video_class_idx` (`class_id`),
+  KEY `video_subj_idx` (`subject_id`),
+  CONSTRAINT `video_class` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `video_subj` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `video_links`
+--
+
+LOCK TABLES `video_links` WRITE;
+/*!40000 ALTER TABLE `video_links` DISABLE KEYS */;
+/*!40000 ALTER TABLE `video_links` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `wishlist`
 --
 
@@ -376,4 +442,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-10 11:28:43
+-- Dump completed on 2024-08-18 10:55:17

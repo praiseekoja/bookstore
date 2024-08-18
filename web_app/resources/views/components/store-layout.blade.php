@@ -7,6 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Hidden Facts - Book Shop</title>
     <meta name="description" content>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/icon/favicon.png">
 
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 
     <style>
         .header-area .header-top .header-info-right .shopping-card::before {
@@ -58,7 +60,7 @@
                                     <div class="header-info-left d-flex align-items-center">
 
                                         <div class="logo">
-                                            <a href="index.html"><img src="assets/img/logo/logo.png" alt></a>
+                                            <a href="{{ route('home') }}"><img src="assets/img/logo/logo.png" alt></a>
                                         </div>
 
                                         <form action="#" class="form-box">
@@ -255,6 +257,10 @@
 
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script src="{{ url('assets/js/blockUI.js') }}"></script>
+    <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ url('assets/js/custom.js') }}"></script>
 
     <script>
         window.dataLayer = window.dataLayer || [];

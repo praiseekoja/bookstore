@@ -1,13 +1,12 @@
 <!doctype html>
 <html class="no-js " lang="en">
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-    <title>User Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ $title ?? 'User Dashbord' }}</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 
@@ -17,6 +16,7 @@
     <link rel="stylesheet" href="{{ url('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/plugins/charts-c3/plugin.css') }}" />
+    <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 
     <link rel="stylesheet" href="{{ url('assets/plugins/morrisjs/morris.min.css') }}" />
     <!-- Custom Css -->
@@ -53,31 +53,40 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a href="index.html"><img src="assets/images/logo.svg" width="25" alt="Aero"><span
-                    class="m-l-10">Aero</span></a>
+            <a href="{{ route('home') }}"><img src="{{ url('assets/img/logo/logo.png') }}" width="75" alt="Hidden Facts"><span
+                    class="m-l-10">Hidden Facts</span></a>
         </div>
         <div class="menu">
             <ul class="list">
                 <li>
                     <div class="user-info">
-                        <a class="image" href="profile.html"><img src="assets/images/profile_av.jpg"
+                        <a class="image" href="{{ route('user.profile', $user->username) }}">
+                            @if(!empty($user->profile_image))<img src="{{ url('/'.$user->profile_image) }}"
                                 alt="User"></a>
+                                @else
+                                <img src="{{ url('/assets/img/noimg.jpg') }}"
+                                alt="no image"></a>
+                                @endif
                         <div class="detail">
-                            <h4>Michael</h4>
+                            <h4>{{ $user->first_name }}</h4>
                             <small>User</small>
                         </div>
                     </div>
                 </li>
-                <li class="active open"><a href="{{route('user.dashboard', '$user->username')}}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+                <li class="active open"><a href="{{ route('user.dashboard') }}"><i
+                            class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="{{route('user.library', '$user->username')}}"><i class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
+                <li class="open"><a href="{{ route('user.library', $user->username) }}"><i
+                            class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
                 </li>
-                <li class="open"><a href="{{route('user.profile', '$user->username')}}"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
+                <li class="open"><a href="{{ route('user.profile', $user->username) }}"><i
+                            class="zmdi zmdi-account"></i><span>Profile</span></a>
                 </li>
-                <li class="open"><a href="{{route('user.transaction', '$user->username')}}"><i
+                <li class="open"><a href="{{ route('user.transaction', $user->username) }}"><i
                             class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
                 </li>
-                <li class="open"><a href="{{route('user.watchlist', '$user->username')}}"><i class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
+                <li class="open"><a href="{{ route('user.watchlist', $user->username) }}"><i
+                            class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
                 </li>
             </ul>
         </div>
@@ -96,6 +105,10 @@
 
     <script src="{{ url('assets/bundles/mainscripts.bundle.js') }}"></script>
     <script src="{{ url('assets/js/pages/index.js') }}"></script>
+
+    <script src="{{ url('assets/js/blockUI.js') }}"></script>
+    <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ url('assets/js/custom.js') }}"></script>
 
     {{-- page specific library --}}
     <script src="{{ url('assets/bundles/datatablescripts.bundle.js') }}"></script>

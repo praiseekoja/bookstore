@@ -23,7 +23,7 @@ use App\Http\Controllers\API\TransactionController;
 |
 */
 
-Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
+Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/email/{email}', [AuthController::class, 'checkEmail']);

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\UserSpaceController;
 
 
 /*
@@ -63,21 +64,15 @@ Route::get('/cart', function () {
 
 
 
-
-
-
-
-
-
 /**
  * authentication Routes
  */
 
- Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
- Route::post('login', [LoginController::class, 'login']);
- Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
- Route::post('register', [RegisterController::class, 'register']);
- Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('login-post');
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register'])->name('register-post');
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
 /**
  * Admin Dashboard Routes
@@ -179,14 +174,10 @@ Route::get('/overseer/users/edit', function () {
  */
 
 
-Route::get('/user/{username}/library', function () {
-    return view('user.collections');
-})->name('user.library');
+Route::get('/user/{username}/library', [UserSpaceController::class, 'showLibrary'])->name('user.library');
 
 
-Route::get('/user/{username}/dashboard', function () {
-    return view('user.dashboard');
-})->name('user.dashboard');
+Route::get('/user/dashboard', [UserSpaceController::class, 'showDashboard'])->name('user.dashboard');
 
 
 Route::get('/user/{username}/transactions', function () {

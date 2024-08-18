@@ -7,6 +7,7 @@
     <title>Book Shop</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/icon/favicon.png">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 </head>
 
 <body>
@@ -50,6 +52,10 @@
 
     <script src="assets/js/plugins.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script src="{{ url('assets/js/blockUI.js') }}"></script>
+    <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
+    <script src="{{ url('assets/js/custom.js') }}"></script>
 </body>
 
 </html>
