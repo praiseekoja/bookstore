@@ -29,6 +29,8 @@ class UserSpaceController extends Controller
                 'title' => 'Dashboard'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showLibrary(Request $request) {
@@ -45,6 +47,8 @@ class UserSpaceController extends Controller
                 'title' => 'Library'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showProfile(Request $request) {
@@ -60,6 +64,8 @@ class UserSpaceController extends Controller
                 'title' => $user->first_name.' - Profile'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showTransaction(Request $request) {
@@ -76,6 +82,8 @@ class UserSpaceController extends Controller
                 'title' => 'Transactions'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showWishlist(Request $request) {
@@ -92,6 +100,8 @@ class UserSpaceController extends Controller
                 'title' => 'Saved Items'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showProfileEdit(Request $request) {
@@ -107,6 +117,8 @@ class UserSpaceController extends Controller
                 'title' => $user->first_name.' - Edit Profile'
             ]);
         }
+
+        return view('Auth.login');
     }
 
 

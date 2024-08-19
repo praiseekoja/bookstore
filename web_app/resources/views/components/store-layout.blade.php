@@ -27,7 +27,7 @@
     <style>
         .header-area .header-top .header-info-right .shopping-card::before {
             position: absolute;
-            content: "3";
+            content: "@php echo $cartCount; @endphp";
             width: 24px;
             height: 24px;
             background: #FF1616;
@@ -99,24 +99,26 @@
                                             <li><a href="{{route('home')}}">Home</a></li>
                                             <li><a href="{{route('store')}}">Store</a></li>
                                             <li><a href="{{route('about')}}">About</a></li>
-                                            <li><a href="#">Classes</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">Mathematics</a></li>
-                                                    <li><a href="#">English Language</a></li>
-                                                    <li><a href="#">Chemistry</a></li>
-                                                    <li><a href="#">Agricultural Science</a></li>
-                                                    <li><a href="#">Biology</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Subjects</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">Mathematics</a></li>
-                                                    <li><a href="#">English Language</a></li>
-                                                    <li><a href="#">Chemistry</a></li>
-                                                    <li><a href="#">Agricultural Science</a></li>
-                                                    <li><a href="#">Biology</a></li>
-                                                </ul>
-                                            </li>
+                                            @if (count($classes) > 0)
+                                                <li><a href="#">Classes</a>
+                                                    <ul class="submenu">
+                                                        @foreach ($classes as $class)
+                                                            <li><a href="#">{{ $class->class_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+
+                                            @if (count($subjects) > 0)
+                                                <li><a href="#">Subjects</a>
+                                                    <ul class="submenu">
+                                                        @foreach ($subjects as $subject)
+                                                            <li><a href="#">{{ $subject->subject_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+                                            <li><a href="{{route('about')}}">Videos</a></li>
                                             <li><a href="{{route('contact')}}">Contact</a></li>
                                         </ul>
                                     </nav>

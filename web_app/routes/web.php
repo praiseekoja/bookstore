@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSpaceController;
+use App\Http\Controllers\StoreController;
 
 
 /*
@@ -23,9 +24,7 @@ use App\Http\Controllers\UserSpaceController;
  * Store Routes
  */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [StoreController::class, 'showHome'])->name('home');
 
 
 Route::get('/about', function () {
@@ -38,9 +37,7 @@ Route::get('/book/{id}', function () {
 })->whereUuid('id')->name('books');
 
 
-Route::get('/store', function () {
-    return view('shop');
-})->name('store');
+Route::get('/store', [StoreController::class, 'showShop'])->name('store');
 
 
 Route::get('/contact', function () {
