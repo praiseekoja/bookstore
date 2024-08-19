@@ -65,6 +65,7 @@ Route::get('/cart', function () {
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('login-post');
+Route::post('overseer/login', [LoginController::class, 'loginAdmin'])->name('login-admin');
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register'])->name('register-post');
 Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
@@ -72,6 +73,11 @@ Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 /**
  * Admin Dashboard Routes
  */
+
+
+ Route::get('/overseer/login', function () {
+    return view('auth.login2');
+})->name('admin.login');
 
 
 Route::get('/overseer/dashboard', function () {
