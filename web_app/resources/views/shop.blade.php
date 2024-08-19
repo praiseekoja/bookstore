@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    {{-- <div class="col-xl-4 col-lg-4 col-md-6">
 
                         <div class="category-listing mb-50">
 
@@ -124,9 +124,9 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
 
-                    <div class="col-xl-8 col-lg-8 col-md-6">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
                         {{-- <div class="row justify-content-end">
                             <div class="col-xl-4">
                                 <div class="product_page_tittle">
@@ -144,7 +144,7 @@
                         </div> --}}
                         <div class="best-selling p-0">
                             <div class="row">
-                                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-4">
                                     <div class="properties pb-30">
                                         <div class="properties-card">
                                             <div class="properties-img">
@@ -174,7 +174,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-4">
                                     <div class="properties pb-30">
                                         <div class="properties-card">
                                             <div class="properties-img">
@@ -204,7 +204,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-4">
                                     <div class="properties pb-30">
                                         <div class="properties-card">
                                             <div class="properties-img">
@@ -234,7 +234,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-6">
+                                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-4">
                                     <div class="properties pb-30">
                                         <div class="properties-card">
                                             <div class="properties-img">

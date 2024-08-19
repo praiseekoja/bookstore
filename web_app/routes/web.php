@@ -32,9 +32,7 @@ Route::get('/about', function () {
 })->name('about');
 
 
-Route::get('/book/{id}', function () {
-    return view('book');
-})->whereUuid('id')->name('books');
+Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id')->name('books');
 
 
 Route::get('/store', [StoreController::class, 'showShop'])->name('store');

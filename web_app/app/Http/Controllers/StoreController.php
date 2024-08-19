@@ -56,6 +56,26 @@ class StoreController extends Controller
         ]);
     }
 
+    function showDetails(Request $request, $id) {
+        $subjects = Subject::take(30)
+        ->get();
+
+        $classes = ClassModel::take(30)
+        ->get();
+
+        $cart_num = 0;
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+            $cart_num = $this->countCart($userId);
+        }
+
+        return view('book')->with([
+            'subjects' => $subjects,
+            'classes' => $classes,
+            'cartCount' => $cart_num,
+            'book' => $this->getBook($id)
+        ]);
+    }
 
 
 
@@ -97,4 +117,13 @@ class StoreController extends Controller
             ->take(3)
             ->get();
     }
+
+    private function getBook($id)
+    {
+        return DB::table('book')
+            ->where('book.book_id', $id)
+            ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'book.class_id', '=', 'class.id')
+            ->first();
+        }
 }
