@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSpaceController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -80,65 +81,40 @@ Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 })->name('admin.login');
 
 
-Route::get('/overseer/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::get('/overseer/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
 
 
-Route::get('/overseer/transactions', function () {
-    return view('admin.transactions');
-})->name('admin.transactions');
+Route::get('/overseer/transactions', [AdminController::class, 'showTransaction'])->name('admin.transactions');
 
 
-Route::get('/overseer/transactions', function () {
-    return view('admin.transactions');
-})->name('admin.transactions');
-
-
-Route::get('/overseer/edit', function () {
-    return view('admin.edit');
-})->name('admin.edit');
+Route::get('/overseer/edit', [AdminController::class, 'showProfile'])->name('admin.edit');
 
 
 //classes
 
-Route::get('/overseer/classes', function () {
-    return view('admin.class.classes');
-})->name('admin.class');
+Route::get('/overseer/class', [AdminController::class, 'showClasses'])->name('admin.class');
 
 
-Route::get('/overseer/classes/add', function () {
-    return view('admin.class.add-class');
-})->name('admin.class.add');
+Route::get('/overseer/class/add', [AdminController::class, 'addClass'])->name('admin.class.add');
 
 
-Route::get('/overseer/classes/edit', function () {
-    return view('admin.class.edit-class');
-})->name('admin.class.edit');
+Route::get('/overseer/class/{id}', [AdminController::class, 'editClass'])->name('admin.class.edit');
 
 
 //subject
 
-Route::get('/overseer/subjects', function () {
-    return view('admin.subject.subjects');
-})->name('admin.subject');
+Route::get('/overseer/subjects', [AdminController::class, 'showSubjects'])->name('admin.subject');
 
 
-Route::get('/overseer/subjects/add', function () {
-    return view('admin.subject.add-subject');
-})->name('admin.subject.add');
+Route::get('/overseer/subjects/add', [AdminController::class, 'addSubject'])->name('admin.subject.add');
 
 
-Route::get('/overseer/subjects/edit', function () {
-    return view('admin.subject.edit-subject');
-})->name('admin.subject.edit');
+Route::get('/overseer/subjects/edit', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
 
 
 //book
 
-Route::get('/overseer/books', function () {
-    return view('admin.book.books');
-})->name('admin.book');
+Route::get('/overseer/books', [AdminController::class, 'showBooks'])->name('admin.book');
 
 
 Route::get('/overseer/books/add', function () {
@@ -153,20 +129,10 @@ Route::get('/overseer/books/edit', function () {
 
 //user
 
-Route::get('/overseer/users', function () {
-    return view('admin.user.users');
-})->name('admin.user');
+Route::get('/overseer/users', [AdminController::class, 'showUsers'])->name('admin.user');
 
 
-Route::get('/overseer/users/edit', function () {
-    return view('admin.user.edit-user');
-})->name('admin.user.edit');
-
-
-
-
-
-
+Route::get('/overseer/users/{id}', [AdminController::class, 'editUser'])->name('admin.user.edit');
 
 
 

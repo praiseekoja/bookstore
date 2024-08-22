@@ -53,7 +53,7 @@
                                     <tbody>
                                         @foreach ($recentTrans as $recent)
                                             <tr>
-                                                <td>{{ timeElapsed($recent->create_at) }}</td>
+                                                <td>{{ timeElapsed($recent->created_at) }}</td>
                                                 <td>₦{{ abbreviateBalance($recent->cost) }}</td>
                                                 <td>{{ count(json_decode($recent->details)) }}</td>
                                             </tr>

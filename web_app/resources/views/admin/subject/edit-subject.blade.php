@@ -33,13 +33,13 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Subject Name">
+                                            <input type="text" class="form-control" value="{{ $subject->subject_name }}" placeholder="Subject Name">
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Subject Description"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder=" Subject Description">{{ $subject->descr }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

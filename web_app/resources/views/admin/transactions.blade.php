@@ -1,4 +1,4 @@
-@extends('components.user-layout')
+@extends('components.admin-layout')
 
 @section('content')
     <section class="content">
@@ -37,39 +37,28 @@
                                 <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>User</th>
+                                            <th>Transaction Date</th>
                                             <th>Amount</th>
                                             <th>Books #</th>
-                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Date</th>
                                             <th>Amount</th>
                                             <th>Books #</th>
-                                            <th>Date</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>61</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>61</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>61</td>
-                                            <td>$320,800</td>
-                                        </tr>
+                                        @foreach ($recentTrans as $recent)
+                                            <tr>
+                                                <td>{{ $recent->first_name.' '.$recent->last_name }}</td>
+                                                <td>{{ timeElapsed($recent->create_at) }}</td>
+                                                <td>₦{{ abbreviateBalance($recent->cost) }}</td>
+                                                <td>{{ count(json_decode($recent->details)) }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

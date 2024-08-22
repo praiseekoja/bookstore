@@ -18,4 +18,8 @@ class Subject extends Model
     protected $hidden = [
         'updated_at',
     ];
+
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }

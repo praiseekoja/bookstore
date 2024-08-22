@@ -19,4 +19,10 @@ class ClassModel extends Model
     protected $hidden = [
         'updated_at',
     ];
+
+    // protected $primaryKey = 'class_id';
+
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }
