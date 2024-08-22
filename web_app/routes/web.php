@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSpaceController;
+use App\Http\Controllers\SearchController;
 
 
 /*
@@ -57,6 +58,11 @@ Route::get('/contact', function () {
 //     return view('register');
 // })->name('register');
 
+// routes/web.php
+
+
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/cart', function () {
     return view('cart');
