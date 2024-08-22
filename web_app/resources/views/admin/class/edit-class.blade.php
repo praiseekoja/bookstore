@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Class Edit</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Class</li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ul>
@@ -18,7 +18,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="profile.html" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
+                        <a href="#" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
                     </div>
                 </div>
             </div>
@@ -33,13 +33,13 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Class Name">
+                                            <input type="text" class="form-control" value="{{ $class->class_name }}" placeholder="Class Name">
                                         </div>
                                     </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Class Description"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder=" Class Description"> {{ $class->descr }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

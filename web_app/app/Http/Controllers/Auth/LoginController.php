@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\AdminModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -47,6 +49,32 @@ class LoginController extends Controller
         return response()->json([
             'message' => "Incorrect password or username/email"
         ], 400);
+    }
+
+    public function loginAdmin(Request $request)
+    {
+        $data = $request->validate([
+            'user' => 'required',
+            'password' => 'required|min:8',
+        ]);
+
+        $admin = AdminModel::whereRaw('username = ? or email = ?', array($data['user'], $data['user']))
+        ->first();
+
+        if($admin == null)
+            return response(['message' => 'User not found'], 404);
+
+        if (Hash::check($data['password'], $admin->password)) {
+
+            $request->session()->regenerate();
+            $request->session()->put('overseer', $admin->adminId);
+            return response([
+                'message' => "Success",
+            ], 200);
+        }
+
+        return response(['message' => 'Password not correct'], 401);
+
     }
 }
 

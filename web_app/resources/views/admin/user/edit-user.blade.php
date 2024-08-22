@@ -6,7 +6,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-7 col-md-6 col-sm-12">
-                        <h2>Profile Edit</h2>
+                        <h2>User Edit</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Users</li>
@@ -60,32 +60,27 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name">
+                                            <input type="text" class="form-control" value="{{ $user->first_name }}" placeholder="First Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name">
+                                            <input type="text" class="form-control" value="{{ $user->last_name }}" placeholder="Last Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="City">
+                                            <input type="text" class="form-control" value="{{ $user->email }}" placeholder="E-mail">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="E-mail">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Country">
+                                            <input type="text" class="form-control" value="{{ $user->tel }}" placeholder="Phone number">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder="Address Line 1"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

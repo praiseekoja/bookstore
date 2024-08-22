@@ -29,6 +29,8 @@ class UserSpaceController extends Controller
                 'title' => 'Dashboard'
             ]);
         }
+
+        return view('Auth.login');
     }
 
     function showLibrary(Request $request) {
@@ -45,9 +47,79 @@ class UserSpaceController extends Controller
                 'title' => 'Library'
             ]);
         }
+
+        return view('Auth.login');
     }
 
+    function showProfile(Request $request) {
+        if ($request->session()->has('user')) {
+            $userId = session('user');
 
+            $user = User::where('auth.userId', $userId)
+            ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+            ->first();
+
+            return view('user.profile')->with([
+                'user' => $user,
+                'title' => $user->first_name.' - Profile'
+            ]);
+        }
+
+        return view('Auth.login');
+    }
+
+    function showTransaction(Request $request) {
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+
+            $user = User::where('auth.userId', $userId)
+            ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+            ->first();
+
+            return view('user.transactions')->with([
+                'user' => $user,
+                'recentTrans' => $this->getTransactions($userId),
+                'title' => 'Transactions'
+            ]);
+        }
+
+        return view('Auth.login');
+    }
+
+    function showWishlist(Request $request) {
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+
+            $user = User::where('auth.userId', $userId)
+            ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+            ->first();
+
+            return view('user.watchlist')->with([
+                'user' => $user,
+                'items' => $this->getSavedItems($userId),
+                'title' => 'Saved Items'
+            ]);
+        }
+
+        return view('Auth.login');
+    }
+
+    function showProfileEdit(Request $request) {
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+
+            $user = User::where('auth.userId', $userId)
+            ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+            ->first();
+
+            return view('user.edit')->with([
+                'user' => $user,
+                'title' => $user->first_name.' - Edit Profile'
+            ]);
+        }
+
+        return view('Auth.login');
+    }
 
 
 
@@ -95,7 +167,7 @@ class UserSpaceController extends Controller
             ->whereRaw('user_collections.userId = ? and user_collections.book_id <> null', array($userId))
             ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
             ->orderBy('user_collections.created_at', 'desc')
-            ->take(50)
+            ->take(100)
             ->get();
     }
 
@@ -105,6 +177,25 @@ class UserSpaceController extends Controller
             ->whereRaw('user = ?', array($userId))
             ->orderBy('created_at', 'desc')
             ->take(5)
+            ->get();
+    }
+
+    private function getTransactions($userId)
+    {
+        return DB::table('transaction')
+            ->whereRaw('user = ?', array($userId))
+            ->orderBy('created_at', 'desc')
+            ->take(100)
+            ->get();
+    }
+
+    private function getSavedItems($userId)
+    {
+        return DB::table('wishlist')
+            ->whereRaw('wishlist.user_id = ? and wishlist.book_ref <> null', array($userId))
+            ->leftjoin('book', 'wishlist.book_ref', '=', 'book.book_id')
+            ->orderBy('wishlist.created_at', 'desc')
+            ->take(20)
             ->get();
     }
 }

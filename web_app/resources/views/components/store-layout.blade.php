@@ -9,25 +9,25 @@
     <meta name="description" content>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/icon/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/icon/favicon.png') }}">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/price_rangs.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/slicknav.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/price_rangs.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 
     <style>
         .header-area .header-top .header-info-right .shopping-card::before {
             position: absolute;
-            content: "3";
+            content: "@php echo $cartCount; @endphp";
             width: 24px;
             height: 24px;
             background: #FF1616;
@@ -63,9 +63,9 @@
                                             <a href="{{ route('home') }}"><img src="assets/img/logo/logo.png" alt></a>
                                         </div>
 
-                                        <form action="{{ route('search') }}" method="GET"class="form-box">
-                                            <input type="text" name="query"
-                                                placeholder="Search book by name" value="{{ request('query') }}">
+                                        <form action="#" class="form-box">
+                                            <input type="text" name="Search"
+                                                placeholder="Search book by name">
                                             <div class="search-icon">
                                                 
                                                 <button type="submit"><i class="ti-search"></i></button>
@@ -82,9 +82,10 @@
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>
                                             <li class="shopping-card">
-                                                <a href="{{route('cart')}}"><img src="assets/img/icon/cart.svg" alt></a>
+                                                <a href="{{ route('cart') }}"><img src="assets/img/icon/cart.svg"
+                                                        alt></a>
                                             </li>
-                                            <li><a href="{{route('login')}}" class="btn header-btn">Sign in</a></li>
+                                            <li><a href="{{ route('login') }}" class="btn header-btn">Sign in</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -98,34 +99,36 @@
                             <div class="col-xl-12">
 
                                 <div class="logo2">
-                                    <a href="{{route('home')}}"><img src="assets/img/logo/logo.png" alt></a>
+                                    <a href="{{ route('home') }}"><img src="assets/img/logo/logo.png" alt></a>
                                 </div>
 
                                 <div class="main-menu text-center d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="{{route('home')}}">Home</a></li>
-                                            <li><a href="{{route('store')}}">Store</a></li>
-                                            <li><a href="{{route('about')}}">About</a></li>
-                                            <li><a href="#">Classes</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">Mathematics</a></li>
-                                                    <li><a href="#">English Language</a></li>
-                                                    <li><a href="#">Chemistry</a></li>
-                                                    <li><a href="#">Agricultural Science</a></li>
-                                                    <li><a href="#">Biology</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="#">Subjects</a>
-                                                <ul class="submenu">
-                                                    <li><a href="#">Mathematics</a></li>
-                                                    <li><a href="#">English Language</a></li>
-                                                    <li><a href="#">Chemistry</a></li>
-                                                    <li><a href="#">Agricultural Science</a></li>
-                                                    <li><a href="#">Biology</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="{{route('contact')}}">Contact</a></li>
+                                            <li><a href="{{ route('home') }}">Home</a></li>
+                                            <li><a href="{{ route('store') }}">Store</a></li>
+                                            <li><a href="{{ route('about') }}">About</a></li>
+                                            @if (count($classes) > 0)
+                                                <li><a href="#">Classes</a>
+                                                    <ul class="submenu">
+                                                        @foreach ($classes as $class)
+                                                            <li><a href="#">{{ $class->class_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+
+                                            @if (count($subjects) > 0)
+                                                <li><a href="#">Subjects</a>
+                                                    <ul class="submenu">
+                                                        @foreach ($subjects as $subject)
+                                                            <li><a href="#">{{ $subject->subject_name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @endif
+                                            <li><a href="{{ route('about') }}">Videos</a></li>
+                                            <li><a href="{{ route('contact') }}">Contact</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -154,7 +157,8 @@
                                 <div class="single-footer-caption mb-30">
 
                                     <div class="footer-logo mb-25">
-                                        <a href="{{route('home')}}"><img src="assets/img/logo/logo2_footer.png" alt></a>
+                                        <a href="{{ route('home') }}"><img src="assets/img/logo/logo2_footer.png"
+                                                alt></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -205,11 +209,11 @@
                                 <div class="footer-tittle">
                                     <h4>Site Map</h4>
                                     <ul class="mb-20">
-                                        <li><a href="{{route('home')}}">Home</a></li>
-                                        <li><a href="{{route('about')}}">About Us</a></li>
-                                        <li><a href="{{route('store')}}">Store</a></li>
-                                        <li><a href="{{route('login')}}">Login</a></li>
-                                        <li><a href="{{route('contact')}}">Contact</a></li>
+                                        <li><a href="{{ route('home') }}">Home</a></li>
+                                        <li><a href="{{ route('about') }}">About Us</a></li>
+                                        <li><a href="{{ route('store') }}">Store</a></li>
+                                        <li><a href="{{ route('login') }}">Login</a></li>
+                                        <li><a href="{{ route('contact') }}">Contact</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -241,30 +245,30 @@
     </div>
 
 
-    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="{{ url('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <script src="{{ url('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ url('assets/js/popper.min.js') }}"></script>
+    <script src="{{ url('assets/js/bootstrap.min.js') }}"></script>
 
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src="{{ url('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url('assets/js/slick.min.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.slicknav.min.js') }}"></script>
 
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.js"></script>
-    <script src="assets/js/jquery.nice-select.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/price_rangs.js"></script>
+    <script src="{{ url('assets/js/wow.min.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ url('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ url('assets/js/price_rangs.js') }}"></script>
 
-    <script src="assets/js/contact.js"></script>
-    <script src="assets/js/jquery.form.js"></script>
-    <script src="assets/js/jquery.validate.min.js"></script>
-    <script src="assets/js/mail-script.js"></script>
-    <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="{{ url('assets/js/contact.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.form.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ url('assets/js/mail-script.js') }}"></script>
+    <script src="{{ url('assets/js/jquery.ajaxchimp.min.js') }}"></script>
 
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url('assets/js/plugins.js') }}"></script>
+    <script src="{{ url('assets/js/main.js') }}"></script>
 
     <script src="{{ url('assets/js/blockUI.js') }}"></script>
     <script src="{{ url('assets/js/iziToast.min.js') }}"></script>

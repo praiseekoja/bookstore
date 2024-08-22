@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class AdminModel extends Model
 {
     use HasFactory;
+    protected $table = 'admin';
 }

@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>User Dashboard</title>
+    <title>{{ $title ?? "" }} - Admin Dashboard</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 
@@ -55,33 +55,33 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a href="index.html"><img src="assets/images/logo.svg" width="25" alt="Hidden Fact"><span
+            <a href="{{ route('home') }}"><img src="{{ url('assets/img/logo/logo.png') }}" width="75" alt="Hidden Fact"><span
                     class="m-l-10">Hidden Fact</span></a>
         </div>
         <div class="menu">
             <ul class="list">
                 <li>
                     <div class="user-info">
-                        <a class="image" href="profile.html"><img src="assets/images/profile_av.jpg"
-                                alt="User"></a>
+                        <a class="image" href="{{ route('admin.edit') }}"><img src="{{ url('/assets/img/noimg.jpg') }}"
+                                alt="No Image"></a>
                         <div class="detail">
-                            <h4>Michael</h4>
+                            <h4>{{ $admin->name }}</h4>
                             <small>Super Admin</small>
                         </div>
                     </div>
                 </li>
-                <li class="active open"><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
+                <li class="open"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-accounts"></i><span>Users</span></a>
+                <li class="open"><a href="{{ route('admin.user') }}"><i class="zmdi zmdi-accounts"></i><span>Users</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i><span>Classes</span></a>
+                <li class="open"><a href="{{ route('admin.class') }}"><i class="zmdi zmdi-view-dashboard"></i><span>Classes</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i
+                <li class="open"><a href="{{ route('admin.subject') }}"><i
                             class="zmdi zmdi-collection-bookmark"></i><span>Subjects</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
+                <li class="open"><a href="{{ route('admin.book') }}"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
                 </li>
-                <li class="open"><a href="index.html"><i
+                <li class="open"><a href="{{ route('admin.transactions') }}"><i
                             class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
                 </li>
             </ul>

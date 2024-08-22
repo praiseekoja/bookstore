@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Subject List</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Subjects</li>
                             <li class="breadcrumb-item active">Class List</li>
                         </ul>
@@ -18,6 +18,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
+                        <a href="{{ route('admin.subject.add') }}" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -44,24 +45,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                        @foreach ($subjects as $subject)
+<tr>
+                                            <td>{{ $subject->subject_name }}</td>
+                                            <td>{{ $subject->descr }}</td>
+                                            <td>{{ $subject->books_count }}</td>
+                                            <td><td>{{ timeElapsed($subject->created_at) }}</td></td>
                                         </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                        </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

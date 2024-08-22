@@ -18,23 +18,29 @@ class BookController extends Controller
             'descr' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
-            'prev_image' => 'required|mimes:jpeg,bmp,png,jpg|max:1024'
+            'prev_image' => 'required|mimes:jpeg,bmp,png,jpg|max:1024',
+            'docu' => 'required|mimes:pdf'
         ]);
 
         $uploaded = true;
         $imagUrl = null;
-        if ($request->file('prev_image')) {
+        $doc = null;
+        if ($request->file('prev_image') && $request->file('docu')) {
             $file = $request->file('prev_image');
+            $docu = $request->file('docu');
 
             $nam = time() . '_' . $request->file('prev_image')->getClientOriginalName();
+            $docNam = time() . '_' . $request->file('docu')->getClientOriginalName();
             $path = 'storage/app/public/book/';
-            if ($file->move($path, $nam)){
+            $path2 = 'storage/app/public/book/document/';
+            if ($file->move($path, $nam) && $file->move($path2, $docNam)){
                 $uploaded = true;
                 $imagUrl = "{$path}{$nam}";
+                $doc = "{$path2}{$docNam}";
             }
             else{
                 $uploaded = false;
-                return response(['message' => 'An error occured when uploading image'], 500);
+                return response(['message' => 'An error occured when uploading files'], 500);
             }
         }
 
@@ -47,14 +53,18 @@ class BookController extends Controller
                 'price' => $data['price'],
                 'descr' => $data['descr'],
                 'class_id' => $data['class_id'],
-                'subject_id' => $data['subject_id']
+                'subject_id' => $data['subject_id'],
+                'thumbnail' => $imagUrl,
+                'book_file' => $doc
             ]);
 
             if($book == null)
-                return response(['message' => 'An error occured'], 400);
+                return response(['message' => 'An error occured while saving image'], 400);
 
             return response(['data' => $book, 'message' => 'Book Created'], 200);
         }
+
+        return response(['message' => 'An error occured when uploading files'], 500);
 
     }
 
