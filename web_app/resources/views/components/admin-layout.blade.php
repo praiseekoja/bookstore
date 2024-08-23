@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ url('assets/plugins/light-gallery/css/lightgallery.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/fullcalendar/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/plugins/charts-c3/plugin.css') }}" />
 

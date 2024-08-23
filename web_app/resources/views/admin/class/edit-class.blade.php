@@ -29,23 +29,26 @@
                             <div class="header">
                                 <h2><strong>Edit</strong> Class</h2>
                             </div>
+                            <form id="edit_class" method="post">
                             <div class="body">
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $class->class_name }}" placeholder="Class Name">
+                                            <input type="text" name="name" class="form-control" value="{{ $class->class_name }}" placeholder="Class Name">
                                         </div>
                                     </div>
-                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Class Description"> {{ $class->descr }}</textarea>
+                                            <textarea rows="4" name="descr" class="form-control no-resize" placeholder=" Class Description"> {{ $class->descr }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>

@@ -117,14 +117,10 @@ Route::get('/overseer/subjects/edit', [AdminController::class, 'editSubject'])->
 Route::get('/overseer/books', [AdminController::class, 'showBooks'])->name('admin.book');
 
 
-Route::get('/overseer/books/add', function () {
-    return view('admin.book.add-book');
-})->name('admin.book.add');
+Route::get('/overseer/books/add', [AdminController::class, 'addBook'])->name('admin.book.add');
 
 
-Route::get('/overseer/books/edit', function () {
-    return view('admin.book.edit-book');
-})->name('admin.book.edit');
+Route::get('/overseer/books/{id}', [AdminController::class, 'editBook'])->name('admin.book.edit');
 
 
 //user

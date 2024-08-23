@@ -29,28 +29,33 @@
                             <div class="header">
                                 <h2><strong>Edit</strong> Subject</h2>
                             </div>
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $subject->subject_name }}" placeholder="Subject Name">
+                            <form id="edit_subj" method="post">
+                                <div class="body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="name" class="form-control"
+                                                    value="{{ $subject->subject_name }}" placeholder="Subject Name">
+                                            </div>
                                         </div>
-                                    </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Subject Description">{{ $subject->descr }}</textarea>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea rows="4" name="descr" class="form-control no-resize" placeholder=" Subject Description">{{ $subject->descr }}</textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary">Save Changes</button>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

@@ -33,19 +33,27 @@
                                 <div class="row clearfix">
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Book Name">
+                                            <input type="text" class="form-control" value="{{ $book->title }}" placeholder="Book Title">
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" value="{{ $book->price }}" placeholder="Price">
+                                        </div>
                                     </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Book Description"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" placeholder=" Book Description">{{ $book->descr }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
                                             <select rows="4" class="form-control no-resize" >
                                                 <option value="Select Subject"></option>
+                                                @foreach ($subjects as $subject)
+                                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -53,12 +61,16 @@
                                         <div class="form-group">
                                             <select rows="4" class="form-control no-resize" >
                                                 <option value="Select Class"></option>
+                                                @foreach ($classes as $class)
+                                                <option value="{{ $class->id }}" >{{ $class->class_name }}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <button class="btn btn-primary">Save Changes</button>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

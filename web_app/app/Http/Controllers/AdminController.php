@@ -90,7 +90,7 @@ class AdminController extends Controller
 
             return view('admin.class.classes')->with([
                 'admin' => $user,
-                'subjects' => $this->getClasses(),
+                'classes' => $this->getClasses(),
                 'title' => 'Subjects'
             ]);
         }
@@ -244,6 +244,50 @@ class AdminController extends Controller
     }
 
 
+    function editBook(Request $request, $id) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            $book = Book::where('book_id', $id)
+            ->first();
+
+            if($book == null)
+                abort(404);
+
+            return view('admin.book.edit-book')->with([
+                'admin' => $admin,
+                'book' => $book,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Edit '.$book->title
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function addBook(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            return view('admin.book.add-book')->with([
+                'admin' => $admin,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Add Book'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+
 
     private function getTotalUser()
     {
@@ -263,10 +307,22 @@ class AdminController extends Controller
             ->count();
     }
 
+    private function getTClasses()
+    {
+        return DB::table('class')
+            ->get();
+    }
+
     private function getTotalSubject()
     {
         return DB::table('subject')
             ->count();
+    }
+
+    private function getTSubjects()
+    {
+        return DB::table('subject')
+            ->get();
     }
 
     private function getRecentBooks()

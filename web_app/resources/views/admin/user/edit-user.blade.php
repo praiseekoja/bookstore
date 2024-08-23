@@ -56,38 +56,45 @@
                             <div class="header">
                                 <h2><strong>Account</strong> Settings</h2>
                             </div>
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $user->first_name }}" placeholder="First Name">
+                            <form id="edit_user" method="post">
+                                <div class="body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="first_name" class="form-control"
+                                                    value="{{ $user->first_name }}" placeholder="First Name">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $user->last_name }}" placeholder="Last Name">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="last_name" class="form-control"
+                                                    value="{{ $user->last_name }}" placeholder="Last Name">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $user->email }}" placeholder="E-mail">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group">
+                                                <input type="email" name="email" class="form-control"
+                                                    value="{{ $user->email }}" placeholder="E-mail">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" value="{{ $user->tel }}" placeholder="Phone number">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" max="tel" class="form-control"
+                                                    value="{{ $user->tel }}" placeholder="Phone number">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea name="addr" rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary">Save Changes</button>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
