@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSpaceController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AjaxController;
 
 
 /*
@@ -109,7 +110,7 @@ Route::get('/overseer/subjects', [AdminController::class, 'showSubjects'])->name
 Route::get('/overseer/subjects/add', [AdminController::class, 'addSubject'])->name('admin.subject.add');
 
 
-Route::get('/overseer/subjects/edit', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
+Route::get('/overseer/subjects/{id}', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
 
 
 //book
@@ -153,3 +154,10 @@ Route::get('/user/{username}/update', [UserSpaceController::class, 'showProfileE
 
 
 Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->name('user.profile');
+
+
+
+//admin ajax request
+
+Route::post('/subject', [AjaxController::class, 'addSubject']);
+Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);

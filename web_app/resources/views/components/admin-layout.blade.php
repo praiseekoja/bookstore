@@ -105,6 +105,7 @@
     <script src="{{ url('assets/js/blockUI.js') }}"></script>
     <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
+    <script src="{{ url('assets/js/custom2.js') }}"></script>
 
     {{-- page specific library --}}
     <script src="{{ url('assets/bundles/datatablescripts.bundle.js') }}"></script>

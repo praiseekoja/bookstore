@@ -31,6 +31,7 @@
                                 <h2><strong>Security</strong> Settings</h2>
                             </div>
                             <form id="edit_sec" method="post">
+                                @method('PATCH')
                                 <div class="body">
                                     <div class="row">
                                         <div class="col-lg-4 col-md-12">
@@ -64,6 +65,7 @@
                                 <h2><strong>Account</strong> Settings</h2>
                             </div>
                             <form id="edit_admin" method="post">
+                                @method('PATCH')
                                 <div class="body">
                                     <div class="row clearfix">
                                         <div class="col-lg-6 col-md-12">

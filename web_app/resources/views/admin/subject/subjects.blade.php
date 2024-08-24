@@ -47,10 +47,10 @@
                                     <tbody>
                                         @foreach ($subjects as $subject)
 <tr>
-                                            <td>{{ $subject->subject_name }}</td>
+                                            <td><a href="{{ route('admin.subject.edit', $subject->id) }}">{{ $subject->subject_name }}</a></td>
                                             <td>{{ $subject->descr }}</td>
                                             <td>{{ $subject->books_count }}</td>
-                                            <td><td>{{ timeElapsed($subject->created_at) }}</td></td>
+                                            <td>{{ timeElapsed($subject->created_at) }}</td>
                                         </tr>
                                         @endforeach
 

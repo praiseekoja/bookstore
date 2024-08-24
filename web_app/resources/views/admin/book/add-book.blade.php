@@ -31,26 +31,34 @@
                             </div>
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Book Name">
+                                            <input type="text" class="form-control" required placeholder="Book Title">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <input type="file" class="form-control" placeholder="Choose thumbnail">
+                                            <label for="">Thumbnail (Preview/cover image)</label>
+                                            <input type="file" class="form-control" required placeholder="Choose thumbnail">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Book File (PDF)</label>
+                                            <input type="file" class="form-control" required placeholder="Choose Book File">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Book Description"></textarea>
+                                            <textarea rows="4" class="form-control no-resize" required placeholder=" Book Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <select rows="4" class="form-control no-resize" >
+                                            <select rows="4" class="form-control no-resize" required>
                                                 <option value="Select Subject"></option>
                                                 @foreach ($subjects as $subject)
                                                     <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
@@ -60,7 +68,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-12">
                                         <div class="form-group">
-                                            <select rows="4" class="form-control no-resize" >
+                                            <select rows="4" class="form-control no-resize" required>
                                                 <option value="Select Class"></option>
                                                 @foreach ($classes as $class)
                                                 <option value="{{ $class->id }}" >{{ $class->class_name }}</option>

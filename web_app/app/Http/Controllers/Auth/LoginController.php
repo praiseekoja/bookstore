@@ -70,7 +70,7 @@ class LoginController extends Controller
             $request->session()->put('overseer', $admin->adminId);
             return response([
                 'message' => "Success",
-            ], 200);
+            ], 200)->cookie('overseer', self::$token, 2628000, '/', null, false, false, false);
         }
 
         return response(['message' => 'Password not correct'], 401);

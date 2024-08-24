@@ -32,10 +32,10 @@
                             <form id="add_subj" method="post">
                                 <div class="body">
                                     <div class="row clearfix">
-                                        <div class="col-lg-6 col-md-12">
+                                        <div class="col-lg-12 col-md-12">
                                             <div class="form-group">
                                                 <input type="text" name="name" class="form-control"
-                                                    placeholder="Subject Name">
+                                                    placeholder="Subject Name" required>
                                             </div>
                                         </div>
 

@@ -30,9 +30,11 @@
                                 <h2><strong>Edit</strong> Subject</h2>
                             </div>
                             <form id="edit_subj" method="post">
+                                @method('PATCH')
+                                <input type="hidden" name="id" value="{{ $subject->id }}">
                                 <div class="body">
                                     <div class="row clearfix">
-                                        <div class="col-lg-6 col-md-12">
+                                        <div class="col-lg-12 col-md-12">
                                             <div class="form-group">
                                                 <input type="text" name="name" class="form-control"
                                                     value="{{ $subject->subject_name }}" placeholder="Subject Name">

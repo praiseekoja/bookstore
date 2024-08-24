@@ -12,7 +12,7 @@ class SubjectController extends Controller
     //
     function create(Request $request) {
         $data = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:subject,subject_name',
             'descr' => 'required_without'
         ]);
 
