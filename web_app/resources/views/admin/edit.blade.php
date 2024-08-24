@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h2><strong>Security</strong> Settings</h2>
+                                <h2><strong>Account</strong> Settings</h2>
                             </div>
                             <form id="edit_sec" method="post">
                                 @method('PATCH')
@@ -36,52 +36,36 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" name="username" class="form-control"
-                                                    value="{{ $admin->username }}" placeholder="Username">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12">
-                                            <div class="form-group">
-                                                <input type="password" name="old_psw" class="form-control"
-                                                    placeholder="Current Password">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-12">
-                                            <div class="form-group">
-                                                <input type="password" name="psw" class="form-control"
-                                                    placeholder="New Password">
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-info">Save Changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                        <div class="card">
-                            <div class="header">
-                                <h2><strong>Account</strong> Settings</h2>
-                            </div>
-                            <form id="edit_admin" method="post">
-                                @method('PATCH')
-                                <div class="body">
-                                    <div class="row clearfix">
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group">
-                                                <input type="text" name="name" class="form-control"
+                                                <input type="text" required name="name" required class="form-control"
                                                     value="{{ $admin->name }}" placeholder="Names">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12">
                                             <div class="form-group">
-                                                <input type="email" name="email" class="form-control"
+                                                <input type="email" name="email" required required class="form-control"
                                                     value="{{ $admin->email }}" placeholder="E-mail">
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="username" class="form-control"
+                                                    value="{{ $admin->username }}" required placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="password" required name="old_password" class="form-control"
+                                                    placeholder="Current Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="password" name="password" required class="form-control"
+                                                    placeholder="New Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-info">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>

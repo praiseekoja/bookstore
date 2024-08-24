@@ -171,3 +171,6 @@ Route::patch('/user/{id}', [AjaxController::class, 'updateUser']);
 
 Route::post('/book', [AjaxController::class, 'addBook']);
 Route::patch('/book/{id}', [AjaxController::class, 'updateBook']);
+
+Route::patch('/auth/admin', [AjaxController::class, 'updateSec']);
+Route::patch('/admin', [AjaxController::class, 'updateAdmin']);

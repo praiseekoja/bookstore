@@ -178,6 +178,29 @@ jQuery(document).ready(($) => {
         });
     })
 
+    $('#edit_sec').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_sec'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: `/auth/admin`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("Success:", 'Saved!!!')
+            },
+            error: () => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
 
 
     function showInfo(title = null, message = null) {

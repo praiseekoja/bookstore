@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Subject;
 use App\Models\ClassModel;
+use App\Models\AdminModel;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Profile;
@@ -260,6 +262,39 @@ class AjaxController extends Controller
 
         return response()->json([
             'message' => "An error occurred"
+        ], 400);
+
+    }
+
+
+    function updateSec(Request $request) {
+        $id = session('overseer');
+
+        $admin = AdminModel::where('adminId', $id)
+        ->first();
+
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|string',
+            'username' => 'required|string',
+            'old_password' => 'required|string|min:8',
+            'password' => 'required|string|min:8'
+        ]);
+
+        if(Hash::check($data['old_password'], $admin->password)){
+            $admin->password = Hash::make($data['password']);
+            $admin->email = $data['email'];
+            $admin->username = $data['username'];
+            $admin->name = $data['name'];
+            $admin->save();
+
+            return response()->json([
+                'message' => "Saved!"
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => "Invalid old password!"
         ], 400);
 
     }
