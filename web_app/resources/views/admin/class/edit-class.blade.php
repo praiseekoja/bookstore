@@ -30,9 +30,11 @@
                                 <h2><strong>Edit</strong> Class</h2>
                             </div>
                             <form id="edit_class" method="post">
+                                @method('PATCH')
+                                <input type="hidden" name="id" value="{{ $class->id }}">
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control" value="{{ $class->class_name }}" placeholder="Class Name">
                                         </div>

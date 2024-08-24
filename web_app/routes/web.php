@@ -161,3 +161,13 @@ Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->nam
 
 Route::post('/subject', [AjaxController::class, 'addSubject']);
 Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);
+
+
+Route::post('/class', [AjaxController::class, 'addClass']);
+Route::patch('/class/{id}', [AjaxController::class, 'updateClass']);
+
+
+Route::patch('/user/{id}', [AjaxController::class, 'updateUser']);
+
+Route::post('/book', [AjaxController::class, 'addBook']);
+Route::patch('/book/{id}', [AjaxController::class, 'updateBook']);

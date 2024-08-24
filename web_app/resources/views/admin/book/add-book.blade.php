@@ -29,63 +29,79 @@
                             <div class="header">
                                 <h2><strong>Add</strong> Book</h2>
                             </div>
-                            <div class="body">
-                                <div class="row clearfix">
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" required placeholder="Book Title">
-                                        </div>
-                                    </div>
+                            <form id="add_book" method="post">
 
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Thumbnail (Preview/cover image)</label>
-                                            <input type="file" class="form-control" required placeholder="Choose thumbnail">
+                                <div class="body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="title" class="form-control" required
+                                                    placeholder="Book Title">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <label for="">Book File (PDF)</label>
-                                            <input type="file" class="form-control" required placeholder="Choose Book File">
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="number" name="price" class="form-control" required
+                                                    placeholder="Book Price">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" required placeholder=" Book Description"></textarea>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Thumbnail (Preview/cover image)</label>
+                                                <input type="file" name="prev_image" class="form-control" accept="image/*" required
+                                                    placeholder="Choose thumbnail">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <select rows="4" class="form-control no-resize" required>
-                                                <option value="Select Subject"></option>
-                                                @foreach ($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
-                                                @endforeach
-                                            </select>
+
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Book File (PDF)</label>
+                                                <input type="file" name="docu" class="form-control" accept=".pdf" required
+                                                    placeholder="Choose Book File">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12">
-                                        <div class="form-group">
-                                            <select rows="4" class="form-control no-resize" required>
-                                                <option value="Select Class"></option>
-                                                @foreach ($classes as $class)
-                                                <option value="{{ $class->id }}" >{{ $class->class_name }}</option>
-                                            @endforeach
-                                            </select>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea rows="4" name="descr" class="form-control no-resize" required placeholder=" Book Description"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-primary">Add Book</button>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <select rows="4" name="subject_id" class="form-control no-resize" required>
+                                                    <option value="Select Subject"></option>
+                                                    @foreach ($subjects as $subject)
+                                                        <option value="{{ $subject->id }}">{{ $subject->subject_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <select rows="4" name="class_id" class="form-control no-resize" required>
+                                                    <option value="Select Class"></option>
+                                                    @foreach ($classes as $class)
+                                                        <option value="{{ $class->id }}">{{ $class->class_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary">Add Book</button>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

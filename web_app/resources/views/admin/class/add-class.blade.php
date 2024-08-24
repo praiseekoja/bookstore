@@ -33,9 +33,9 @@
 
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Class Name">
+                                            <input type="text" name="name" required class="form-control" placeholder="Class Name">
                                         </div>
                                     </div>
 

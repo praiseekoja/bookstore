@@ -57,24 +57,32 @@
                                 <h2><strong>Account</strong> Settings</h2>
                             </div>
                             <form id="edit_user" method="post">
+                                @method('PATCH')
+                                <input type="hidden" name="id" value="{{ $user->userId }}">
                                 <div class="body">
                                     <div class="row clearfix">
                                         <div class="col-lg-6 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" name="first_name" class="form-control"
+                                                <input type="text" name="first_name" required class="form-control"
                                                     value="{{ $user->first_name }}" placeholder="First Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" name="last_name" class="form-control"
+                                                <input type="text" name="last_name" required class="form-control"
                                                     value="{{ $user->last_name }}" placeholder="Last Name">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12">
                                             <div class="form-group">
-                                                <input type="email" name="email" class="form-control"
+                                                <input type="email" name="email" required class="form-control"
                                                     value="{{ $user->email }}" placeholder="E-mail">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group">
+                                                <input type="text" name="username" required class="form-control"
+                                                    value="{{ $user->username }}" placeholder="Username">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-12">

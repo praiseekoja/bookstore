@@ -52,7 +52,131 @@ jQuery(document).ready(($) => {
         });
     })
 
+    $('#add_class').submit((e) => {
+        e.preventDefault();
 
+        let form_data = new FormData(document.getElementById('add_class'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: "/class",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: (data) => {
+                unblockUI()
+                showSuccess("Success", 'Saved!!')
+            },
+            error: (data) => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+    $('#edit_class').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_class'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: `/class/${form_data.get('id')}`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: (data) => {
+                unblockUI()
+                showSuccess("Success:", 'Saved!!!')
+            },
+            error: (data) => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+
+    $('#edit_user').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_user'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: `/user/${form_data.get('id')}`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: (data) => {
+                unblockUI()
+                showSuccess("Success:", 'Saved!!!')
+            },
+            error: (data) => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+
+    $('#add_book').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('add_book'));
+
+        try {
+            let price = convertToDouble(form_data.get('price'))
+            form_data.set('price', price)
+        } catch (error) {
+            showError("Error:", "Invalid price");
+            return
+        }
+
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: "/book",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("Success", 'Saved!!')
+            },
+            error: () => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+    $('#edit_book').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_book'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: `/book/${form_data.get('id')}`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("Success:", 'Saved!!!')
+            },
+            error: () => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
 
 
 
@@ -99,9 +223,8 @@ jQuery(document).ready(($) => {
         return $.unblockUI();
     }
 
-    function getCookie(name) {
-        var re = new RegExp(name + "=([^;]+)");
-        var value = re.exec(document.cookie);
-        return (value != null) ? unescape(value[1]) : null;
+    function convertToDouble(cuurency) {
+        var temp = cuurency.replace(/[^0-9.-]+/g, "");
+        return parseFloat(temp);
     }
 });
