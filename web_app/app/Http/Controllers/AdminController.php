@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\Transaction;
 use App\Models\Wishlist;
 use App\Models\AdminModel;
+use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -187,6 +188,66 @@ class AdminController extends Controller
             return view('admin.subject.add-subject')->with([
                 'admin' => $admin,
                 'title' => 'Add Subject'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function showVideo(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $id = session('overseer');
+
+            $user = AdminModel::where('adminId', $id)
+            ->first();
+
+            return view('admin.video.videos')->with([
+                'admin' => $user,
+                'videos' => $this->getVideos(),
+                'title' => 'Videos'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function editVideo(Request $request, $id) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            $video = Video::find($id)
+            ->first();
+
+            if($video == null)
+                abort(404);
+
+            return view('admin.video.edit-video')->with([
+                'admin' => $admin,
+                'video' => $video,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Edit Video'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function addVideo(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            return view('admin.video.add-video')->with([
+                'admin' => $admin,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Add video'
             ]);
         }
 
@@ -373,6 +434,15 @@ class AdminController extends Controller
         return DB::table('auth')
             ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
             ->orderBy('auth.created_at', 'desc')
+            ->take(100)
+            ->get();
+    }
+
+    private function getVideos(){
+        return DB::table('video_links')
+            ->leftjoin('subject', 'video_links.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'video_links.class_id', '=', 'class.id')
+            ->orderBy('video_links.created_at', 'desc')
             ->take(100)
             ->get();
     }

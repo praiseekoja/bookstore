@@ -99,6 +99,54 @@ jQuery(document).ready(($) => {
     })
 
 
+    $('#add_vid').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('add_vid'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: "/video",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: (data) => {
+                unblockUI()
+                showSuccess("Success", 'Saved!!')
+            },
+            error: (data) => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+    $('#edit_vid').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_vid'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: `/video/${form_data.get('id')}`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: (data) => {
+                unblockUI()
+                showSuccess("Success:", 'Saved!!!')
+            },
+            error: (data) => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+
+
     $('#edit_user').submit((e) => {
         e.preventDefault();
 

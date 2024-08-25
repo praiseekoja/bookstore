@@ -1675,6 +1675,13 @@ hr {
     color: #1a1a1a
 }
 
+.best-selling .properties .properties-card .properties-caption h6 a {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1a1a1a
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .best-selling .properties .properties-card .properties-caption h3 a {
         font-size: 16px
@@ -1740,6 +1747,10 @@ hr {
 }
 
 .best-selling .properties:hover .properties-caption h3 a {
+    color: #FF1616
+}
+
+.best-selling .properties:hover .properties-caption h6 a {
     color: #FF1616
 }
 

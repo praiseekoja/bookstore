@@ -32,7 +32,7 @@ class CartController extends Controller
                 'qty' => $data['qty'],
                 'format' => $data['format'],
                 'book' => $data['book_id'],
-                'user_id' => $request->user()->userId
+                'user' => $request->user()->userId
             ]);
 
             if($item != null)

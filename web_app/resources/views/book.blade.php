@@ -23,7 +23,8 @@
                                         <div class="review">
                                             <p>{{ $book->subject_name }}</p>
                                         </div>
-                                        <a href="#" class="white-btn mr-10">Add to Cart</a>
+                                        <a href="#" class="white-btn mr-10" id="add_to_cart">Add to Cart</a>
+                                        <input type="hidden" name="bookId" value="{{ $book->book_id }}">
                                     </div>
                                 </div>
                             </div>
@@ -63,8 +64,8 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
+            </div>
         </section>
 
 

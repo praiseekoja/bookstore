@@ -60,7 +60,8 @@
                                     <div class="header-info-left d-flex align-items-center">
 
                                         <div class="logo">
-                                            <a href="{{ route('home') }}"><img src="assets/img/logo/logo.png" alt></a>
+                                            <a href="{{ route('home') }}"><img
+                                                    src="{{ url('assets/img/logo/logo.png') }}" alt></a>
                                         </div>
 
                                         <form action="#" class="form-box">
@@ -73,8 +74,8 @@
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>
                                             <li class="shopping-card">
-                                                <a href="{{ route('cart') }}"><img src="assets/img/icon/cart.svg"
-                                                        alt></a>
+                                                <a href="{{ route('cart') }}"><img
+                                                        src="{{ url('assets/img/icon/cart.svg') }}" alt></a>
                                             </li>
                                             <li><a href="{{ route('login') }}" class="btn header-btn">Sign in</a></li>
                                         </ul>
@@ -90,7 +91,8 @@
                             <div class="col-xl-12">
 
                                 <div class="logo2">
-                                    <a href="{{ route('home') }}"><img src="assets/img/logo/logo.png" alt></a>
+                                    <a href="{{ route('home') }}"><img src="{{ url('assets/img/logo/logo.png') }}"
+                                            alt></a>
                                 </div>
 
                                 <div class="main-menu text-center d-none d-lg-block">
@@ -103,7 +105,9 @@
                                                 <li><a href="#">Classes</a>
                                                     <ul class="submenu">
                                                         @foreach ($classes as $class)
-                                                            <li><a href="#">{{ $class->class_name }}</a></li>
+                                                            <li><a
+                                                                    href="{{ route('store.class', $class->id) }}">{{ $class->class_name }}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
@@ -113,12 +117,14 @@
                                                 <li><a href="#">Subjects</a>
                                                     <ul class="submenu">
                                                         @foreach ($subjects as $subject)
-                                                            <li><a href="#">{{ $subject->subject_name }}</a></li>
+                                                            <li><a
+                                                                    href="{{ route('store.subject', $class->id) }}">{{ $subject->subject_name }}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
                                             @endif
-                                            <li><a href="{{ route('about') }}">Videos</a></li>
+                                            <li><a href="{{ route('video') }}">Videos</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
                                         </ul>
                                     </nav>
@@ -148,8 +154,8 @@
                                 <div class="single-footer-caption mb-30">
 
                                     <div class="footer-logo mb-25">
-                                        <a href="{{ route('home') }}"><img src="assets/img/logo/logo2_footer.png"
-                                                alt></a>
+                                        <a href="{{ route('home') }}"><img
+                                                src="{{ url('assets/img/logo/logo2_footer.png') }}" alt></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
@@ -170,31 +176,31 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>Book Category</h4>
+                                    <h4>Classes</h4>
                                     <ul>
-                                        <li><a href="#">History</a></li>
-                                        <li><a href="#">Horror - Thriller</a></li>
-                                        <li><a href="#">Love Stories</a></li>
-                                        <li><a href="#">Science Fiction</a></li>
-                                        <li><a href="#">Business</a></li>
+                                        @foreach ($classes as $class)
+                                            <li><a
+                                                    href="{{ route('store.class', $class->id) }}">{{ $class->class_name }}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>&nbsp;</h4>
+                                    <h4>Subjects</h4>
                                     <ul>
-                                        <li><a href="#">Biography</a></li>
-                                        <li><a href="#">Astrology</a></li>
-                                        <li><a href="#">Digital Marketing</a></li>
-                                        <li><a href="#">Software Development</a></li>
-                                        <li><a href="#">Ecommerce</a></li>
+                                        @foreach ($subjects as $subject)
+                                            <li><a
+                                                    href="{{ route('store.subject', $class->id) }}">{{ $subject->subject_name }}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">

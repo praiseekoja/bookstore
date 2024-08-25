@@ -73,7 +73,7 @@ CREATE TABLE `auth` (
 
 LOCK TABLES `auth` WRITE;
 /*!40000 ALTER TABLE `auth` DISABLE KEYS */;
-INSERT INTO `auth` VALUES (1,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','yay','yay@gmail.com','$2y$12$yc3bLiuRNBExSC3.Vr6UceVzLEi9mivdUGHv3oCK21hfsEfJv9w0i','','2024-08-10 09:30:11','2024-08-24 02:44:04');
+INSERT INTO `auth` VALUES (1,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','yay','yay@gmail.com','$2y$12$P6UaJMLzF8wjfkqQ3cOr/uQLZCFGkPhPG8cYYuaLrJl9OT/ubp7XC','','2024-08-10 09:30:11','2024-08-25 01:21:23');
 /*!40000 ALTER TABLE `auth` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('9cd70787-543e-473d-a500-a4c152d66406','The Learners',23456.00,'The learners is just a learner','storage/app/public/book/1724473582_4urhBHLg_400x400.jpg','storage/app/public/book/document/1724473582_DissertationIMart.pdf',2,6,'2024-08-24 04:40:38','2024-08-24 04:13:58'),('9cd71980-bb58-45c1-b05f-536c3b30365d','Turtle',345645.00,'Descr','storage/app/public/book/1724477861_thumbnail_240.jpg','storage/app/public/book/document/1724477861_Resume Ayomidipupo Jubril Ajayi (1).pdf',1,2,'2024-08-24 05:16:37','2024-08-24 04:37:41');
+INSERT INTO `book` VALUES ('9cd70787-543e-473d-a500-a4c152d66406','The Learners',23456.00,'The learners is just a learner','storage/app/public/book/1724551472_best_selling3.jpg','storage/app/public/book/document/1724473582_DissertationIMart.pdf',2,6,'2024-08-24 04:40:38','2024-08-25 01:04:32'),('9cd71980-bb58-45c1-b05f-536c3b30365d','Turtle',345645.00,'Descr','storage/app/public/book/1724551495_best_selling1.jpg','storage/app/public/book/document/1724477861_Resume Ayomidipupo Jubril Ajayi (1).pdf',1,2,'2024-08-24 05:16:37','2024-08-25 01:04:55'),('9cd8d8ad-c9c8-4fec-a7e1-335216c6b9bc','Joe Regan',3445.00,'Another one','storage/app/public/book/1724551618_best_selling2.jpg','storage/app/public/book/document/1724551618_Vecteezy-License-Information.pdf',2,2,'2024-08-25 02:07:02',NULL),('9cd8d8c6-a9e0-483b-ab81-64644d9af0a6','Joe Regan 2',3445.00,'Another one','storage/app/public/book/1724551637_best_selling4.jpg','storage/app/public/book/document/1724551637_Vecteezy-License-Information.pdf',2,2,'2024-08-25 02:07:17',NULL),('9cd8d8e3-019c-4533-9d6f-2abad6a7a326','Joe Regan Part 3',3445.00,'Another one','storage/app/public/book/1724551913_best_selling1.jpg','storage/app/public/book/document/1724551656_Vecteezy-License-Information.pdf',3,1,'2024-08-25 02:07:36','2024-08-25 01:11:53'),('9cd8d909-bb03-40cf-a51d-a0df08ae8fe7','Toosle Fold Part 3',3445.00,'Another one','storage/app/public/book/1724551681_best_selling5.jpg','storage/app/public/book/document/1724551681_Vecteezy-License-Information.pdf',1,7,'2024-08-25 02:08:01',NULL),('9cd8d932-ad17-4ca3-8d5c-c76d18ce4cf3','Toosle Fold Part',3445.00,'Another one','storage/app/public/book/1724551708_best_selling7.jpg','storage/app/public/book/document/1724551708_Vecteezy-License-Information.pdf',3,6,'2024-08-25 02:08:28',NULL),('9cd8d94e-b6f2-4f7e-a81d-4894fc6a8558','Toosle Fold Part 1',3445.00,'Another one','storage/app/public/book/1724551726_best_selling6.jpg','storage/app/public/book/document/1724551726_Vecteezy-License-Information.pdf',3,5,'2024-08-25 02:08:46',NULL),('9cd8d970-9ba8-4724-a2ee-3d1211f0681e','Toosle Fold Part 2',3445.00,'Another one','storage/app/public/book/1724551749_best_selling9.jpg','storage/app/public/book/document/1724551749_Vecteezy-License-Information.pdf',1,2,'2024-08-25 02:09:09','2024-08-25 06:14:19'),('9cd8d99c-d3a9-4a5e-ba97-078de38417d2','Toosle',3445.00,'Another one','storage/app/public/book/1724551778_best_selling8.jpg','storage/app/public/book/document/1724551778_Vecteezy-License-Information.pdf',2,3,'2024-08-25 02:09:38',NULL),('9cd8d9ff-20d9-480f-8a66-1ba199575f51','Toosle Thic',3445.00,'Another one','storage/app/public/book/1724551842_best-books1.jpg','storage/app/public/book/document/1724551842_Vecteezy-License-Information.pdf',3,1,'2024-08-25 02:10:42',NULL);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +133,7 @@ CREATE TABLE `cart` (
   KEY `cart_user_idx` (`user`),
   CONSTRAINT `cart_book` FOREIGN KEY (`book`) REFERENCES `book` (`book_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `cartUser` FOREIGN KEY (`user`) REFERENCES `auth` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,6 +142,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,1,'soft','9cd8d94e-b6f2-4f7e-a81d-4894fc6a8558','9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','2024-08-25 07:40:11','2024-08-25 07:40:11');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +160,7 @@ CREATE TABLE `class` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -244,7 +245,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +254,7 @@ CREATE TABLE `personal_access_tokens` (
 
 LOCK TABLES `personal_access_tokens` WRITE;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
-INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials','1','Ayo:Dev','bbdfd05d464818004d440caa206fac7578ec9eb78b76bf8db74d2427734f7440','[\"*\"]','2024-08-17 11:16:13',NULL,'2024-08-10 08:00:08','2024-08-17 11:16:13'),(2,'App\\Models\\DevCredentials','2','Praise:Dev','1a1a70f9a2d7ce17833cd4baabfaa44b1a64720293fd61f869c88b46e8a624e4','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(3,'App\\Models\\DevCredentials','3','Collins:Dev','b5c3d219dcda49c5bd206da7d69de48b25b07e16594492a389b9e39f8536399c','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(4,'App\\Models\\User','1','yay','9e5738990f4558de82c3e30767d313a3ca9f1233a4d02489a0294dc2e17e9d86','[\"*\"]',NULL,'2025-08-10 09:30:11','2024-08-10 09:30:11','2024-08-10 09:30:11'),(5,'App\\Models\\User','1','yay','a76d07352662e491cf4563f79d5ca53188be2f98779ec0aa3f28354c1a5c3004','[\"*\"]',NULL,'2025-08-17 03:39:21','2024-08-17 03:39:21','2024-08-17 03:39:21'),(6,'App\\Models\\User','1','yay','036931ed638a5977ec64cd80a201e84bca0b68f39385bb8e0525eb58106033ba','[\"*\"]',NULL,'2025-08-17 10:58:51','2024-08-17 10:58:51','2024-08-17 10:58:51'),(7,'App\\Models\\User','1','yay','77376057b7f580f1c121dce96b21289f4feba50a4de53dab2c93e49dfbdb28b7','[\"*\"]',NULL,'2025-08-17 11:00:17','2024-08-17 11:00:17','2024-08-17 11:00:17'),(8,'App\\Models\\User','1','yay','1913d2abb91d019f1d3b3fac11a7fe68becb007784cd4d0206134031fa9aea73','[\"*\"]',NULL,'2025-08-17 19:30:20','2024-08-17 19:30:20','2024-08-17 19:30:20'),(9,'App\\Models\\User','1','yay','ab5ec23dcd10caf043409f0d3858f8c009a20ea6e2a300031554f062d7c4095a','[\"*\"]',NULL,'2025-08-17 19:31:33','2024-08-17 19:31:33','2024-08-17 19:31:33'),(10,'App\\Models\\User','1','yay','32b603b738a5506139e8c5bec232262cb91d47554acef35c2bc7ce84a19d58a2','[\"*\"]',NULL,'2025-08-17 19:32:15','2024-08-17 19:32:15','2024-08-17 19:32:15'),(11,'App\\Models\\User','1','yay','6632b68dc79acafe19be3f8a026abb29befb4283e26903849f15eed56ed93afe','[\"*\"]',NULL,'2025-08-17 19:34:10','2024-08-17 19:34:10','2024-08-17 19:34:10'),(12,'App\\Models\\User','1','yay','5ebcb2e619eebdd75b66d6091434ef2906a80120f4d3e42e2112c7f15731a71e','[\"*\"]',NULL,'2025-08-18 07:10:50','2024-08-18 07:10:51','2024-08-18 07:10:51'),(13,'App\\Models\\User','1','yay','30fb7c2c0f564f2cf59cbf3dab4162f448ecdbdd3f9e035081302d913912fd29','[\"*\"]',NULL,'2025-08-24 01:20:37','2024-08-24 01:20:39','2024-08-24 01:20:39');
+INSERT INTO `personal_access_tokens` VALUES (1,'App\\Models\\DevCredentials','1','Ayo:Dev','bbdfd05d464818004d440caa206fac7578ec9eb78b76bf8db74d2427734f7440','[\"*\"]','2024-08-17 11:16:13',NULL,'2024-08-10 08:00:08','2024-08-17 11:16:13'),(2,'App\\Models\\DevCredentials','2','Praise:Dev','1a1a70f9a2d7ce17833cd4baabfaa44b1a64720293fd61f869c88b46e8a624e4','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(3,'App\\Models\\DevCredentials','3','Collins:Dev','b5c3d219dcda49c5bd206da7d69de48b25b07e16594492a389b9e39f8536399c','[\"*\"]',NULL,NULL,'2024-08-10 08:00:08','2024-08-10 08:00:08'),(4,'App\\Models\\User','1','yay','9e5738990f4558de82c3e30767d313a3ca9f1233a4d02489a0294dc2e17e9d86','[\"*\"]',NULL,'2025-08-10 09:30:11','2024-08-10 09:30:11','2024-08-10 09:30:11'),(5,'App\\Models\\User','1','yay','a76d07352662e491cf4563f79d5ca53188be2f98779ec0aa3f28354c1a5c3004','[\"*\"]',NULL,'2025-08-17 03:39:21','2024-08-17 03:39:21','2024-08-17 03:39:21'),(6,'App\\Models\\User','1','yay','036931ed638a5977ec64cd80a201e84bca0b68f39385bb8e0525eb58106033ba','[\"*\"]',NULL,'2025-08-17 10:58:51','2024-08-17 10:58:51','2024-08-17 10:58:51'),(7,'App\\Models\\User','1','yay','77376057b7f580f1c121dce96b21289f4feba50a4de53dab2c93e49dfbdb28b7','[\"*\"]',NULL,'2025-08-17 11:00:17','2024-08-17 11:00:17','2024-08-17 11:00:17'),(8,'App\\Models\\User','1','yay','1913d2abb91d019f1d3b3fac11a7fe68becb007784cd4d0206134031fa9aea73','[\"*\"]',NULL,'2025-08-17 19:30:20','2024-08-17 19:30:20','2024-08-17 19:30:20'),(9,'App\\Models\\User','1','yay','ab5ec23dcd10caf043409f0d3858f8c009a20ea6e2a300031554f062d7c4095a','[\"*\"]',NULL,'2025-08-17 19:31:33','2024-08-17 19:31:33','2024-08-17 19:31:33'),(10,'App\\Models\\User','1','yay','32b603b738a5506139e8c5bec232262cb91d47554acef35c2bc7ce84a19d58a2','[\"*\"]',NULL,'2025-08-17 19:32:15','2024-08-17 19:32:15','2024-08-17 19:32:15'),(11,'App\\Models\\User','1','yay','6632b68dc79acafe19be3f8a026abb29befb4283e26903849f15eed56ed93afe','[\"*\"]',NULL,'2025-08-17 19:34:10','2024-08-17 19:34:10','2024-08-17 19:34:10'),(12,'App\\Models\\User','1','yay','5ebcb2e619eebdd75b66d6091434ef2906a80120f4d3e42e2112c7f15731a71e','[\"*\"]',NULL,'2025-08-18 07:10:50','2024-08-18 07:10:51','2024-08-18 07:10:51'),(13,'App\\Models\\User','1','yay','30fb7c2c0f564f2cf59cbf3dab4162f448ecdbdd3f9e035081302d913912fd29','[\"*\"]',NULL,'2025-08-24 01:20:37','2024-08-24 01:20:39','2024-08-24 01:20:39'),(14,'App\\Models\\User','1','yay','0bed2a7e182947149df9c243894a59701c1be6af702383942190f83407bd28ae','[\"*\"]',NULL,'2025-08-25 00:13:03','2024-08-25 00:13:04','2024-08-25 00:13:04'),(15,'App\\Models\\User','1','yay','1c9dab1443dc699797b6cdd47fb4f2cd2a2acf155273943d1b25376b462daab7','[\"*\"]',NULL,'2025-08-25 07:36:04','2024-08-25 07:36:05','2024-08-25 07:36:05');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +287,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (1,'Ayy','AJJ',NULL,NULL,NULL,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','2024-08-10 09:30:11','2024-08-24 02:44:04');
+INSERT INTO `profile` VALUES (1,'Ay','AJ',NULL,NULL,NULL,'9cbb5fdb-fb83-4d75-afe8-32e39d8fa828','2024-08-10 09:30:11','2024-08-25 01:18:18');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,7 +314,7 @@ CREATE TABLE `subject` (
 
 LOCK TABLES `subject` WRITE;
 /*!40000 ALTER TABLE `subject` DISABLE KEYS */;
-INSERT INTO `subject` VALUES (1,'English',NULL,'2024-08-24 02:42:54',NULL),(2,'Literature','Just Literature','2024-08-24 02:45:57',NULL),(3,'Novel','Just Novels','2024-08-24 02:48:13',NULL),(4,'Art',NULL,'2024-08-24 02:50:26',NULL),(5,'Acting Book',NULL,'2024-08-24 02:51:21','2024-08-24 02:16:51'),(6,'Actor',NULL,'2024-08-24 02:55:33',NULL),(7,'Actress',NULL,'2024-08-24 02:55:52',NULL);
+INSERT INTO `subject` VALUES (1,'English',NULL,'2024-08-24 02:42:54',NULL),(2,'Literature','Just Literature','2024-08-24 02:45:57',NULL),(3,'Novel','Just Novels','2024-08-24 02:48:13',NULL),(5,'Acting Book',NULL,'2024-08-24 02:51:21','2024-08-24 02:16:51'),(6,'Actor',NULL,'2024-08-24 02:55:33',NULL),(7,'Actress',NULL,'2024-08-24 02:55:52',NULL);
 /*!40000 ALTER TABLE `subject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,18 +385,18 @@ DROP TABLE IF EXISTS `video_links`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `video_links` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `video_id` int NOT NULL AUTO_INCREMENT,
   `video_link` text NOT NULL,
   `subject_id` int DEFAULT NULL,
   `class_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`video_id`),
   KEY `video_class_idx` (`class_id`),
   KEY `video_subj_idx` (`subject_id`),
   CONSTRAINT `video_class` FOREIGN KEY (`class_id`) REFERENCES `class` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `video_subj` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,6 +405,7 @@ CREATE TABLE `video_links` (
 
 LOCK TABLES `video_links` WRITE;
 /*!40000 ALTER TABLE `video_links` DISABLE KEYS */;
+INSERT INTO `video_links` VALUES (1,'https://youtube.com/embed/nK1BwdLw0Co?si=1Hq5xyhJfvS_wg67',7,2,'2024-08-25 10:09:12','2024-08-25 10:48:13'),(2,'https://www.youtube.com/embed/tgbNymZ7vqY',2,1,'2024-08-25 10:49:08',NULL);
 /*!40000 ALTER TABLE `video_links` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-24  7:14:41
+-- Dump completed on 2024-08-25 12:07:09

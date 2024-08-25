@@ -12,6 +12,7 @@ use App\Models\AdminModel;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Video;
 
 class AjaxController extends Controller
 {
@@ -61,6 +62,57 @@ class AjaxController extends Controller
 
         return response()->json([
             'message' => "Subject saved"
+        ], 200);
+    }
+
+
+    function addVideo(Request $request) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+            $data = $request->validate([
+                'video_link' => 'required|unique:video_links,video_link',
+                'class_id' => 'required',
+                'subject_id' => 'required'
+            ]);
+
+            $result = DB::table('video_links')->insert([
+                'video_link' => $data['video_link'],
+                'subject_id' => $data['subject_id'],
+                'class_id' => $data['class_id']
+            ]);
+
+            if($result){
+                return response()->json([
+                    'message' => "Video link saved"
+                ], 200);
+            }
+        else{
+            return response()->json([
+                'message' => "An error occurred"
+            ], 400);
+        }
+    }
+
+    function updateVideo(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $data = $request->validate([
+            'video_link' => 'required',
+                'class_id' => 'required',
+                'subject_id' => 'required'
+        ]);
+
+        Video::where('video_id', $id)
+        ->update([
+            'video_link' => $data['video_link'],
+                'subject_id' => $data['subject_id'],
+                'class_id' => $data['class_id']
+        ]);
+
+        return response()->json([
+            'message' => "Video saved"
         ], 200);
     }
 

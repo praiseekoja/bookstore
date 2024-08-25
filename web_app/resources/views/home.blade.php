@@ -53,14 +53,14 @@
                                         <a href="{{ route('books', $best->book_id) }}"><img src="{{ $best->thumbnail }}" alt></a>
                                     </div>
                                     <div class="properties-caption">
-                                        <h3><a href="{{ route('books', $best->book_id) }}">{{ $best->title }}</a></h3>
+                                        <h6><a href="{{ route('books', $best->book_id) }}">{{ $best->title }}</a></h6>
                                         <p>{{ $best->class_name }}</p>
                                         <div class="properties-footer d-flex justify-content-between align-items-center">
                                             <div class="review">
                                                 <p>{{ $best->subject_name }}</p>
                                             </div>
                                             <div class="price">
-                                                <span>₦{{ abbreviateBalance($best->price) }}</span>
+                                                <span>₦{{ abbreviateNumber($best->price) }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@
                                                         alt></a>
                                             </div>
                                             <div class="properties-caption properties-caption2">
-                                                <h3><a href="{{ route('books', $book->book_id) }}">{{ $book->title }}</a></h3>
+                                                <h6><a href="{{ route('books', $book->book_id) }}">{{ $book->title }}</a></h6>
                                                 <p>{{ $book->class_name }}</p>
                                                 <div
                                                     class="properties-footer d-flex justify-content-between align-items-center">

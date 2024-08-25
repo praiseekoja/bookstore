@@ -29,9 +29,9 @@ use App\Http\Controllers\AjaxController;
 Route::get('/', [StoreController::class, 'showHome'])->name('home');
 
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [StoreController::class, 'showAbout'])->name('about');
+
+Route::get('/video', [StoreController::class, 'showVideo'])->name('video');
 
 
 Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id')->name('books');
@@ -39,10 +39,13 @@ Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id
 
 Route::get('/store', [StoreController::class, 'showShop'])->name('store');
 
+Route::get('/store/class/{id}', [StoreController::class, 'showClass'])->name('store.class');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/store/subject/{id}', [StoreController::class, 'showSubject'])->name('store.subject');
+
+Route::get('/contact', [StoreController::class, 'showContact'])->name('contact');
+
+Route::post('/cart', [StoreController::class, 'addCart']);
 
 
 // Route::get('/login', function () {
@@ -113,6 +116,17 @@ Route::get('/overseer/subjects/add', [AdminController::class, 'addSubject'])->na
 Route::get('/overseer/subjects/{id}', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
 
 
+//video
+
+Route::get('/overseer/video', [AdminController::class, 'showVideo'])->name('admin.video');
+
+
+Route::get('/overseer/video/add', [AdminController::class, 'addVideo'])->name('admin.video.add');
+
+
+Route::get('/overseer/video/{id}', [AdminController::class, 'editVideo'])->name('admin.video.edit');
+
+
 //book
 
 Route::get('/overseer/books', [AdminController::class, 'showBooks'])->name('admin.book');
@@ -168,6 +182,8 @@ Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);
 Route::post('/class', [AjaxController::class, 'addClass']);
 Route::patch('/class/{id}', [AjaxController::class, 'updateClass']);
 
+Route::post('/video', [AjaxController::class, 'addVideo']);
+Route::patch('/video/{id}', [AjaxController::class, 'updateVideo']);
 
 Route::patch('/user/{id}', [AjaxController::class, 'updateUser']);
 

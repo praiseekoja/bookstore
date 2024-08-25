@@ -144,29 +144,15 @@
                         </div> --}}
                         <div class="best-selling p-0">
                             <div class="row">
-                                @foreach ($books as $book)
-                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                                @foreach ($videos as $video)
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" style="margin-right: 200px;">
                                         <div class="properties pb-30">
                                             <div class="properties-card">
-                                                <div class="properties-img">
-                                                    <a href="{{ route('books', $book->book_id) }}"><img
-                                                            src="{{ url($book->thumbnail) }}" alt></a>
-                                                </div>
-                                                <div class="properties-caption properties-caption2">
-                                                    <h3><a
-                                                            href="{{ route('books', $book->book_id) }}">{{ $book->title }}</a>
-                                                    </h3>
-                                                    <p>{{ $book->class_name }}</p>
-                                                    <div
-                                                        class="properties-footer d-flex justify-content-between align-items-center">
-                                                        {{-- <div class="review">
-                                                        <p>{{ $book->subject_name }}</p>
-                                                    </div> --}}
-                                                        <div class="price">
-                                                            <span>₦{{ abbreviateNumber($book->price) }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <iframe width="460" height="315"
+                                                    src="{{ $video->video_link }}"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     </div>

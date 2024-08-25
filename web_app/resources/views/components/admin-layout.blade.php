@@ -80,6 +80,9 @@
                 <li class="open"><a href="{{ route('admin.subject') }}"><i
                             class="zmdi zmdi-collection-bookmark"></i><span>Subjects</span></a>
                 </li>
+                <li class="open"><a href="{{ route('admin.video') }}"><i
+                    class="zmdi zmdi-play-circle"></i><span>Videos</span></a>
+        </li>
                 <li class="open"><a href="{{ route('admin.book') }}"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
                 </li>
                 <li class="open"><a href="{{ route('admin.transactions') }}"><i
