@@ -157,7 +157,9 @@ Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->nam
 
 
 
-//admin ajax request
+//ajax request
+
+//admin
 
 Route::post('/subject', [AjaxController::class, 'addSubject']);
 Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);
@@ -174,3 +176,14 @@ Route::patch('/book/{id}', [AjaxController::class, 'updateBook']);
 
 Route::patch('/auth/admin', [AjaxController::class, 'updateSec']);
 Route::patch('/admin', [AjaxController::class, 'updateAdmin']);
+
+Route::delete('user/{id}', [AjaxController::class, 'deleteUser']);
+Route::delete('book/{id}', [AjaxController::class, 'deleteBook']);
+Route::delete('subject/{id}', [AjaxController::class, 'deleteSubject']);
+Route::delete('class/{id}', [AjaxController::class, 'deleteClass']);
+
+
+//user
+
+Route::patch('/auth/user', [UserSpaceController::class, 'updateSec']);
+Route::patch('/user', [UserSpaceController::class, 'profileEdit']);

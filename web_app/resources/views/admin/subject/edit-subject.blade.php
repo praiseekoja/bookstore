@@ -18,7 +18,10 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="profile.html" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-check"></i></a>
+                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right"
+                            data-id="subject"><i class="zmdi zmdi-delete"></i></a>
+                        <input type="hidden" name="delete_type" value="subject">
+                        <input type="hidden" name="delete_id" value="{{ $subject->id }}">
                     </div>
                 </div>
             </div>

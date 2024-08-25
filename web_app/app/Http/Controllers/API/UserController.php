@@ -39,7 +39,7 @@ class UserController extends Controller
             'last_name' => 'required',
             'phone' => 'required_without',
             'address' => 'required_without',
-            'profile_image' => 'required_without|mimes:jpeg,bmp,png,jpg|max:1024'
+            // 'profile_image' => 'required_without|mimes:jpeg,bmp,png,jpg|max:1024'
         ]);
 
         $uploaded = true;

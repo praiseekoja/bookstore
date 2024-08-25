@@ -51,6 +51,52 @@ jQuery(document).ready(($) => {
         });
     })
 
+    $('#edit_userr').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_userr'));
+        blockUI("Updating details, please wait...");
+        $.ajax({
+            url: "/user",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                showSuccess("Success:", "Details Updated")
+                unblockUI()
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message);
+                unblockUI()
+            }
+        });
+    })
+
+    $('#edit_user_sec').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_user_sec'));
+        blockUI("Updating details, please wait...");
+        $.ajax({
+            url: "/auth/user",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                showSuccess("Success:", "Details Updated");
+                unblockUI()
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message);
+                unblockUI()
+            }
+        });
+    })
+
 
     function showInfo(title = null, message = null) {
         iziToast.info({

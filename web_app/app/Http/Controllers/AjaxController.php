@@ -19,6 +19,9 @@ class AjaxController extends Controller
     private static $token = '1|llsMVtuMnY9vXsdygvbnhv7d3TjOksNSQcTkEmR20270ac6f';
 
     function addSubject(Request $request) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'name' => 'required|unique:subject,subject_name',
             'descr' => 'required_without'
@@ -42,6 +45,9 @@ class AjaxController extends Controller
     }
 
     function updateSubject(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'name' => 'required',
             'descr' => 'required_without'
@@ -59,6 +65,9 @@ class AjaxController extends Controller
     }
 
     function addClass(Request $request) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'name' => 'required|unique:class,class_name',
             'descr' => 'required_without'
@@ -82,6 +91,9 @@ class AjaxController extends Controller
     }
 
     function updateClass(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'name' => 'required',
             'descr' => 'required_without'
@@ -99,6 +111,9 @@ class AjaxController extends Controller
     }
 
     function updateUser(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -128,6 +143,9 @@ class AjaxController extends Controller
 
 
     function addBook(Request $request) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'title' => 'required|unique:book,title',
             'price' => 'required',
@@ -192,6 +210,9 @@ class AjaxController extends Controller
     }
 
     function updateBook(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $data = $request->validate([
             'title' => 'required',
             'price' => 'required',
@@ -268,6 +289,9 @@ class AjaxController extends Controller
 
 
     function updateSec(Request $request) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
         $id = session('overseer');
 
         $admin = AdminModel::where('adminId', $id)
@@ -297,6 +321,67 @@ class AjaxController extends Controller
             'message' => "Invalid old password!"
         ], 400);
 
+    }
+
+
+    function deleteSubject(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $subject = DB::table('subject')
+        ->where('id', $id)
+        ->delete();
+
+        if ($subject == 1) {
+            return response()->json(['message' => 'Subject deleted'], 200);
+        }
+
+        return response()->json(['message' => 'Subject does not exist'], 400);
+    }
+
+    function deleteClass(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $row = DB::table('class')
+        ->where('id', $id)
+        ->delete();
+
+        if ($row == 1) {
+            return response()->json(['message' => 'Class deleted'], 200);
+        }
+
+        return response()->json(['message' => 'Class does not exist'], 400);
+    }
+
+    function deleteBook(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $row = DB::table('book')
+        ->where('book_id', $id)
+        ->delete();
+
+        if ($row == 1) {
+            return response()->json(['message' => 'Book deleted'], 200);
+        }
+
+        return response()->json(['message' => 'Book does not exist'], 400);
+    }
+
+    function deleteUser(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $row = DB::table('subject')
+        ->where('id', $id)
+        ->delete();
+
+        if ($row == 1) {
+            return response()->json(['message' => 'User deleted'], 200);
+        }
+
+        return response()->json(['message' => 'User does not exist'], 400);
     }
 }
 

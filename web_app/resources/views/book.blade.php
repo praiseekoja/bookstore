@@ -12,13 +12,13 @@
 
                                 <div class="single-services d-flex align-items-center mb-0">
                                     <div class="features-img">
-                                        <img src="{{ $book->thumbnail }}" alt>
+                                        <img src="{{ url($book->thumbnail) }}" alt>
                                     </div>
                                     <div class="features-caption">
                                         <h3>{{ $book->title }}</h3>
                                         <p>{{ $book->class_name }}</p>
                                         <div class="price">
-                                            <span>₦{{ abbreviateBalance($book->price) }}</span>
+                                            <span>₦{{ abbreviateNumber($book->price) }}</span>
                                         </div>
                                         <div class="review">
                                             <p>{{ $book->subject_name }}</p>
@@ -65,7 +65,6 @@
                     </div>
                     </div>
                 </div>
-            </div>
         </section>
 
 

@@ -202,6 +202,29 @@ jQuery(document).ready(($) => {
     })
 
 
+    $('#delete_action').click((e) => {
+        e.preventDefault();
+        var dataType = $('input[name="delete_type"]').val();
+        var dataId = $('input[name="delete_id"]').val();
+        blockUI("Please wait...");
+        $.ajax({
+            url: `/${dataType}/${dataId}`,
+            type: 'DELETE',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("Success:", 'Deleted!!!')
+            },
+            error: () => {
+                unblockUI()
+                showError('Error:', 'An error occurred, Try again');
+            }
+        });
+    })
+
+
 
     function showInfo(title = null, message = null) {
         iziToast.info({
