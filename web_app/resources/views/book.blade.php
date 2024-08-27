@@ -12,18 +12,19 @@
 
                                 <div class="single-services d-flex align-items-center mb-0">
                                     <div class="features-img">
-                                        <img src="{{ $book->thumbnail }}" alt>
+                                        <img src="{{ url($book->thumbnail) }}" alt>
                                     </div>
                                     <div class="features-caption">
                                         <h3>{{ $book->title }}</h3>
                                         <p>{{ $book->class_name }}</p>
                                         <div class="price">
-                                            <span>₦{{ abbreviateBalance($book->price) }}</span>
+                                            <span>₦{{ abbreviateNumber($book->price) }}</span>
                                         </div>
                                         <div class="review">
                                             <p>{{ $book->subject_name }}</p>
                                         </div>
-                                        <a href="#" class="white-btn mr-10">Add to Cart</a>
+                                        <a href="#" class="white-btn mr-10" id="add_to_cart">Add to Cart</a>
+                                        <input type="hidden" name="bookId" value="{{ $book->book_id }}">
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +63,6 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

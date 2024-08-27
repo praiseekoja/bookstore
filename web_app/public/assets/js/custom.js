@@ -51,6 +51,83 @@ jQuery(document).ready(($) => {
         });
     })
 
+    $('#edit_userr').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_userr'));
+        blockUI("Updating details, please wait...");
+        $.ajax({
+            url: "/user",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                showSuccess("Success:", "Details Updated")
+                unblockUI()
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message);
+                unblockUI()
+            }
+        });
+    })
+
+    $('#edit_user_sec').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_user_sec'));
+        blockUI("Updating details, please wait...");
+        $.ajax({
+            url: "/auth/user",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                showSuccess("Success:", "Details Updated");
+                unblockUI()
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message);
+                unblockUI()
+            }
+        });
+    })
+
+
+    $('#add_to_cart').click((e) => {
+        e.preventDefault();
+
+        var dataId = $('input[name="bookId"]').val();
+
+        let form_data = new FormData();
+
+        form_data.set('qty', 1)
+        form_data.set('format', 'soft')
+        form_data.set('book_id', dataId)
+
+        blockUI("Adding item, please wait...");
+        $.ajax({
+            url: `/cart`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                showSuccess("Success:", "Item Added to Cart");
+                unblockUI()
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message);
+                unblockUI()
+            }
+        });
+    })
+
 
     function showInfo(title = null, message = null) {
         iziToast.info({

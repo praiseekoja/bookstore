@@ -29,23 +29,27 @@
                             <div class="header">
                                 <h2><strong>Add</strong> Class</h2>
                             </div>
+                            <form id="add_class" method="post">
+
                             <div class="body">
                                 <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-12">
+                                    <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Class Name">
+                                            <input type="text" name="name" required class="form-control" placeholder="Class Name">
                                         </div>
                                     </div>
-                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <textarea rows="4" class="form-control no-resize" placeholder=" Class Description"></textarea>
+                                            <textarea rows="4" name="descr" class="form-control no-resize" placeholder=" Class Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <button class="btn btn-primary">Add Class</button>
+                                        <button type="submit" class="btn btn-primary">Add Class</button>
                                     </div>
                                 </div>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserSpaceController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AjaxController;
 
 
 /*
@@ -29,9 +30,9 @@ use App\Http\Controllers\AdminController;
 Route::get('/', [StoreController::class, 'showHome'])->name('home');
 
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [StoreController::class, 'showAbout'])->name('about');
+
+Route::get('/video', [StoreController::class, 'showVideo'])->name('video');
 
 
 Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id')->name('books');
@@ -39,10 +40,13 @@ Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id
 
 Route::get('/store', [StoreController::class, 'showShop'])->name('store');
 
+Route::get('/store/class/{id}', [StoreController::class, 'showClass'])->name('store.class');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/store/subject/{id}', [StoreController::class, 'showSubject'])->name('store.subject');
+
+Route::get('/contact', [StoreController::class, 'showContact'])->name('contact');
+
+Route::post('/cart', [StoreController::class, 'addCart']);
 
 
 // Route::get('/login', function () {
@@ -115,7 +119,18 @@ Route::get('/overseer/subjects', [AdminController::class, 'showSubjects'])->name
 Route::get('/overseer/subjects/add', [AdminController::class, 'addSubject'])->name('admin.subject.add');
 
 
-Route::get('/overseer/subjects/edit', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
+Route::get('/overseer/subjects/{id}', [AdminController::class, 'editSubject'])->name('admin.subject.edit');
+
+
+//video
+
+Route::get('/overseer/video', [AdminController::class, 'showVideo'])->name('admin.video');
+
+
+Route::get('/overseer/video/add', [AdminController::class, 'addVideo'])->name('admin.video.add');
+
+
+Route::get('/overseer/video/{id}', [AdminController::class, 'editVideo'])->name('admin.video.edit');
 
 
 //book
@@ -123,14 +138,10 @@ Route::get('/overseer/subjects/edit', [AdminController::class, 'editSubject'])->
 Route::get('/overseer/books', [AdminController::class, 'showBooks'])->name('admin.book');
 
 
-Route::get('/overseer/books/add', function () {
-    return view('admin.book.add-book');
-})->name('admin.book.add');
+Route::get('/overseer/books/add', [AdminController::class, 'addBook'])->name('admin.book.add');
 
 
-Route::get('/overseer/books/edit', function () {
-    return view('admin.book.edit-book');
-})->name('admin.book.edit');
+Route::get('/overseer/books/{id}', [AdminController::class, 'editBook'])->name('admin.book.edit');
 
 
 //user
@@ -163,3 +174,38 @@ Route::get('/user/{username}/update', [UserSpaceController::class, 'showProfileE
 
 
 Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->name('user.profile');
+
+
+
+//ajax request
+
+//admin
+
+Route::post('/subject', [AjaxController::class, 'addSubject']);
+Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);
+
+
+Route::post('/class', [AjaxController::class, 'addClass']);
+Route::patch('/class/{id}', [AjaxController::class, 'updateClass']);
+
+Route::post('/video', [AjaxController::class, 'addVideo']);
+Route::patch('/video/{id}', [AjaxController::class, 'updateVideo']);
+
+Route::patch('/user/{id}', [AjaxController::class, 'updateUser']);
+
+Route::post('/book', [AjaxController::class, 'addBook']);
+Route::patch('/book/{id}', [AjaxController::class, 'updateBook']);
+
+Route::patch('/auth/admin', [AjaxController::class, 'updateSec']);
+Route::patch('/admin', [AjaxController::class, 'updateAdmin']);
+
+Route::delete('user/{id}', [AjaxController::class, 'deleteUser']);
+Route::delete('book/{id}', [AjaxController::class, 'deleteBook']);
+Route::delete('subject/{id}', [AjaxController::class, 'deleteSubject']);
+Route::delete('class/{id}', [AjaxController::class, 'deleteClass']);
+
+
+//user
+
+Route::patch('/auth/user', [UserSpaceController::class, 'updateSec']);
+Route::patch('/user', [UserSpaceController::class, 'profileEdit']);

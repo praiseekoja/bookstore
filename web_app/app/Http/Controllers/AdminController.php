@@ -12,6 +12,7 @@ use App\Models\Cart;
 use App\Models\Transaction;
 use App\Models\Wishlist;
 use App\Models\AdminModel;
+use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -90,7 +91,7 @@ class AdminController extends Controller
 
             return view('admin.class.classes')->with([
                 'admin' => $user,
-                'subjects' => $this->getClasses(),
+                'classes' => $this->getClasses(),
                 'title' => 'Subjects'
             ]);
         }
@@ -193,6 +194,66 @@ class AdminController extends Controller
         return view('Auth.login2');
     }
 
+    function showVideo(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $id = session('overseer');
+
+            $user = AdminModel::where('adminId', $id)
+            ->first();
+
+            return view('admin.video.videos')->with([
+                'admin' => $user,
+                'videos' => $this->getVideos(),
+                'title' => 'Videos'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function editVideo(Request $request, $id) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            $video = Video::find($id)
+            ->first();
+
+            if($video == null)
+                abort(404);
+
+            return view('admin.video.edit-video')->with([
+                'admin' => $admin,
+                'video' => $video,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Edit Video'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function addVideo(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            return view('admin.video.add-video')->with([
+                'admin' => $admin,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Add video'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
     function showTransaction(Request $request) {
         if ($request->session()->has('overseer')) {
             $id = session('overseer');
@@ -244,6 +305,50 @@ class AdminController extends Controller
     }
 
 
+    function editBook(Request $request, $id) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            $book = Book::where('book_id', $id)
+            ->first();
+
+            if($book == null)
+                abort(404);
+
+            return view('admin.book.edit-book')->with([
+                'admin' => $admin,
+                'book' => $book,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Edit '.$book->title
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+    function addBook(Request $request) {
+        if ($request->session()->has('overseer')) {
+            $idd = session('overseer');
+
+            $admin = AdminModel::where('adminId', $idd)
+            ->first();
+
+            return view('admin.book.add-book')->with([
+                'admin' => $admin,
+                'subjects' => $this->getTSubjects(),
+                'classes' => $this->getTClasses(),
+                'title' => 'Add Book'
+            ]);
+        }
+
+        return view('Auth.login2');
+    }
+
+
 
     private function getTotalUser()
     {
@@ -263,10 +368,22 @@ class AdminController extends Controller
             ->count();
     }
 
+    private function getTClasses()
+    {
+        return DB::table('class')
+            ->get();
+    }
+
     private function getTotalSubject()
     {
         return DB::table('subject')
             ->count();
+    }
+
+    private function getTSubjects()
+    {
+        return DB::table('subject')
+            ->get();
     }
 
     private function getRecentBooks()
@@ -317,6 +434,15 @@ class AdminController extends Controller
         return DB::table('auth')
             ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
             ->orderBy('auth.created_at', 'desc')
+            ->take(100)
+            ->get();
+    }
+
+    private function getVideos(){
+        return DB::table('video_links')
+            ->leftjoin('subject', 'video_links.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'video_links.class_id', '=', 'class.id')
+            ->orderBy('video_links.created_at', 'desc')
             ->take(100)
             ->get();
     }

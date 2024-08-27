@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSpaceController extends Controller
 {
@@ -121,6 +122,98 @@ class UserSpaceController extends Controller
         return view('Auth.login');
     }
 
+
+    function profileEdit(Request $request) {
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'username' => 'required',
+            'tel' => 'required_without',
+            'addr' => 'required_without',
+        ]);
+
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+
+            $user = User::where('userId', $userId)
+            ->first();
+
+            $profile = Profile::where('userId', $userId)
+            ->first();
+
+            if($user == null || $profile == null)
+                abort(401);
+
+            $emai = User::where('userId', '<>', $userId)
+            ->where('email', $data['email'])
+            ->first();
+
+            if($emai != null)
+                return response()->json([
+                    'message' => 'Email address already exist'
+                ], 409);
+
+            $userna = User::where('userId', '<>', $userId)
+            ->where('username', $data['username'])
+            ->first();
+
+            if($userna != null)
+                return response()->json([
+                    'message' => 'Username address already exist'
+                ], 409);
+
+
+            $user->username = $data['username'];
+            $user->email = $data['email'];
+
+            $profile->first_name = $data['first_name'];
+            $profile->last_name = $data['last_name'];
+            $profile->tel = $data['tel'];
+            $profile->address = $data['addr'];
+
+            $user->save();
+            $profile->save();
+
+            return response()->json([
+                'message' => 'Updated!!'
+            ]);
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
+
+
+    function updateSec(Request $request) {
+        if (!$request->session()->has('user'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $userId = session('user');
+        $user = User::where('userId', $userId)
+        ->first();
+
+        if($user == null)
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $data = $request->validate([
+            'old_psw' => 'required|string|min:8',
+            'psw' => 'required|string|min:8'
+        ]);
+
+        if(Hash::check($data['old_psw'], $user->password)){
+            $user->password = Hash::make($data['psw']);
+            $user->save();
+
+            return response()->json([
+                'message' => "Saved!"
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => "Invalid old password!"
+        ], 400);
+
+    }
 
 
 

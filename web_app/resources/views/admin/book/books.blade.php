@@ -40,7 +40,7 @@
                                     <thead>
                                         <tr>
                                             <th>Book Title</th>
-                                            <th>DesPricecription</th>
+                                            <th>Price</th>
                                             <th>Class</th>
                                             <th>Subject</th>
                                             <th>Date Created</th>
@@ -49,7 +49,7 @@
                                     <tbody>
                                         @foreach ($books as $book)
                                         <tr>
-                                            <td>{{ $book->title }}</td>
+                                            <td><a href="{{ route('admin.book.edit', $book->book_id) }}">{{ $book->title }}</a></td>
                                             <td>{{ $book->price }}</td>
                                             <td>{{ $book->class_name }}</td>
                                             <td>{{ $book->subject_name }}</td>

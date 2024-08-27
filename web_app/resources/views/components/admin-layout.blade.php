@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ url('assets/plugins/light-gallery/css/lightgallery.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/fullcalendar/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-select/css/bootstrap-select.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/plugins/charts-c3/plugin.css') }}" />
 
@@ -79,6 +80,9 @@
                 <li class="open"><a href="{{ route('admin.subject') }}"><i
                             class="zmdi zmdi-collection-bookmark"></i><span>Subjects</span></a>
                 </li>
+                <li class="open"><a href="{{ route('admin.video') }}"><i
+                    class="zmdi zmdi-play-circle"></i><span>Videos</span></a>
+        </li>
                 <li class="open"><a href="{{ route('admin.book') }}"><i class="zmdi zmdi-collection-pdf"></i><span>Books</span></a>
                 </li>
                 <li class="open"><a href="{{ route('admin.transactions') }}"><i
@@ -104,6 +108,7 @@
     <script src="{{ url('assets/js/blockUI.js') }}"></script>
     <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
+    <script src="{{ url('assets/js/custom2.js') }}"></script>
 
     {{-- page specific library --}}
     <script src="{{ url('assets/bundles/datatablescripts.bundle.js') }}"></script>

@@ -6,10 +6,10 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-7 col-md-6 col-sm-12">
-                        <h2>Book Edit</h2>
+                        <h2>Video Edit</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
-                            <li class="breadcrumb-item">Book</li>
+                            <li class="breadcrumb-item">Video</li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
@@ -18,10 +18,10 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right" data-id="book"><i
-                                class="zmdi zmdi-delete"></i></a>
-                        <input type="hidden" name="delete_type" value="book">
-                        <input type="hidden" name="delete_id" value="{{ $book->book_id }}">
+                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right"
+                            data-id="subject"><i class="zmdi zmdi-delete"></i></a>
+                        <input type="hidden" name="delete_type" value="video">
+                        <input type="hidden" name="delete_id" value="{{ $video->id }}">
                     </div>
                 </div>
             </div>
@@ -30,50 +30,20 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h2><strong>Edit</strong> Book</h2>
+                                <h2><strong>Edit</strong> Video</h2>
                             </div>
-                            <form id="edit_book" method="post">
+                            <form id="edit_vid" method="post">
                                 @method('PATCH')
-                                <input type="hidden" name="id" value="{{ $book->book_id }}">
-                                <input type="hidden" name="old_prev_image" value="{{ $book->thumbnail }}">
-                                <input type="hidden" name="old_docu" value="{{ $book->book_file }}">
+                                <input type="hidden" name="id" value="{{ $video->video_id }}">
                                 <div class="body">
                                     <div class="row clearfix">
-                                        <div class="col-lg-6 col-md-12">
+                                        <div class="col-lg-12 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="title"
-                                                    value="{{ $book->title }}" required placeholder="Book Title">
+                                                <input type="text" name="video_link" class="form-control"
+                                                    value="{{ $video->video_link }}" placeholder="Video Link">
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group">
-                                                <input type="number" name="price" class="form-control" required
-                                                    value="{{ $book->price }}" placeholder="Price">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Thumbnail (Preview/cover image)</label>
-                                                <input type="file" class="form-control" name="prev_image"
-                                                    accept="image/*" placeholder="Choose thumbnail">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6 col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Book File (PDF)</label>
-                                                <input type="file" class="form-control" name="docu" accept=".pdf"
-                                                    placeholder="Choose Book File">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <textarea rows="4" class="form-control no-resize" name="descr" required placeholder=" Book Description">{{ $book->descr }}</textarea>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-6 col-md-12">
                                             <div class="form-group">
                                                 <select rows="4" name="subject_id" class="form-control no-resize"
@@ -81,7 +51,7 @@
                                                     <option value="Select Subject"></option>
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}"
-                                                            @if ($book->subject_id == $subject->id) @selected(true) @endif>
+                                                            @if ($video->subject_id == $subject->id) @selected(true) @endif>
                                                             {{ $subject->subject_name }}</option>
                                                     @endforeach
                                                 </select>
@@ -94,19 +64,20 @@
                                                     <option value="Select Class"></option>
                                                     @foreach ($classes as $class)
                                                         <option value="{{ $class->id }}"
-                                                            @if ($book->class_id == $class->id) @selected(true) @endif>
+                                                            @if ($video->class_id == $class->id) @selected(true) @endif>
                                                             {{ $class->class_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary">Save Changes</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
+
                         </div>
                     </div>
                 </div>
