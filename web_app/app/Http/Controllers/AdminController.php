@@ -92,7 +92,7 @@ class AdminController extends Controller
             return view('admin.class.classes')->with([
                 'admin' => $user,
                 'classes' => $this->getClasses(),
-                'title' => 'Subjects'
+                'title' => 'Class'
             ]);
         }
 

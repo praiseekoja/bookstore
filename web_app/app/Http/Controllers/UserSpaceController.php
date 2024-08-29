@@ -177,7 +177,7 @@ class UserSpaceController extends Controller
 
             return response()->json([
                 'message' => 'Updated!!'
-            ]);
+            ], 200);
         }
 
         return response()->json(['message' => 'Unauthorized'], 401);

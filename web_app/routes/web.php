@@ -31,7 +31,7 @@ Route::get('/', [StoreController::class, 'showHome'])->name('home');
 
 Route::get('/about', [StoreController::class, 'showAbout'])->name('about');
 
-Route::get('/video', [StoreController::class, 'showVideo'])->name('video');
+Route::get('/videos', [StoreController::class, 'showVideo'])->name('video');
 
 
 Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id')->name('books');
@@ -58,10 +58,14 @@ Route::post('/cart', [StoreController::class, 'addCart']);
 // })->name('register');
 
 
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+Route::get('/cart', [StoreController::class, 'showCart'])->name('cart');
+Route::patch('/cart', [StoreController::class, 'updateCart']);
+Route::delete('/cart/{id}', [StoreController::class, 'removeItem']);
 
+Route::get('/payment/{id}', [StoreController::class, 'verifyPayment']);
+
+
+Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('checkout');
 
 
 /**
@@ -176,26 +180,34 @@ Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->nam
 //admin
 
 Route::post('/subject', [AjaxController::class, 'addSubject']);
+
 Route::patch('/subject/{id}', [AjaxController::class, 'updateSubject']);
 
 
 Route::post('/class', [AjaxController::class, 'addClass']);
+
 Route::patch('/class/{id}', [AjaxController::class, 'updateClass']);
 
 Route::post('/video', [AjaxController::class, 'addVideo']);
+
 Route::patch('/video/{id}', [AjaxController::class, 'updateVideo']);
 
 Route::patch('/user/{id}', [AjaxController::class, 'updateUser']);
 
 Route::post('/book', [AjaxController::class, 'addBook']);
+
 Route::patch('/book/{id}', [AjaxController::class, 'updateBook']);
 
 Route::patch('/auth/admin', [AjaxController::class, 'updateSec']);
+
 Route::patch('/admin', [AjaxController::class, 'updateAdmin']);
 
 Route::delete('user/{id}', [AjaxController::class, 'deleteUser']);
+
 Route::delete('book/{id}', [AjaxController::class, 'deleteBook']);
+
 Route::delete('subject/{id}', [AjaxController::class, 'deleteSubject']);
+
 Route::delete('class/{id}', [AjaxController::class, 'deleteClass']);
 
 

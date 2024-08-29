@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\ClassModel;
 use App\Models\Cart;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
 
 class StoreController extends Controller
@@ -179,6 +181,30 @@ class StoreController extends Controller
         ]);
     }
 
+    function showCart(Request $request) {
+        if ($request->session()->has('user')) {
+            $subjects = Subject::take(30)
+            ->get();
+
+            $classes = ClassModel::take(30)
+            ->get();
+
+            $cart_num = 0;
+
+            $userId = session('user');
+            $cart_num = $this->countCart($userId);
+
+            return view('cart')->with([
+                'subjects' => $subjects,
+                'classes' => $classes,
+                'cartCount' => $cart_num,
+                'carts' => $this->getCartItems($userId)
+            ]);
+        }
+
+        return redirect()->route('login');
+    }
+
     function addCart(Request $request) {
         if (!$request->session()->has('user'))
             return response()->json(['message' => 'Sign-in before adding items to your cart'], 401);
@@ -218,6 +244,98 @@ class StoreController extends Controller
         ->json(['message' => 'Unknown error occured'], 400);
     }
 
+    function updateCart(Request $request) {
+        if (!$request->session()->has('user'))
+            return response()->json(['message' => 'Sign-in before updates items in your cart'], 401);
+
+        $userId = session('user');
+
+        $data = $request->validate([
+            'qty' => 'required',
+            'id' => 'required'
+        ]);
+
+        $item = Cart::where('id', $data['id'])
+        ->where('user', $userId)
+        ->first();
+
+        $item->qty = $data['qty'];
+        $item->save();
+        return response()->json([
+            'message' => 'Updated!!'
+        ], 200);
+    }
+
+    function removeItem(Request $request, $id) {
+        if (!$request->session()->has('user'))
+            return response()->json(['message' => 'Sign-in before updates items in your cart'], 401);
+
+        $userId = session('user');
+
+        $item = DB::table('cart')
+        ->where('id', $id)
+        ->where('user', $userId)
+        ->delete();
+
+        if($item > 0)
+            return response()->json([
+                'message' => 'Updated!!'
+            ], 200);
+
+        return response()->json([
+            'message' => 'Item already deleted'
+        ], 400);
+    }
+
+    function showCheckout(Request $request) {
+        if ($request->session()->has('user')) {
+            $subjects = Subject::take(30)
+            ->get();
+
+            $classes = ClassModel::take(30)
+            ->get();
+
+            $cart_num = 0;
+
+            $userId = session('user');
+            $user = User::where('userId', $userId)
+            ->first();
+
+            $profile = Profile::where('userId', $userId)
+            ->first();
+            $cart_num = $this->countCart($userId);
+
+            return view('checkout')->with([
+                'subjects' => $subjects,
+                'classes' => $classes,
+                'cartCount' => $cart_num,
+                'carts' => $this->getCartItems($userId),
+                'user' => $user,
+                'profile' => $profile
+            ]);
+        }
+
+        return redirect()->route('login');
+    }
+
+    function verifyPayment(Request $request, $id) {
+        $flw = new \Flutterwave\Rave(getenv('FLW_SECRET_KEY')); // Set `PUBLIC_KEY` as an environment variable
+        $transactions = new \Flutterwave\Transactions();
+        $response = $transactions->verifyTransaction(['id' => $transactionId]);
+        if (
+            $response['data']['status'] === "successful"
+            && $response['data']['amount'] === $expectedAmount
+            && $response['data']['currency'] === $expectedCurrency) {
+
+                return response()->json([
+                    'message' => 'Payment successful!!'
+                ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Payment not successfull'
+            ], 400);
+        }
+    }
 
 
 
@@ -307,5 +425,12 @@ class StoreController extends Controller
             ->orderBy('video_links.created_at', 'desc')
             ->take(100)
             ->get();
+    }
+
+    private function getCartItems($userId){
+        return DB::table('cart')
+        ->leftjoin('book', 'cart.book', '=', 'book.book_id')
+        ->orderBy('cart.created_at', 'desc')
+        ->get();
     }
 }
