@@ -65,11 +65,20 @@
                                         </div>
 
                                         <form action="#" class="form-box">
-                                            <input type="text" name="Search" placeholder="Search book by name">
+                                            <input type="text" name="Search"
+                                                placeholder="Search book by name">
                                             <div class="search-icon">
-                                                <i class="ti-search"></i>
+                                                
+                                                <button type="submit"><i class="ti-search"></i></button>
                                             </div>
                                         </form>
+                                        <!-- resources/views/search/search.blade.php -->
+
+{{-- <form action="{{ route('search') }}" method="GET">
+    <input type="text" name="query" placeholder="Search..." value="{{ request('query') }}">
+    <button type="submit">Search</button>
+</form> --}}
+
                                     </div>
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>

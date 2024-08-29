@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserSpaceController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AjaxController;
@@ -57,6 +58,11 @@ Route::post('/cart', [StoreController::class, 'addCart']);
 //     return view('register');
 // })->name('register');
 
+// routes/web.php
+
+
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::get('/cart', [StoreController::class, 'showCart'])->name('cart');
 Route::patch('/cart', [StoreController::class, 'updateCart']);

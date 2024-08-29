@@ -66,7 +66,7 @@
                                                 </div>
                                             </td>
                                             <td id="subbTotal-{{ $item->id }}">₦{{ number_format($item->price * $item->qty, 2) }}</td>
-                                            
+
                                             <td><button class="remove-item" data-id="{{ $item->id }}"
                                                 style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
                                                 type="button">X</button></td>
