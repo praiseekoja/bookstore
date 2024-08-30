@@ -34,14 +34,14 @@ jQuery(document).ready(($) => {
         let form_data = new FormData(document.getElementById('register_formm'));
         blockUI("Verifying details, please wait...");
         $.ajax({
-            url: "/login",
+            url: "/register",
             type: 'POST',
             data: form_data,
             contentType: false,
             cache: false,
             processData: false,
             success: () => {
-                window.location.href = "/dashboard"
+                window.location.href = "/user/dashboard"
                 unblockUI()
             },
             error: (data) => {

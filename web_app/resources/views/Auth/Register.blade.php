@@ -24,6 +24,12 @@
                             <label>Last name</label>
                             <input type="text" required placeholder="Enter last name" name="last_name">
                         </div>
+
+                        <div class="single-input-fields">
+                            <label>Username</label>
+                            <input type="text" required placeholder="Enter username" name="user">
+                        </div>
+
                         <div class="single-input-fields">
                             <label>Email Address</label>
                             <input type="email" required placeholder="Enter email address" name="email">

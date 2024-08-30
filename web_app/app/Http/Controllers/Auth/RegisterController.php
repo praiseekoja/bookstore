@@ -35,7 +35,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'deviceId' => $data['deviceId']
+            'deviceId' => '6787'
         ], [], [], [
             'HTTP_AUTHORIZATION' => "bearer ".self::$token
         ]);
