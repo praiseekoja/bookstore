@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/icon/favicon.png') }}">
 
+    <link rel="stylesheet" href="{{ url('assets/css/ccstyle.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/tiny-slider.css') }}">
+
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/slicknav.css') }}">
@@ -68,7 +71,7 @@
                                             <input type="text" name="Search"
                                                 placeholder="Search book by name">
                                             <div class="search-icon">
-                                                
+
                                                 <button type="submit"><i class="ti-search"></i></button>
                                             </div>
                                         </form>

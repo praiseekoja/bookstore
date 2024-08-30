@@ -27,7 +27,7 @@
 
                         <div class="single-input-fields">
                             <label>Username</label>
-                            <input type="text" required placeholder="Enter username" name="user">
+                            <input type="text" required placeholder="Enter username" name="username">
                         </div>
 
                         <div class="single-input-fields">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="single-input-fields">
                             <label>Confirm Password</label>
-                            <input type="password" required placeholder="Confirm Password" name="cpassword">
+                            <input type="password" required placeholder="Confirm Password" name="password_confirmation">
                         </div>
                     </div>
 

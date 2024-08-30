@@ -88,6 +88,9 @@
                 <li class="open"><a href="{{ route('user.watchlist', $user->username) }}"><i
                             class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
                 </li>
+                <li class="open"><a href="{{ route('logout') }}"><i
+                    class="zmdi zmdi-power"></i><span>Sign Out</span></a>
+        </li>
             </ul>
         </div>
     </aside>

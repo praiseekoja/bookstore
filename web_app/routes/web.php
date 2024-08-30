@@ -78,12 +78,13 @@ Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('checkou
  * authentication Routes
  */
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login'])->name('login-post');
-Route::post('overseer/login', [LoginController::class, 'loginAdmin'])->name('login-admin');
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register'])->name('register-post');
-Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login-post');
+Route::post('/overseer/login', [LoginController::class, 'loginAdmin'])->name('login-admin');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register-post');
+Route::get('/user/logout', [LogoutController::class, 'logoutUser'])->name('logout');
+Route::get('/overseer/logout', [LogoutController::class, 'logoutAdmin'])->name('logout-admin');
 
 /**
  * Admin Dashboard Routes

@@ -88,6 +88,9 @@
                 <li class="open"><a href="{{ route('admin.transactions') }}"><i
                             class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
                 </li>
+                <li class="open"><a href="{{ route('logout-admin') }}"><i
+                    class="zmdi zmdi-time-restore"></i><span>Sign Out</span></a>
+        </li>
             </ul>
         </div>
     </aside>

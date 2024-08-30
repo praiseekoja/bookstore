@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 class RegisterController extends Controller
 {
@@ -21,7 +22,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:auth,username',
@@ -44,8 +45,8 @@ class RegisterController extends Controller
         $content = json_decode($res->getContent());
 
         if($res->getStatusCode() == 200){
-            $request->session()->regenerate();
-            $request->session()->put('user', $content->user->userId);
+            // $request->session()->regenerate();
+            // $request->session()->put('user', $content->user->userId);
 
             return response()->json([
                 'message' => "success",

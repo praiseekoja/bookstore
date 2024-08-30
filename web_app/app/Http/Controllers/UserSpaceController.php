@@ -31,7 +31,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
     function showLibrary(Request $request) {
@@ -49,7 +49,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
     function showProfile(Request $request) {
@@ -66,7 +66,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
     function showTransaction(Request $request) {
@@ -84,7 +84,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
     function showWishlist(Request $request) {
@@ -102,7 +102,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
     function showProfileEdit(Request $request) {
@@ -119,7 +119,7 @@ class UserSpaceController extends Controller
             ]);
         }
 
-        return view('Auth.login');
+        return redirect()->route('login');
     }
 
 

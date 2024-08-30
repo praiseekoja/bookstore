@@ -19,7 +19,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:auth,email',
             'username' => 'required|unique:auth,username',
             'password' => 'required|min:8',
-            'deviceId' => 'mac_address'
+            'deviceId' => 'required_without'
         ]);
 
         $userId = Str::orderedUuid();
@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user = User::create([
             'id' => $userId, 'email' => $credentials['email'],
             'username' => $credentials['username'], 'userId' => $userId,
-            'password' => Hash::make($credentials['password']), 'deviceId' => $credentials['deviceId']
+            'password' => Hash::make($credentials['password']), 'deviceId' => $credentials['deviceId'] ?? ""
         ]);
 
         $profile = Profile::create([
@@ -36,10 +36,11 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken($credentials['username'], ['*'], now()->addYear());
+        $request->session()->regenerate();
+        $request->session()->put('user', $user->userId);
 
         return response([
             'User' => $user,
-            'User_details' => $profile,
             'token' => $token->plainTextToken
         ], 200);
     }
