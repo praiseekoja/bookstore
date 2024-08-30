@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 
+
     <style>
         .header-area .header-top .header-info-right .shopping-card::before {
             position: absolute;
@@ -68,20 +69,11 @@
                                         </div>
 
                                         <form action="#" class="form-box">
-                                            <input type="text" name="Search"
-                                                placeholder="Search book by name">
+                                            <input type="text" name="Search" placeholder="Search book by name">
                                             <div class="search-icon">
-
-                                                <button type="submit"><i class="ti-search"></i></button>
+                                                <i class="ti-search"></i>
                                             </div>
                                         </form>
-                                        <!-- resources/views/search/search.blade.php -->
-
-{{-- <form action="{{ route('search') }}" method="GET">
-    <input type="text" name="query" placeholder="Search..." value="{{ request('query') }}">
-    <button type="submit">Search</button>
-</form> --}}
-
                                     </div>
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>

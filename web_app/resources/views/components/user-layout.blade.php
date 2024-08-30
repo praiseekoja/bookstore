@@ -7,7 +7,7 @@
     <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'User Dashbord' }}</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/icon/favicon.png') }}">
     <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap/css/bootstrap.min.css') }}">
 
     <!-- Light Gallery Plugin Css -->

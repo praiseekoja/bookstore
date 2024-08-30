@@ -1,5 +1,5 @@
 <section class="subscribe-area">
-    <div class="container">
+    {{-- <div class="container">
         <div class="subscribe-caption text-center  subscribe-padding section-img2-bg"
             data-background="{{ url('assets/img/gallery/section-bg1.jpg') }}">
             <div class="row justify-content-center">
@@ -13,5 +13,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </section>
