@@ -215,6 +215,33 @@ class UserSpaceController extends Controller
 
     }
 
+    function read(Request $request, $id) {
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+
+            $user = User::where('auth.userId', $userId)
+            ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+            ->first();
+
+            $book = UserCollections::where('user_collections.id', $id)
+            ->where('user_collections.userId', $userId)
+            ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
+            ->first();
+
+            if ($book == null) {
+                abort(404);
+            }
+
+            return view('user.read')->with([
+                'user' => $user,
+                'book' =>$book,
+                'title' => 'Read - '.$book->title
+            ]);
+        }
+
+        return redirect()->route('login');
+    }
+
 
 
 

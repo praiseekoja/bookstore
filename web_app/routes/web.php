@@ -163,19 +163,21 @@ Route::get('/overseer/users/{id}', [AdminController::class, 'editUser'])->name('
  */
 
 
-Route::get('/user/{username}/library', [UserSpaceController::class, 'showLibrary'])->name('user.library');
+Route::get('/user/library', [UserSpaceController::class, 'showLibrary'])->name('user.library');
+
+Route::get('/user/library/{id}', [UserSpaceController::class, 'read'])->name('user.read');
 
 
 Route::get('/user/dashboard', [UserSpaceController::class, 'showDashboard'])->name('user.dashboard');
 
 
-Route::get('/user/{username}/transactions', [UserSpaceController::class, 'showTransaction'])->name('user.transaction');
+Route::get('/user/transactions', [UserSpaceController::class, 'showTransaction'])->name('user.transaction');
 
 
-Route::get('/user/{username}/watchlist', [UserSpaceController::class, 'showWishlist'])->name('user.watchlist');
+Route::get('/user/watchlist', [UserSpaceController::class, 'showWishlist'])->name('user.watchlist');
 
 
-Route::get('/user/{username}/update', [UserSpaceController::class, 'showProfileEdit'])->name('user.edit');
+Route::get('/user/update', [UserSpaceController::class, 'showProfileEdit'])->name('user.edit');
 
 
 Route::get('/user/{username}', [UserSpaceController::class, 'showProfile'])->name('user.profile');

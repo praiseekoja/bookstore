@@ -76,16 +76,16 @@
                 <li class="active open"><a href="{{ route('user.dashboard') }}"><i
                             class="zmdi zmdi-home"></i><span>Dashboard</span></a>
                 </li>
-                <li class="open"><a href="{{ route('user.library', $user->username) }}"><i
+                <li class="open"><a href="{{ route('user.library') }}"><i
                             class="zmdi zmdi-collection-pdf"></i><span>Library</span></a>
                 </li>
                 <li class="open"><a href="{{ route('user.profile', $user->username) }}"><i
                             class="zmdi zmdi-account"></i><span>Profile</span></a>
                 </li>
-                <li class="open"><a href="{{ route('user.transaction', $user->username) }}"><i
+                <li class="open"><a href="{{ route('user.transaction') }}"><i
                             class="zmdi zmdi-time-restore"></i><span>Transactions</span></a>
                 </li>
-                <li class="open"><a href="{{ route('user.watchlist', $user->username) }}"><i
+                <li class="open"><a href="{{ route('user.watchlist') }}"><i
                             class="zmdi zmdi-eye"></i><span>Watchlist</span></a>
                 </li>
                 <li class="open"><a href="{{ route('logout') }}"><i

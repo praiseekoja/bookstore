@@ -45,7 +45,7 @@
                                                             class="img-fluid">
                                                     </div>
                                                     <div class="file-name">
-                                                        <p class="m-b-5 text-muted">{{ $book->title }}</p>
+                                                        <a href="{{ route('user.read', $book->id) }}" target="_blank"><p class="m-b-5 text-muted">{{ $book->title }}</p></a>
                                                         {{-- <small>Size: 2MB <span class="date">Dec 11, 2019</span></small> --}}
                                                     </div>
                                                 </a>
