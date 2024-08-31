@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Book;
+use App\Models\UserCollections;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -223,14 +225,17 @@ class UserSpaceController extends Controller
             ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
             ->first();
 
-            $book = UserCollections::where('user_collections.id', $id)
-            ->where('user_collections.userId', $userId)
-            ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
-            ->first();
+            // $book = UserCollections::where('user_collections.id', $id)
+            // ->where('user_collections.userId', $userId)
+            // ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
+            // ->first();
 
-            if ($book == null) {
-                abort(404);
-            }
+            // if ($book == null) {
+            //     abort(404);
+            // }
+
+            $book = Book::where('book_id', $id)
+            ->first();
 
             return view('user.read')->with([
                 'user' => $user,

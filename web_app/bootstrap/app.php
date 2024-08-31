@@ -41,7 +41,7 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-//require_once('../app/globalFunctions.php');
+require_once('../app/globalFunctions.php');
 
 /*
 |--------------------------------------------------------------------------

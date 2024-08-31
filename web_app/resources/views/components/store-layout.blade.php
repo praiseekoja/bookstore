@@ -69,7 +69,7 @@
                                         </div>
 
                                         <form action="{{ route('search') }}" class="form-box">
-                                            <input type="text" name="Search" placeholder="Search book by name">
+                                            <input type="text" name="query" placeholder="Search book by name">
                                             <div class="search-icon">
                                                 <i class="ti-search"></i>
                                             </div>

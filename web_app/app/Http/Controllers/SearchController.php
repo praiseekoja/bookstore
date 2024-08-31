@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Cart;
 use App\Models\ClassModel;
 use App\Models\Subject;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -18,9 +19,12 @@ class SearchController extends Controller
         // Check if the search query is not empty
         if (!empty($query)) {
             // Perform the search using Eloquent ORM
-            $results = Book::where('title', 'LIKE', "%{$query}%")
-                           ->orWhere('content', 'LIKE', "%{$query}%")
-                           ->get();
+            $results = Book::where('book.title', 'LIKE', "%{$query}%")
+                    ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+                    ->leftjoin('class', 'book.class_id', '=', 'class.id')
+                    ->orWhere('class.class_name', 'LIKE', "%{$query}%")
+                    ->orWhere('subject.subject_name', 'LIKE', "%{$query}%")
+                    ->get();
         } else {
             // If no search query, return all records or an empty result set
             $results = Book::all();  // Optional: Change to an empty collection if needed
@@ -43,5 +47,11 @@ class SearchController extends Controller
             'subjects' => $subjects,
             'classes' => $classes
         ]);
+    }
+
+    private function countCart($userId)
+    {
+        return DB::table('cart')
+            ->whereRaw('user = ?', array($userId))->count();
     }
 }
