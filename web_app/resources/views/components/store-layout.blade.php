@@ -68,7 +68,7 @@
                                                     src="{{ url('assets/img/logo/logo.png') }}" alt></a>
                                         </div>
 
-                                        <form action="#" class="form-box">
+                                        <form action="{{ route('search') }}" class="form-box">
                                             <input type="text" name="Search" placeholder="Search book by name">
                                             <div class="search-icon">
                                                 <i class="ti-search"></i>
