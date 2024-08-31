@@ -321,7 +321,7 @@ class StoreController extends Controller
     }
 
     function verifyPayment(Request $request, $id) {
-        $flw = new \Flutterwave\Rave(getenv('FLW_SECRET_KEY')); // Set `PUBLIC_KEY` as an environment variable
+        $flw = new \Flutterwave\Rave(getenv('FLW_SECRET_KEY'));
         $transactions = new \Flutterwave\Transactions();
         $response = $transactions->verifyTransaction(['id' => $transactionId]);
         if (
@@ -329,9 +329,41 @@ class StoreController extends Controller
             && $response['data']['amount'] === $expectedAmount
             && $response['data']['currency'] === $expectedCurrency) {
 
-                return response()->json([
+                try {
+                    return response()->json([
                     'message' => 'Payment successful!!'
-                ], 200);
+                    ], 200);
+                } catch (\Throwable $e) {
+                    return response()->json([
+                        'message' => 'Payment successful!!'
+                        ], 200);
+                } finally {
+                    $userId = session('user');
+
+                    $cartItem = $this->getCartItems($userId);
+                    $cost = 0;
+                    foreach ($cartItem as $item) {
+                        $cost += $item->price;
+                        if(checkUserCollection($userId, $item->book_id) == 0){
+                            $result = DB::table('user_collections')->insert([
+                                'userId' => $item->book_id,
+                                'book_id' => $userId
+                            ]);
+                        }
+                    }
+
+                    $result = DB::table('transaction')->insert([
+                        'cost' => $cost,
+                        'details' => json_encode($cartItem),
+                        'user' => $userId
+                    ]);
+
+
+                    DB::table('cart')
+                    ->where('user', $userId)
+                    ->delete();
+                }
+
         } else {
             return response()->json([
                 'message' => 'Payment not successfull'
@@ -339,9 +371,33 @@ class StoreController extends Controller
         }
     }
 
+    function showOrderSent(Request $request) {
+        $subjects = Subject::take(30)
+        ->get();
+
+        $classes = ClassModel::take(30)
+        ->get();
+
+        $cart_num = 0;
+
+        $cart_num = $this->countCart($userId);
+
+        return view('order')->with([
+            'subjects' => $subjects,
+            'classes' => $classes,
+            'cartCount' => $cart_num
+        ]);
+    }
 
 
 
+
+
+    private function checkUserCollection($userId, $bookId)
+    {
+        return DB::table('user_collections')
+            ->whereRaw('userId = ? and book_id = ?', array($userId, $bookId))->count();
+    }
 
     private function countCart($userId)
     {

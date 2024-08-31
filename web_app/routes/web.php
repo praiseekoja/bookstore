@@ -70,6 +70,8 @@ Route::delete('/cart/{id}', [StoreController::class, 'removeItem']);
 
 Route::get('/payment/{id}', [StoreController::class, 'verifyPayment']);
 
+Route::get('/order', [StoreController::class, 'showOrderSent']);
+
 
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('checkout');
 

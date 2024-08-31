@@ -116,25 +116,6 @@ jQuery(document).ready(($) => {
         });
     }
 
-    const verifyTransaction = async (payment_id) =>{
-        $.ajax({
-            url: `/payment/${payment_id}`,
-            type: 'GET',
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: () => {
-                unblockUI();
-                showSuccess('Cart Updated!!!');
-            },
-            error: (data) => {
-                unblockUI();
-                showError('Error:', data.responseJSON.message);
-            },
-        });
-    }
-
-
     function showSuccess(title = "Success", message = null) {
         iziToast.success({
             title,
@@ -175,9 +156,12 @@ jQuery(document).ready(($) => {
 function makePayment() {
     let form_data = new FormData(document.getElementById('order-form'));
 
+    if(isNullOrWhitespace(form_data.get('email'))){
+        showError('Enter your email address')
+    }
 
     const modal = FlutterwaveCheckout({
-        public_key: "FLWPUBK-92f171ec65717d6566e119a032d269c9-X",
+        public_key: "FLWPUBK_TEST-92f171ec65717d6566e119a032d269c9-X",
         tx_ref: form_data.get('ref'),
         amount: $('#total-pr').val(),
         currency: "NGN",
@@ -202,3 +186,59 @@ function makePayment() {
     });
 }
 
+const verifyTransaction = async (payment_id) =>{
+    $.ajax({
+        url: `/payment/${payment_id}`,
+        type: 'GET',
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: () => {
+            unblockUI();
+            showSuccess('Cart Updated!!!');
+        },
+        error: (data) => {
+            unblockUI();
+            showError('Error:', data.responseJSON.message);
+        },
+    });
+}
+
+function showSuccess(title = "Success", message = null) {
+    iziToast.success({
+        title,
+        message,
+        position: 'center'
+    });
+}
+
+function showError(title = "Error", message = "An error occured") {
+    iziToast.error({
+        title,
+        message,
+        position: 'center'
+    });
+}
+
+function blockUI(message = 'Loading please wait...') {
+    return $.blockUI({
+        css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+        },
+        message: message
+    });
+}
+
+function unblockUI() {
+    return $.unblockUI();
+}
+
+function isNullOrWhitespace(input) {
+    return !input || input.trim().length === 0;
+}
