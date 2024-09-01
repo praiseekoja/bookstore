@@ -106,7 +106,7 @@ jQuery(document).ready(($) => {
         let form_data = new FormData();
 
         form_data.set('qty', 1)
-        form_data.set('format', 'soft')
+        form_data.set('format', $('#item-format').val())
         form_data.set('book_id', dataId)
 
         blockUI("Adding item, please wait...");
