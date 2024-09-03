@@ -497,6 +497,7 @@ class StoreController extends Controller
 
     private function getCartItems($userId){
         return DB::table('cart')
+        ->where('user', $userId)
         ->leftjoin('book', 'cart.book', '=', 'book.book_id')
         ->orderBy('cart.created_at', 'desc')
         ->get();
