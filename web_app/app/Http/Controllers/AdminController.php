@@ -37,7 +37,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showUsers(Request $request) {
@@ -54,7 +54,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function editUser(Request $request, $id) {
@@ -79,7 +79,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showClasses(Request $request) {
@@ -96,7 +96,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function editClass(Request $request, $id) {
@@ -119,7 +119,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function addClass(Request $request) {
@@ -135,7 +135,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showSubjects(Request $request) {
@@ -152,7 +152,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function editSubject(Request $request, $id) {
@@ -175,7 +175,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function addSubject(Request $request) {
@@ -191,7 +191,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showVideo(Request $request) {
@@ -208,7 +208,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function editVideo(Request $request, $id) {
@@ -233,7 +233,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function addVideo(Request $request) {
@@ -251,7 +251,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showTransaction(Request $request) {
@@ -268,7 +268,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showProfile(Request $request) {
@@ -284,7 +284,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function showBooks(Request $request) {
@@ -301,7 +301,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
 
@@ -327,7 +327,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
     function addBook(Request $request) {
@@ -345,7 +345,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('Auth.login2');
+        return view('auth.login2');
     }
 
 

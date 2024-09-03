@@ -161,12 +161,12 @@ function makePayment() {
     }
 
     const modal = FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-92f171ec65717d6566e119a032d269c9-X",
+        public_key: "FLWPUBK-92f171ec65717d6566e119a032d269c9-X",
         tx_ref: form_data.get('ref'),
         amount: $('#total-pr').val(),
         currency: "NGN",
         payment_options: "card, banktransfer, internetbanking, enaira, opay, ussd",
-        redirect_url: "http://127.0.0.1:8000/order",
+        redirect_url: "https://hiddenfactsbooks.com/order",
         meta: {
             consumer_id: form_data.get('userId'),
             consumer_mac: "",
