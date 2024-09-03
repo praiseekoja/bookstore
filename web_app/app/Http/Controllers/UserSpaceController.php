@@ -225,17 +225,14 @@ class UserSpaceController extends Controller
             ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
             ->first();
 
-            // $book = UserCollections::where('user_collections.id', $id)
-            // ->where('user_collections.userId', $userId)
-            // ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
-            // ->first();
-
-            // if ($book == null) {
-            //     abort(404);
-            // }
-
-            $book = Book::where('book_id', $id)
+            $book = UserCollections::where('user_collections.id', $id)
+            ->where('user_collections.userId', $userId)
+            ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
             ->first();
+
+            if ($book == null) {
+                abort(404);
+            }
 
             return view('user.read')->with([
                 'user' => $user,

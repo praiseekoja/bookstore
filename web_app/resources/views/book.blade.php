@@ -26,7 +26,13 @@
                                         </div>
                                         <div class="review">
                                             <p>{{ $book->subject_name }}</p>
+                                            
+                                        <select name="format" id="item-format">
+                                            <option value="Hard Copy">Hard Copy</option>
+                                            <option value="Soft Copy">Soft Copy</option>
+                                        </select>
                                         </div>
+                                        
                                         <a href="#" class="white-btn mr-10" id="add_to_cart">Add to Cart</a>
                                         <input type="hidden" name="bookId" value="{{ $book->book_id }}">
                                     </div>

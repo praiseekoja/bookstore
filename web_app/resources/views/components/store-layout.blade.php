@@ -81,6 +81,9 @@
                                                 <a href="{{ route('cart') }}"><img
                                                         src="{{ url('assets/img/icon/cart.svg') }}" alt></a>
                                             </li>
+                                            <li>
+                                                <a href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i></a>
+                                            </li>
                                             <li><a href="{{ route('login') }}" class="btn header-btn">Sign in</a></li>
                                         </ul>
                                     </div>
