@@ -40,37 +40,83 @@
                                     @endphp
                                     @foreach ($carts as $item)
                                         @php
-                                            $total += $item->price * $item->qty;
-                                        @endphp <tr>
-                                            <td class="product-thumbnail">
-                                                <img src="{{ url($item->thumbnail) }}" alt="Image" width="30%"
-                                                    class="img-fld" />
-                                            </td>
-                                            <td class="product-name">
-                                                <h2 class="h5 text-black">{{ $item->title }}</h2>
-                                            </td>
-                                            <td id="unit-{{ $item->id }}">₦{{ number_format($item->price, 2) }}</td>
-                                            <td>
-                                                <div class="quantity">
-                                                    <button type="button"
+                                            if ($item->format == 'hard') {
+                                                if ($item->price2 > 0) {
+                                                    $total += $item->price2 * $item->qty;
+                                                }
+                                            } else {
+                                                if ($item->price > 0) {
+                                                    $total += $item->price * $item->qty;
+                                                }
+                                            }
+                                        @endphp
+                                        @if ($item->format == 'hard')
+                                            <tr>
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url($item->thumbnail) }}" alt="Image" width="30%"
+                                                        class="img-fld" />
+                                                </td>
+                                                <td class="product-name">
+                                                    <h2 class="h5 text-black">{{ $item->title }}</h2>
+                                                </td>
+                                                <td id="unit-{{ $item->id }}">₦{{ number_format($item->price2, 2) }}
+                                                </td>
+                                                <td>
+                                                    <div class="quantity">
+                                                        <button type="button"
+                                                            style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
+                                                            class="decr" data-id="item-{{ $item->id }}">-</button>
+
+                                                        <span class="prod-qty"
+                                                            id="item-{{ $item->id }}">{{ $item->qty }}</span>
+
+                                                        <button
+                                                            style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
+                                                            type="button" class="incr"
+                                                            data-id="item-{{ $item->id }}">+</button>
+                                                    </div>
+                                                </td>
+                                                <td id="subbTotal-{{ $item->id }}">
+                                                    ₦{{ number_format($item->price2 * $item->qty, 2) }}</td>
+
+                                                <td><button class="remove-item" data-id="{{ $item->id }}"
                                                         style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
-                                                        class="decr" data-id="item-{{ $item->id }}">-</button>
+                                                        type="button">X</button></td>
+                                            </tr>
+                                        @else
+                                            <tr>
+                                                <td class="product-thumbnail">
+                                                    <img src="{{ url($item->thumbnail) }}" alt="Image" width="30%"
+                                                        class="img-fld" />
+                                                </td>
+                                                <td class="product-name">
+                                                    <h2 class="h5 text-black">{{ $item->title }}</h2>
+                                                </td>
+                                                <td id="unit-{{ $item->id }}">₦{{ number_format($item->price, 2) }}
+                                                </td>
+                                                <td>
+                                                    <div class="quantity">
+                                                        <button type="button"
+                                                            style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
+                                                            class="decr" data-id="item-{{ $item->id }}">-</button>
 
-                                                    <span class="prod-qty"
-                                                        id="item-{{ $item->id }}">{{ $item->qty }}</span>
+                                                        <span class="prod-qty"
+                                                            id="item-{{ $item->id }}">{{ $item->qty }}</span>
 
-                                                    <button
+                                                        <button
+                                                            style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
+                                                            type="button" class="incr" disabled
+                                                            data-id="item-{{ $item->id }}">+</button>
+                                                    </div>
+                                                </td>
+                                                <td id="subbTotal-{{ $item->id }}">
+                                                    ₦{{ number_format($item->price * $item->qty, 2) }}</td>
+
+                                                <td><button class="remove-item" data-id="{{ $item->id }}"
                                                         style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
-                                                        type="button" class="incr"
-                                                        data-id="item-{{ $item->id }}">+</button>
-                                                </div>
-                                            </td>
-                                            <td id="subbTotal-{{ $item->id }}">₦{{ number_format($item->price * $item->qty, 2) }}</td>
-
-                                            <td><button class="remove-item" data-id="{{ $item->id }}"
-                                                style="margin: 10px; font-weight: 900; border: 0px; background-color: white; color:black;"
-                                                type="button">X</button></td>
-                                        </tr>
+                                                        type="button">X</button></td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -115,7 +161,8 @@
                                         <span class="text-black">Total</span>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <strong id="total-price" class="text-black">₦{{ number_format($total, 2) }}</strong>
+                                        <strong id="total-price"
+                                            class="text-black">₦{{ number_format($total, 2) }}</strong>
                                     </div>
                                 </div>
 
