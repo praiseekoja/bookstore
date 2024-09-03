@@ -158,6 +158,15 @@ function makePayment() {
 
     if(isNullOrWhitespace(form_data.get('email'))){
         showError('Enter your email address')
+        return
+    }
+    else if(isNullOrWhitespace(form_data.get('first_name'))){
+        showError('Enter your first name')
+        return
+    }
+    else if(isNullOrWhitespace(form_data.get('last_name'))){
+        showError('Enter your last name')
+        return
     }
 
     const modal = FlutterwaveCheckout({

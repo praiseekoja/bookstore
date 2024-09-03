@@ -43,7 +43,14 @@
                                         <div class="col-lg-6 col-md-12">
                                             <div class="form-group">
                                                 <input type="number" name="price" class="form-control" required
-                                                    placeholder="Book Price">
+                                                    placeholder="Book Softcopy Price">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group">
+                                                <input type="number" name="price2" class="form-control" required
+                                                    placeholder="Book Hardcopy Price">
                                             </div>
                                         </div>
 
