@@ -79,13 +79,13 @@
         <div class="services-area2 top-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 col-lg-9 col-md-8">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="row">
 
                             <div class="col-xl-12">
                                 <div class="section-tittle d-flex justify-content-between align-items-center mb-40">
                                     <h2 class="mb-0">Featured This Week</h2>
-                                    <a href="{{ route('store') }}" class="browse-btn">View All</a>
+                                    <a href="{{ route('video') }}" class="browse-btn">View All</a>
                                 </div>
                             </div>
                         </div>
@@ -111,14 +111,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {{-- </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-9">
 
                         <div class="google-add">
                             <img src="assets/img/image.jpg" alt class="w-100">
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
