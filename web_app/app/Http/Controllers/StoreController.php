@@ -390,6 +390,42 @@ class StoreController extends Controller
         ]);
     }
 
+    function showTransactionDetails(Request $request, $id) {
+        if (!$request->session()->has('user') || !$request->session()->has('overseer'))
+            abort(401);
+
+        $subjects = Subject::take(30)
+        ->get();
+
+        $classes = ClassModel::take(30)
+        ->get();
+
+        $cart_num = 0;
+
+        if($request->session()->has('user')){
+            $userId = session('overseer');
+            $cart_num = $this->countCart($userId);
+
+            return view('transaction')->with([
+                'subjects' => $subjects,
+                'classes' => $classes,
+                'cartCount' => $cart_num,
+                'carts' => $this->getUserTransaction($id, $userId)
+            ]);
+        }
+        elseif ($request->session()->has('overseer')) {
+            return view('transaction')->with([
+                'subjects' => $subjects,
+                'classes' => $classes,
+                'cartCount' => $cart_num,
+                'carts' => json_decode($this->getTransaction($id))->details
+            ]);
+        }
+        else {
+            abort(404);
+        }
+    }
+
 
 
 
@@ -501,5 +537,19 @@ class StoreController extends Controller
         ->leftjoin('book', 'cart.book', '=', 'book.book_id')
         ->orderBy('cart.created_at', 'desc')
         ->get();
+    }
+
+    private function getTransaction($id)
+    {
+        return DB::table('transaction')
+            ->whereRaw('id = ?', array($id))
+            ->first();
+    }
+
+    private function getUserTransaction($id, $userId)
+    {
+        return DB::table('transaction')
+            ->whereRaw('id = ? and user = ?', array($id, $userId))
+            ->first();
     }
 }

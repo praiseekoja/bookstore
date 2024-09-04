@@ -73,6 +73,8 @@ Route::get('/payment/{id}', [StoreController::class, 'verifyPayment']);
 
 Route::get('/order', [StoreController::class, 'showOrderSent']);
 
+Route::get('/transaction/{id}', [StoreController::class, 'showTransactionDetails'])->name('trans.details');
+
 
 Route::get('/checkout', [StoreController::class, 'showCheckout'])->name('checkout');
 
