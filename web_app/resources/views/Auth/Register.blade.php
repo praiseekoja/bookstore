@@ -12,8 +12,7 @@
                     <span>Sign Up</span>
                     <p>Create your account to get full access</p>
                 </div>
-                <form action="{{ route('register-post') }}" id="register_formm" method="post">
-
+                 <form action="{{ route('register-post') }}" id="register_formm" method="post">
 
                     <div class="input-box">
                         <div class="single-input-fields">
