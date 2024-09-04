@@ -158,15 +158,24 @@ function makePayment() {
 
     if(isNullOrWhitespace(form_data.get('email'))){
         showError('Enter your email address')
+        return
+    }
+    else if(isNullOrWhitespace(form_data.get('first_name'))){
+        showError('Enter your first name')
+        return
+    }
+    else if(isNullOrWhitespace(form_data.get('last_name'))){
+        showError('Enter your last name')
+        return
     }
 
     const modal = FlutterwaveCheckout({
-        public_key: "FLWPUBK_TEST-92f171ec65717d6566e119a032d269c9-X",
+        public_key: "FLWPUBK-92f171ec65717d6566e119a032d269c9-X",
         tx_ref: form_data.get('ref'),
         amount: $('#total-pr').val(),
         currency: "NGN",
         payment_options: "card, banktransfer, internetbanking, enaira, opay, ussd",
-        redirect_url: "http://127.0.0.1:8000/order",
+        redirect_url: "https://hiddenfactsbooks.com/order",
         meta: {
             consumer_id: form_data.get('userId'),
             consumer_mac: "",

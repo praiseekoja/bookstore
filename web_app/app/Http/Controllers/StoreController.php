@@ -34,6 +34,7 @@ class StoreController extends Controller
             'cartCount' => $cart_num,
             'newBooks' => $this->getNewBooks(),
             'bestSelling' => $this->getBestSelling(),
+            'videos' => $this->getFewVideos(),
             'random' => $this->getRandom()
         ]);
     }
@@ -485,8 +486,18 @@ class StoreController extends Controller
             ->get();
     }
 
+    private function getFewVideos(){
+        return DB::table('video_links')
+            ->leftjoin('subject', 'video_links.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'video_links.class_id', '=', 'class.id')
+            ->orderBy('video_links.created_at', 'desc')
+            ->take(3)
+            ->get();
+    }
+
     private function getCartItems($userId){
         return DB::table('cart')
+        ->where('user', $userId)
         ->leftjoin('book', 'cart.book', '=', 'book.book_id')
         ->orderBy('cart.created_at', 'desc')
         ->get();

@@ -201,6 +201,7 @@ class AjaxController extends Controller
         $data = $request->validate([
             'title' => 'required|unique:book,title',
             'price' => 'required',
+            'price2' => 'required',
             'descr' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
@@ -240,6 +241,7 @@ class AjaxController extends Controller
                 'book_id' => $bookId,
                 'title' => $data['title'],
                 'price' => $data['price'],
+                'price2' => $data['price2'],
                 'descr' => $data['descr'],
                 'class_id' => $data['class_id'],
                 'subject_id' => $data['subject_id'],
@@ -268,6 +270,7 @@ class AjaxController extends Controller
         $data = $request->validate([
             'title' => 'required',
             'price' => 'required',
+            'price2' => 'required',
             'descr' => 'required',
             'class_id' => 'required',
             'subject_id' => 'required',
@@ -318,6 +321,7 @@ class AjaxController extends Controller
             ->update([
                 'title' => $data['title'],
                 'price' => $data['price'],
+                'price2' => $data['price2'],
                 'descr' => $data['descr'],
                 'class_id' => $data['class_id'],
                 'subject_id' => $data['subject_id'],

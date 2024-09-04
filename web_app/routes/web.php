@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\UserSpaceController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StoreController;
@@ -87,6 +88,14 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register'])->name('register-post');
 Route::get('/user/logout', [LogoutController::class, 'logoutUser'])->name('logout');
 Route::get('/overseer/logout', [LogoutController::class, 'logoutAdmin'])->name('logout-admin');
+
+Route::get('/forget-password', [PasswordResetController::class, 'showForget'])->name('forget');
+Route::get('/auth/otp', [PasswordResetController::class, 'showOtp'])->name('otp');
+Route::get('/auth/change-password', [PasswordResetController::class, 'showChangePassword'])->name('change.password');
+
+Route::post('/auth/find-user', [PasswordResetController::class, 'findUser']);
+Route::get('/auth/verify/{id}', [PasswordResetController::class, 'verifyOtp']);
+Route::post('/auth/change-password', [PasswordResetController::class, 'changePassword']);
 
 /**
  * Admin Dashboard Routes

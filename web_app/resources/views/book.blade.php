@@ -18,14 +18,18 @@
                                         <h3>{{ $book->title }}</h3>
                                         <p>{{ $book->class_name }}</p>
                                         <div class="price">
-                                            <span>₦{{ abbreviateNumber($book->price) }}</span>
+                                            <span>₦{{ abbreviateNumber($book->price) }} <small style="font-size: 15px">softcopy</small></span>
+                                        </div>
+                                        <br>
+                                        <div class="price">
+                                            <span>₦{{ abbreviateNumber($book->price2) }} <small style="font-size: 15px">hardtcopy</small></span>
                                         </div>
                                         <div class="review">
                                             <p>{{ $book->subject_name }}</p>
                                             
                                         <select name="format" id="item-format">
-                                            <option value="Hard Copy">Hard Copy</option>
-                                            <option value="Soft Copy">Soft Copy</option>
+                                            <option value="hard">Hard Copy</option>
+                                            <option value="soft">Soft Copy</option>
                                         </select>
                                         </div>
                                         

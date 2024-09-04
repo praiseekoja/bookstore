@@ -128,6 +128,79 @@ jQuery(document).ready(($) => {
         });
     })
 
+    $('#forget_formm').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('forget_formm'));
+        blockUI("Verifying details, please wait...");
+        $.ajax({
+            url: "/auth/find-user",
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("OTP sent to your email, check your inbox", '');
+                window.location.href = "/auth/otp"
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message.split('.')[0]+'.');
+                unblockUI()
+            }
+        });
+    })
+
+    $('#otp_formm').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('otp_formm'));
+        blockUI("Verifying OTP, please wait...");
+        $.ajax({
+            url: `/auth/verify/${form_data.get('otp')}`,
+            type: 'GET',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("OTP verified!", '');
+                window.location.href = "/auth/change-password"
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message.split('.')[0]+'.');
+                unblockUI()
+            }
+        });
+    })
+
+
+    $('#psw_formm').submit((e) => {
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('psw_formm'));
+        blockUI("Updating details, please wait...");
+        $.ajax({
+            url: `/auth/change-password`,
+            type: 'POST',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: () => {
+                unblockUI()
+                showSuccess("Password Reset Successfully!!", '');
+                window.location.href = "/user/dashboard"
+            },
+            error: (data) => {
+                showError('Error:', data.responseJSON.message.split('.')[0]+'.');
+                unblockUI()
+            }
+        });
+    })
+
 
     function showInfo(title = null, message = null) {
         iziToast.info({

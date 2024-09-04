@@ -92,22 +92,18 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="services-active">
-                                    @foreach ($random as $book)
+                                    @foreach ($videos as $video)
                                     <div class="single-services d-flex align-items-center">
-                                        <div class="features-img">
-                                            <img src="{{ $book->thumbnail }}" alt>
-                                        </div>
-                                        <div class="features-caption">
-                                            <img src="assets/img/icon/logo.html" alt>
-                                            <h3>{{ $book->title }}</h3>
-                                            <p>{{ $book->class_name }}</p>
-                                            <div class="price">
-                                                <span>₦{{ abbreviateNumber($book->price) }}</span>
+                                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" style="margin-right: 200px;">
+                                            <div class="properties pb-30">
+                                                <div class="properties-card">
+                                                    <iframe width="460" height="315"
+                                                        src="{{ $video->video_link }}"
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        allowfullscreen></iframe>
+                                                </div>
                                             </div>
-                                            <div class="review">
-                                                <p>{{ $book->subject_name }}</p>
-                                            </div>
-                                            <a href="{{ route('books', $book->book_id) }}" class="border-btn">View Details</a>
                                         </div>
                                     </div>
                                     @endforeach
