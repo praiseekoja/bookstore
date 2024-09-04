@@ -53,7 +53,7 @@
                                     <tbody>
                                         @foreach ($recentTrans as $recent)
                                             <tr>
-                                                <td>{{ $recent->first_name.' '.$recent->last_name }}</td>
+                                                <td><a href="{{ route('trans.details', $recent->id) }}" target="_blank" rel="noopener noreferrer">{{ $recent->first_name.' '.$recent->last_name }}</a></td>
                                                 <td>{{ timeElapsed($recent->create_at) }}</td>
                                                 <td>₦{{ abbreviateBalance($recent->cost) }}</td>
                                                 <td>{{ count(json_decode($recent->details)) }}</td>
