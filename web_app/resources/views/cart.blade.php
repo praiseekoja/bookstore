@@ -51,9 +51,9 @@
                                             }
                                         @endphp
                                         @if ($item->format == 'hard')
-                                            <tr>
+                                            <tr id="row-{{ $item->id }}">
                                                 <td class="product-thumbnail">
-                                                    <img src="{{ url($item->thumbnail) }}" alt="Image" width="30%"
+                                                    <img src="{{ url(''.$item->thumbnail.'') }}" alt="Image" width="30%"
                                                         class="img-fld" />
                                                 </td>
                                                 <td class="product-name">
@@ -84,9 +84,9 @@
                                                         type="button">X</button></td>
                                             </tr>
                                         @else
-                                            <tr>
+                                            <tr id="row-{{ $item->id }}">
                                                 <td class="product-thumbnail">
-                                                    <img src="{{ url($item->thumbnail) }}" alt="Image" width="30%"
+                                                    <img src="{{ url(''.$item->thumbnail.'') }}" alt="Image" width="30%"
                                                         class="img-fld" />
                                                 </td>
                                                 <td class="product-name">

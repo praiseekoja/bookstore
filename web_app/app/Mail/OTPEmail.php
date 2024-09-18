@@ -32,7 +32,7 @@ class OTPEmail extends Mailable
     {
         return new Envelope(
             subject: 'Reset Password',
-            from: new Address('no-reply@onebiss.themichaelstech.com', 'Hidden Facts Books'),
+            from: new Address('no-reply@hiddenfactsbooks.com', 'Hidden Facts Books'),
         );
     }
 

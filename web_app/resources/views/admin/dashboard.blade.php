@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Dashboard</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
@@ -194,9 +194,9 @@
                                             <tbody>
                                                 @foreach ($recentTrans as $recent)
                                                     <tr>
-                                                        <td>{{ $recent->first_name . ' ' . $recent->last_name }}</td>
-                                                        <td>{{ timeElapsed($recent->create_at) }}</td>
-                                                        <td>₦{{ abbreviateBalance($recent->cost) }}</td>
+                                                        <td><a href="{{ route('trans.details', $recent->id) }}" target="_blank" rel="noopener noreferrer">{{ $recent->first_name . ' ' . $recent->last_name }}</a></td>
+                                                        <td>{{ timeElapsed($recent->created_at) }}</td>
+                                                        <td>₦{{ abbreviateNumber($recent->cost) }}</td>
                                                         <td>{{ count(json_decode($recent->details)) }}</td>
                                                     </tr>
                                                 @endforeach

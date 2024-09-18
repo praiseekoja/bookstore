@@ -150,7 +150,7 @@
                                             <div class="properties-card">
                                                 <div class="properties-img">
                                                     <a href="{{ route('books', $book->book_id) }}"><img
-                                                            src="{{ url($book->thumbnail) }}" alt></a>
+                                                            src="{{ url($book->thumbnail) }}" style="object-fit: cover; height: 300px;" alt></a>
                                                 </div>
                                                 <div class="properties-caption properties-caption2">
                                                     <h3><a

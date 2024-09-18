@@ -126,14 +126,28 @@
                                         <tbody>
                                             @foreach ($carts as $item)
                                                 @php
+                                                    if ($item->format == 'hard') {
+                                                if ($item->price2 > 0) {
+                                                    $total += $item->price2 * $item->qty;
+                                                }
+                                            } else {
+                                                if ($item->price > 0) {
                                                     $total += $item->price * $item->qty;
+                                                }
+                                            }
                                                 @endphp
                                                 <tr>
                                                     <td>
                                                         {{ $item->title }} <strong class="mx-2">x</strong>
                                                         {{ $item->qty }}
                                                     </td>
+                                                    @if ($item->format == 'hard')
+                                                    <td>₦{{ number_format($item->price2 * $item->qty, 2) }}</td>
+                                                    @else
+                                                    
                                                     <td>₦{{ number_format($item->price * $item->qty, 2) }}</td>
+                                                    @endif
+                                                    
                                                 </tr>
                                             @endforeach
 

@@ -52,7 +52,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::whereRaw('auth.username = ? or auth.email = ?', array($credentials['user'], $credentials['user']))
-        ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
+        // ->leftjoin('profile', 'auth.userId', '=', 'profile.userId')
         ->first();
 
         if($user == null)

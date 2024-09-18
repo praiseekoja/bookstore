@@ -72,8 +72,8 @@ class AjaxController extends Controller
 
             $data = $request->validate([
                 'video_link' => 'required|unique:video_links,video_link',
-                'class_id' => 'required',
-                'subject_id' => 'required'
+                'class_id' => 'required|min:1',
+                'subject_id' => 'required|min:1'
             ]);
 
             $result = DB::table('video_links')->insert([
@@ -100,8 +100,8 @@ class AjaxController extends Controller
 
         $data = $request->validate([
             'video_link' => 'required',
-                'class_id' => 'required',
-                'subject_id' => 'required'
+                'class_id' => 'required|int|min:1',
+                'subject_id' => 'required|int|min:1'
         ]);
 
         Video::where('video_id', $id)
@@ -362,11 +362,18 @@ class AjaxController extends Controller
         ]);
 
         if(Hash::check($data['old_password'], $admin->password)){
-            $admin->password = Hash::make($data['password']);
-            $admin->email = $data['email'];
-            $admin->username = $data['username'];
-            $admin->name = $data['name'];
-            $admin->save();
+            AdminModel::where('adminId', $id)
+            ->update([
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'username' => $data['username'],
+                'name' => $data['name']
+            ]);
+            // $admin->password = Hash::make($data['password']);
+            // $admin->email = $data['email'];
+            // $admin->username = $data['username'];
+            // $admin->name = $data['name'];
+            // $admin->save();
 
             return response()->json([
                 'message' => "Saved!"
@@ -408,6 +415,21 @@ class AjaxController extends Controller
         }
 
         return response()->json(['message' => 'Class does not exist'], 400);
+    }
+    
+    function deleteVideo(Request $request, $id) {
+        if (!$request->session()->has('overseer'))
+            return response()->json(['message' => 'Unauthorized'], 401);
+
+        $row = DB::table('video_links')
+        ->where('video_id', $id)
+        ->delete();
+
+        if ($row == 1) {
+            return response()->json(['message' => 'Video Link deleted'], 200);
+        }
+
+        return response()->json(['message' => 'Video link does not exist'], 400);
     }
 
     function deleteBook(Request $request, $id) {

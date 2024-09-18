@@ -9,7 +9,7 @@
                     <div class="col-xl-12">
                         <div class="slider-active dot-style">
                             @foreach ($newBooks as $book)
-                            <div class="single-slider slider-height d-flex align-items-center" style="background-image: url({{ $book->thumbnail }})">
+                            <div class="single-slider slider-height d-flex align-items-center banner-img">
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <div class="col-xxl-4 col-xl-4 col-lg-5 col-md-6 col-sm-7">
@@ -17,7 +17,7 @@
                                                 <span data-animation="fadeInUp" data-delay=".2s">{{ $book->class_name }}</span>
                                                 <h1 data-animation="fadeInUp" data-delay=".4s">{{ $book->title }}
                                                 </h1>
-                                                <a href="{{ route('books', $book->book_id) }}" class="btn hero-btn" data-animation="bounceIn"
+                                                <a href="{{ route('store') }}" class="btn hero-btn" data-animation="bounceIn"
                                                     data-delay=".8s">Browse Store</a>
                                             </div>
                                         </div>
@@ -38,7 +38,7 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mb-55">
-                            <h2>Best Selling Books Ever</h2>
+                            <h2>Catalog</h2>
                         </div>
                     </div>
                 </div>
@@ -50,16 +50,20 @@
                             <div class="properties pb-20">
                                 <div class="properties-card">
                                     <div class="properties-img">
-                                        <a href="{{ route('books', $best->book_id) }}"><img src="{{ $best->thumbnail }}" alt></a>
+                                        <a href="{{ route('books', $best->book_id) }}"><img style="object-fit: cover; height: 230px;" src="{{ $best->thumbnail }}" alt></a>
                                     </div>
                                     <div class="properties-caption">
                                         <h6><a href="{{ route('books', $best->book_id) }}">{{ $best->title }}</a></h6>
-                                        <p>{{ $best->class_name }}</p>
+                                        <p title="{{ $best->class_name }}">{{ $best->class_name }}</p>
                                         <div class="properties-footer d-flex justify-content-between align-items-center">
                                             <div class="review">
-                                                <p>{{ $best->subject_name }}</p>
+                                                <p title="{{ $best->subject_name }}">{{ $best->subject_name }}</p>
                                             </div>
+                                            
                                             <div class="price">
+                                                <br>
+                                                <br>
+                                                <br>
                                                 <span>₦{{ abbreviateNumber($best->price) }}</span>
                                             </div>
                                         </div>
@@ -79,13 +83,13 @@
         <div class="services-area2 top-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 col-lg-9 col-md-8">
+                    <div class="col-xl-12 col-lg-12 col-md-12">
                         <div class="row">
 
                             <div class="col-xl-12">
                                 <div class="section-tittle d-flex justify-content-between align-items-center mb-40">
                                     <h2 class="mb-0">Featured This Week</h2>
-                                    <a href="{{ route('store') }}" class="browse-btn">View All</a>
+                                    <a href="{{ route('video') }}" class="browse-btn">View All</a>
                                 </div>
                             </div>
                         </div>
@@ -111,14 +115,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {{-- </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-9">
 
                         <div class="google-add">
                             <img src="assets/img/image.jpg" alt class="w-100">
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -161,11 +165,11 @@
 
                         <div class="row">
                                 @foreach ($bestSelling as $book)
-                                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
                                     <div class="properties pb-30">
                                         <div class="properties-card">
                                             <div class="properties-img">
-                                                <a href="{{ route('books', $book->book_id) }}"><img src="{{ $book->thumbnail }}"
+                                                <a href="{{ route('books', $book->book_id) }}"><img style="object-fit: cover; height: 230px;" src="{{ $book->thumbnail }}"
                                                         alt></a>
                                             </div>
                                             <div class="properties-caption properties-caption2">

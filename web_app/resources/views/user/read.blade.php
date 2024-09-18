@@ -1,137 +1,45 @@
-<!DOCTYPE html>
-<html>
+@extends('components.read-layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/icon/favicon.png') }}">
-    <title>{{ $book->title }} - Hidden Facts Books</title>
+@section('content')
 
-</head>
+<main>
 
-<body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="slider-area">
+                        <div class="slider-height2 slider-bg5 d-flex align-items-center justify-content-center">
+                            <div class="hero-caption hero-caption2">
+                                <h2>{{ $book->title }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="listing-area pt-50 pb-50">
+            <div class="container">
+                <div class="row">
 
-    <script src="{{ url('assets/js/vendor/pdf.mjs') }}" type="module"></script>
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        
+                        <div class="best-selling p-0">
+                            <div class="row">
+                                <div>
+                                    <button class="border-btn border-btn2 more-btn2" id="prev">Previous</button>
+                                    <button class="border-btn border-btn2 more-btn2" id="next">Next</button>
+                                    &nbsp; &nbsp;
+                                    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+                                </div>
+                            
+                                <canvas id="the-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <script type="module">
-        // If absolute URL from the remote server is provided, configure the CORS
-        // header on that server.
-        var url = '{{ url($book->book_file) }}';
-
-        // Loaded via <script> tag, create shortcut to access PDF.js exports.
-        var {
-            pdfjsLib
-        } = globalThis;
-
-        // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ url('assets/js/vendor/pdf.worker.mjs') }}";
-
-        var pdfDoc = null,
-            pageNum = 1,
-            pageRendering = false,
-            pageNumPending = null,
-            scale = 0.8,
-            canvas = document.getElementById('the-canvas'),
-            ctx = canvas.getContext('2d');
-
-        /**
-         * Get page info from document, resize canvas accordingly, and render page.
-         * @param num Page number.
-         */
-        function renderPage(num) {
-            pageRendering = true;
-            // Using promise to fetch the page
-            pdfDoc.getPage(num).then(function(page) {
-                var viewport = page.getViewport({
-                    scale: scale
-                });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                // Render PDF page into canvas context
-                var renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                var renderTask = page.render(renderContext);
-
-                // Wait for rendering to finish
-                renderTask.promise.then(function() {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        // New page rendering is pending
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
-            });
-
-            // Update page counters
-            document.getElementById('page_num').textContent = num;
-        }
-
-        /**
-         * If another page rendering in progress, waits until the rendering is
-         * finised. Otherwise, executes rendering immediately.
-         */
-        function queueRenderPage(num) {
-            if (pageRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
-            }
-        }
-
-        /**
-         * Displays previous page.
-         */
-        function onPrevPage() {
-            if (pageNum <= 1) {
-                return;
-            }
-            pageNum--;
-            queueRenderPage(pageNum);
-        }
-        document.getElementById('prev').addEventListener('click', onPrevPage);
-
-        /**
-         * Displays next page.
-         */
-        function onNextPage() {
-            if (pageNum >= pdfDoc.numPages) {
-                return;
-            }
-            pageNum++;
-            queueRenderPage(pageNum);
-        }
-        document.getElementById('next').addEventListener('click', onNextPage);
-
-        /**
-         * Asynchronously downloads PDF.
-         */
-        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
-            pdfDoc = pdfDoc_;
-            document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-            // Initial/first page rendering
-            renderPage(pageNum);
-        });
-    </script>
-
-    <h1>{{ $book->title }}</h1>
-
-    <div>
-        <button id="prev">Previous</button>
-        <button id="next">Next</button>
-        &nbsp; &nbsp;
-        <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-    </div>
-
-    <canvas id="the-canvas"></canvas>
-
-</body>
-
-</html>
+                <x-newsletter></x-newsletter>
+</main>
+    
+@endsection

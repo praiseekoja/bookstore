@@ -8,9 +8,10 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Class List</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Classes</li>
                             <li class="breadcrumb-item active">Class List</li>
+                            <li><a href="{{ route('admin.class.add') }}" class="btn btn-info btn-icon float-right mobile_menu2"><i class="zmdi zmdi-plus"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -18,7 +19,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="{{ route('admin.class.add') }}" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-plus"></i></a>
+                        
                     </div>
                 </div>
             </div>

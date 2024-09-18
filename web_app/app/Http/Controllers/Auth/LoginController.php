@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\AdminModel;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,11 +39,12 @@ class LoginController extends Controller
         $content = json_decode($res->getContent());
 
         if($res->getStatusCode() == 200){
+            $request->session()->forget('user');
             $request->session()->regenerate();
             $request->session()->put('user', $content->user->userId);
 
             return response()->json([
-                'message' => "success",
+                'message' => "success ".$content->user->userId
             ], 200);
         }
 

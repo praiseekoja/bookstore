@@ -35,6 +35,8 @@ Route::get('/about', [StoreController::class, 'showAbout'])->name('about');
 
 Route::get('/videos', [StoreController::class, 'showVideo'])->name('video');
 
+Route::get('/videos/{id}', [StoreController::class, 'showVideoSub'])->name('video.subject');
+
 
 Route::get('/book/{id}', [StoreController::class, 'showDetails'])->whereUuid('id')->name('books');
 
@@ -69,7 +71,7 @@ Route::get('/cart', [StoreController::class, 'showCart'])->name('cart');
 Route::patch('/cart', [StoreController::class, 'updateCart']);
 Route::delete('/cart/{id}', [StoreController::class, 'removeItem']);
 
-Route::get('/payment/{id}', [StoreController::class, 'verifyPayment']);
+Route::post('/payment/{id}/verify', [StoreController::class, 'verifyPayment']);
 
 Route::get('/order', [StoreController::class, 'showOrderSent']);
 
@@ -231,6 +233,8 @@ Route::delete('book/{id}', [AjaxController::class, 'deleteBook']);
 Route::delete('subject/{id}', [AjaxController::class, 'deleteSubject']);
 
 Route::delete('class/{id}', [AjaxController::class, 'deleteClass']);
+
+Route::delete('video/{id}', [AjaxController::class, 'deleteVideo']);
 
 
 //user

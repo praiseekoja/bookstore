@@ -12,6 +12,8 @@
                                     Facts</a></li>
                             <li class="breadcrumb-item"><a href="#">Profile</a></a></li>
                             <li class="breadcrumb-item active">Welcome to your profile {{ $user->first_name }}</li>
+                            <li><a href="{{ route('user.edit', $user->username) }}" class="btn btn-info btn-icon float-right mobile_menu2"><i
+                                class="zmdi zmdi-edit"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -19,8 +21,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="{{ route('user.edit', $user->username) }}" class="btn btn-info btn-icon float-right"><i
-                                class="zmdi zmdi-edit"></i></a>
+                        
                     </div>
                 </div>
             </div>

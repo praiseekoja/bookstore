@@ -32,11 +32,18 @@ function abbreviateNumber($num) {
       $suffix = 'T';
     }
 
-    return !empty($format . $suffix) ? $format . $suffix : 0;
+    return number_format($num);//!empty($format . $suffix) ? $format . $suffix : 0;
   }
 
 function timeElapsed($date){
     date_default_timezone_set("Africa/Lagos");
+    
+    $dateTime = new DateTime($date);
+    
+    $dateTime->add(new DateInterval('PT5H'));
+    
+    $date = $dateTime->format('Y-m-d H:i:s');
+    
     $months=array();
     for ($i=1; $i < 13; $i++) {
         $month = date('F',mktime(0,0,0,$i));

@@ -11,6 +11,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Books</li>
                             <li class="breadcrumb-item active">Book List</li>
+                            <li><a href="{{ route('admin.book.add') }}" class="btn btn-info btn-icon float-right mobile_menu2"><i class="zmdi zmdi-plus"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -19,7 +20,7 @@
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
 
-                            <a href="{{ route('admin.book.add') }}" class="btn btn-info btn-icon float-right"><i class="zmdi zmdi-plus"></i></a>
+                            
                     </div>
                 </div>
             </div>

@@ -1,0 +1,1 @@
+[04-Sep-2024 14:45:35 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/hiddfmns/public_html/app/Http/Controllers/StoreController.php on line 12

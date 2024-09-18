@@ -8,9 +8,10 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Video Edit</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Video</li>
                             <li class="breadcrumb-item active">Edit</li>
+                            <li><a href="#" id="delete_action" class="btn btn-danger btn-icon float-right mobile_menu2"><i class="zmdi zmdi-delete"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -18,10 +19,9 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right"
-                            data-id="subject"><i class="zmdi zmdi-delete"></i></a>
+                        
                         <input type="hidden" name="delete_type" value="video">
-                        <input type="hidden" name="delete_id" value="{{ $video->id }}">
+                        <input type="hidden" name="delete_id" value="{{ $video->video_id }}">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                             <div class="form-group">
                                                 <select rows="4" name="subject_id" class="form-control no-resize"
                                                     required>
-                                                    <option value="Select Subject"></option>
+                                                    
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}"
                                                             @if ($video->subject_id == $subject->id) @selected(true) @endif>
@@ -61,7 +61,7 @@
                                             <div class="form-group">
                                                 <select rows="4" name="class_id" class="form-control no-resize"
                                                     required>
-                                                    <option value="Select Class"></option>
+                                                    
                                                     @foreach ($classes as $class)
                                                         <option value="{{ $class->id }}"
                                                             @if ($video->class_id == $class->id) @selected(true) @endif>

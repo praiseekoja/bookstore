@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Book;
+use App\Models\Subject;
+use App\Models\ClassModel;
+use App\Models\Cart;
 use App\Models\UserCollections;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -166,16 +169,26 @@ class UserSpaceController extends Controller
                 ], 409);
 
 
-            $user->username = $data['username'];
-            $user->email = $data['email'];
+            // $user->username = $data['username'];
+            // $user->email = $data['email'];
 
-            $profile->first_name = $data['first_name'];
-            $profile->last_name = $data['last_name'];
-            $profile->tel = $data['tel'];
-            $profile->address = $data['addr'];
+            // $profile->first_name = $data['first_name'];
+            // $profile->last_name = $data['last_name'];
+            // $profile->tel = $data['tel'];
+            // $profile->address = $data['addr'];
 
-            $user->save();
-            $profile->save();
+            Profile::where('userId', $userId)
+        ->update([
+            'last_name' => $data['last_name'],
+            'first_name' => $data['first_name'],
+            'tel' => $data['tel'] ?? null, 'address' => $data['addr'] ?? null,
+        ]);
+
+        User::where('userId', $userId)
+        ->update([
+            'email' => $data['email'],
+            'username' => $data['username']
+        ]);
 
             return response()->json([
                 'message' => 'Updated!!'
@@ -234,7 +247,16 @@ class UserSpaceController extends Controller
                 abort(404);
             }
 
+            $subjects = Subject::take(30)
+            ->get();
+    
+            $classes = ClassModel::take(30)
+            ->get();
+            
             return view('user.read')->with([
+                'subjects' => $subjects,
+                'classes' => $classes,
+                'cartCount' => $this->countCart($userId),
                 'user' => $user,
                 'book' =>$book,
                 'title' => 'Read - '.$book->title
@@ -252,7 +274,7 @@ class UserSpaceController extends Controller
     private function getTotalLibrary($userId)
     {
         return DB::table('user_collections')
-            ->whereRaw('userId = ? and book_id <> null', array($userId))->count();
+            ->whereRaw('userId = ?', array($userId))->count();
     }
 
     private function getTotalPurchased($userId)
@@ -286,7 +308,7 @@ class UserSpaceController extends Controller
     private function getBooks($userId)
     {
         return DB::table('user_collections')
-            ->whereRaw('user_collections.userId = ? and user_collections.book_id <> null', array($userId))
+            ->whereRaw('user_collections.userId = ?', array($userId))
             ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
             ->orderBy('user_collections.created_at', 'desc')
             ->take(100)
@@ -319,5 +341,11 @@ class UserSpaceController extends Controller
             ->orderBy('wishlist.created_at', 'desc')
             ->take(20)
             ->get();
+    }
+    
+    private function countCart($userId)
+    {
+        return DB::table('cart')
+            ->whereRaw('user = ?', array($userId))->count();
     }
 }

@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Add Subject</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Subject</li>
                             <li class="breadcrumb-item active">Add</li>
                         </ul>

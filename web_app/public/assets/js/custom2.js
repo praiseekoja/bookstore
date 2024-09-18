@@ -274,7 +274,7 @@ jQuery(document).ready(($) => {
 
 
 
-    function showInfo(title = null, message = null) {
+    function showInfo(title = null, message = '') {
         iziToast.info({
             title,
             message,
@@ -282,7 +282,7 @@ jQuery(document).ready(($) => {
         });
     }
 
-    function showSuccess(title = "Success", message = null) {
+    function showSuccess(title = "Success", message = '') {
         iziToast.success({
             title,
             message,

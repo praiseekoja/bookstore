@@ -88,6 +88,8 @@ jQuery(document).ready(($) => {
             success: () => {
                 unblockUI();
                 showSuccess('Item Removed!');
+                document.getElementById(`row-${id}`).style.display = 'none';
+                window.location.reload();
             },
             error: (data) => {
                 unblockUI();
@@ -116,7 +118,7 @@ jQuery(document).ready(($) => {
         });
     }
 
-    function showSuccess(title = "Success", message = null) {
+    function showSuccess(title = "Success", message = '') {
         iziToast.success({
             title,
             message,
@@ -174,8 +176,6 @@ function makePayment() {
         tx_ref: form_data.get('ref'),
         amount: $('#total-pr').val(),
         currency: "NGN",
-        payment_options: "card, banktransfer, internetbanking, enaira, opay, ussd",
-        redirect_url: "https://hiddenfactsbooks.com/order",
         meta: {
             consumer_id: form_data.get('userId'),
             consumer_mac: "",
@@ -189,22 +189,26 @@ function makePayment() {
             title: "Hidden Facts Books",
         },
         callback: async function (payment) {
-            await verifyTransaction(payment.id);
+            let ref = payment.tx_ref;
+            await verifyTransaction(ref, form_data);
             modal.close();
+            blockUI("Verifying your payment please wait");
         }
     });
 }
 
-const verifyTransaction = async (payment_id) =>{
+const verifyTransaction = async (payment_id, form_data) =>{
     $.ajax({
-        url: `/payment/${payment_id}`,
-        type: 'GET',
+        url: `/payment/${payment_id}/verify`,
+        type: 'POST',
         contentType: false,
         cache: false,
+        data: form_data,
         processData: false,
         success: () => {
             unblockUI();
-            showSuccess('Cart Updated!!!');
+            showSuccess('Payment successful!!', '');
+            window.location.href = "/order"
         },
         error: (data) => {
             unblockUI();
@@ -213,7 +217,7 @@ const verifyTransaction = async (payment_id) =>{
     });
 }
 
-function showSuccess(title = "Success", message = null) {
+function showSuccess(title = "Success", message = '') {
     iziToast.success({
         title,
         message,

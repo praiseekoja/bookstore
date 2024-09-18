@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
 // use Flutterwave\Transactions;
 // use Flutterwave\Rave;
 
@@ -183,6 +184,27 @@ class StoreController extends Controller
             'videos' => $this->getVideos()
         ]);
     }
+    
+    function showVideoSub(Request $request, $id) {
+        $subjects = Subject::take(30)
+        ->get();
+
+        $classes = ClassModel::take(30)
+        ->get();
+
+        $cart_num = 0;
+        if ($request->session()->has('user')) {
+            $userId = session('user');
+            $cart_num = $this->countCart($userId);
+        }
+
+        return view('video-subject')->with([
+            'subjects' => $subjects,
+            'classes' => $classes,
+            'cartCount' => $cart_num,
+            'videos' => $this->getVideosSub($id)
+        ]);
+    }
 
     function showCart(Request $request) {
         if ($request->session()->has('user')) {
@@ -322,13 +344,19 @@ class StoreController extends Controller
     }
 
     function verifyPayment(Request $request, $id) {
-        $flw = new \Flutterwave\Rave(getenv('FLW_SECRET_KEY'));
-        $transactions = new \Flutterwave\Transactions();
-        $response = $transactions->verifyTransaction(['id' => $transactionId]);
-        if (
-            $response['data']['status'] === "successful"
-            && $response['data']['amount'] === $expectedAmount
-            && $response['data']['currency'] === $expectedCurrency) {
+        $flw_key = env('FLW_SECRET_KEY');
+        $client = new Client();
+        $response = $client->request('GET', "https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref={$id}", [
+            'headers' => [
+                'Authorization' => "Bearer {$flw_key}",
+                'Content-Type'  => 'application/json',
+            ],
+        ]);
+
+        $responseBody = json_decode($response->getBody()->getContents(), true);
+
+        // Check the payment status
+        if (isset($responseBody['data']['status']) && $responseBody['data']['status'] == 'successful') {
 
                 try {
                     return response()->json([
@@ -344,19 +372,34 @@ class StoreController extends Controller
                     $cartItem = $this->getCartItems($userId);
                     $cost = 0;
                     foreach ($cartItem as $item) {
-                        $cost += $item->price;
-                        if(checkUserCollection($userId, $item->book_id) == 0){
+                        if($item->format == 'hard')
+                            $cost += $item->price2;
+                        else
+                            $cost += $item->price;
+                        
+                        if($this->checkUserCollection($userId, $item->book_id) == 0){
                             $result = DB::table('user_collections')->insert([
-                                'userId' => $item->book_id,
-                                'book_id' => $userId
+                                'userId' => $userId,
+                                'book_id' => $item->book_id
                             ]);
                         }
                     }
+                    
+                    $data = $request->validate([
+                        'first_name' => 'required_without',
+                        'last_name' => 'required_without',
+                        'phone' => 'required_without',
+                        'email' => 'required_without',
+                        'state' => 'required_without',
+                        'address' => 'required_without',
+                        'company' => 'required_without'
+                    ]);
 
                     $result = DB::table('transaction')->insert([
                         'cost' => $cost,
                         'details' => json_encode($cartItem),
-                        'user' => $userId
+                        'user' => $userId,
+                        'shipping_details' => json_encode($data)
                     ]);
 
 
@@ -381,7 +424,7 @@ class StoreController extends Controller
 
         $cart_num = 0;
 
-        $cart_num = $this->countCart($userId);
+        $cart_num = $this->countCart('$userId');
 
         return view('order')->with([
             'subjects' => $subjects,
@@ -391,9 +434,6 @@ class StoreController extends Controller
     }
 
     function showTransactionDetails(Request $request, $id) {
-        if (!$request->session()->has('user') || !$request->session()->has('overseer'))
-            abort(401);
-
         $subjects = Subject::take(30)
         ->get();
 
@@ -403,7 +443,7 @@ class StoreController extends Controller
         $cart_num = 0;
 
         if($request->session()->has('user')){
-            $userId = session('overseer');
+            $userId = session('user');
             $cart_num = $this->countCart($userId);
 
             return view('transaction')->with([
@@ -418,7 +458,7 @@ class StoreController extends Controller
                 'subjects' => $subjects,
                 'classes' => $classes,
                 'cartCount' => $cart_num,
-                'carts' => json_decode($this->getTransaction($id))->details
+                'carts' => $this->getTransaction($id)
             ]);
         }
         else {
@@ -515,6 +555,16 @@ class StoreController extends Controller
 
     private function getVideos(){
         return DB::table('video_links')
+            ->leftjoin('subject', 'video_links.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'video_links.class_id', '=', 'class.id')
+            ->orderBy('video_links.created_at', 'desc')
+            ->take(100)
+            ->get();
+    }
+    
+    private function getVideosSub($id){
+        return DB::table('video_links')
+            ->where('video_links.subject_id', $id)
             ->leftjoin('subject', 'video_links.subject_id', '=', 'subject.id')
             ->leftjoin('class', 'video_links.class_id', '=', 'class.id')
             ->orderBy('video_links.created_at', 'desc')

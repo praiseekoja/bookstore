@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/iziToast.min.css') }}">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         .header-area .header-top .header-info-right .shopping-card::before {
@@ -75,6 +76,10 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="logo2">
+                                    <a href="{{ route('home') }}"><img src="{{ url('assets/img/logo/logo.png') }}"
+                                            alt></a>
+                                </div>
                                     <div class="header-info-right d-flex align-items-center">
                                         <ul>
                                             <li class="shopping-card">
@@ -84,7 +89,9 @@
                                             <li>
                                                 <a href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i></a>
                                             </li>
+                                            @if (!session()->has('user'))
                                             <li><a href="{{ route('login') }}" class="btn header-btn">Sign in</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -97,17 +104,12 @@
                         <div class="row align-items-center">
                             <div class="col-xl-12">
 
-                                <div class="logo2">
-                                    <a href="{{ route('home') }}"><img src="{{ url('assets/img/logo/logo.png') }}"
-                                            alt></a>
-                                </div>
-
                                 <div class="main-menu text-center d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="{{ route('home') }}">Home</a></li>
                                             <li><a href="{{ route('store') }}">Store</a></li>
-                                            <li><a href="{{ route('about') }}">About</a></li>
+                                            
                                             @if (count($classes) > 0)
                                                 <li><a href="#">Classes</a>
                                                     <ul class="submenu">
@@ -125,7 +127,7 @@
                                                     <ul class="submenu">
                                                         @foreach ($subjects as $subject)
                                                             <li><a
-                                                                    href="{{ route('store.subject', $class->id) }}">{{ $subject->subject_name }}</a>
+                                                                    href="{{ route('store.subject', $subject->id) }}">{{ $subject->subject_name }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -133,6 +135,7 @@
                                             @endif
                                             <li><a href="{{ route('video') }}">Videos</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
+                                            <li><a href="{{ route('about') }}">About</a></li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -166,16 +169,17 @@
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
-                                            <p>Get the breathing space now, and we’ll extend your term at the other end
-                                                year for go.</p>
+                                            <p>Otumudia Publishers Limited is a publishing firm. The series 'Hidden facts books' is solely owned and published by the company, Otumudia Publishers Limited.</p>
                                         </div>
                                     </div>
 
                                     <div class="footer-social">
-                                        <a href="#"><i class="fab fa-facebook"></i></a>
-                                        <a href="#"><i class="fab fa-instagram"></i></a>
-                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        <a href="#"><i class="fab fa-youtube"></i></a>
+                                        <a href="https://web.facebook.com/profile.php?id=61561631919045"><i class="fab fa-facebook"></i></a>
+                                        <a href="https://www.instagram.com/hiddenfactsbooks/"><i class="fab fa-instagram"></i></a>
+                                        <a href="https://wa.me/message/D4YC42X6A6SNF1"><i class="fab fa-whatsapp"></i></a>
+                                        <a href="https://x.com/hiddenfactsbook"><i class="fab fa-twitter"></i></a>
+                                        <a href="https://www.youtube.com/@hiddenfactsbooks"><i class="fab fa-youtube"></i></a>
+                                        <a href="https://www.tiktok.com/@hiddenfactsbooks"><i class="fab fa-tiktok"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +205,7 @@
                                     <ul>
                                         @foreach ($subjects as $subject)
                                             <li><a
-                                                    href="{{ route('store.subject', $class->id) }}">{{ $subject->subject_name }}</a>
+                                                    href="{{ route('store.subject', $subject->id) }}">{{ $subject->subject_name }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -278,6 +282,8 @@
     <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
     <script src="{{ url('assets/js/checkout.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://checkout.flutterwave.com/v3.js"></script>
 

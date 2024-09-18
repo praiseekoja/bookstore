@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>User List</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Users</li>
                             <li class="breadcrumb-item active">User List</li>
                         </ul>

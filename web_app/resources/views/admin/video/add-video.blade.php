@@ -8,7 +8,7 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Add Video</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Video</li>
                             <li class="breadcrumb-item active">Add</li>
                         </ul>
@@ -41,7 +41,6 @@
                                             <div class="form-group">
                                                 <select rows="4" name="subject_id" class="form-control no-resize"
                                                     required>
-                                                    <option value="Select Subject"></option>
                                                     @foreach ($subjects as $subject)
                                                         <option value="{{ $subject->id }}">{{ $subject->subject_name }}
                                                         </option>
@@ -53,7 +52,7 @@
                                             <div class="form-group">
                                                 <select rows="4" name="class_id" class="form-control no-resize"
                                                     required>
-                                                    <option value="Select Class"></option>
+                                                    
                                                     @foreach ($classes as $class)
                                                         <option value="{{ $class->id }}">{{ $class->class_name }}
                                                         </option>

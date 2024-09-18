@@ -8,9 +8,10 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>User Edit</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Users</li>
                             <li class="breadcrumb-item active">Edit</li>
+                            <li><a href="#" id="delete_action" class="btn btn-danger btn-icon float-right mobile_menu2"><i class="zmdi zmdi-delete"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -18,7 +19,7 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right"><i class="zmdi zmdi-delete"></i></a>
+                        
                         <input type="hidden" name="delete_type" value="user">
                         <input type="hidden" name="delete_id" value="{{ $user->userId }}">
                     </div>
@@ -89,13 +90,13 @@
                                         </div>
                                         <div class="col-lg-4 col-md-12">
                                             <div class="form-group">
-                                                <input type="text" max="tel" class="form-control"
+                                                <input type="text" name="phone" class="form-control"
                                                     value="{{ $user->tel }}" placeholder="Phone number">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <textarea name="addr" rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
+                                                <textarea name="address" rows="4" class="form-control no-resize" placeholder="Address Line 1">{{ $user->address }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">

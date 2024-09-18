@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Hidden Facts Books - Book Shop</title>
+    <title>{{ $book->title }} - Hidden Facts Books</title>
     <meta name="description" content>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,25 +51,114 @@
             transition: all .3s ease-out 0s;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
         }
-        
-        .banner-img{
-            background-image: url({{ 'assets/img/hero/banner.jpg' }});
-            object-fit: contain;
-            width: fit-content;
-            height: 500px;
+    </style>
+    
+    <script src="{{ url('assets/js/vendor/pdf.mjs') }}" type="module"></script>
+
+    <script type="module">
+        // If absolute URL from the remote server is provided, configure the CORS
+        // header on that server.
+        var url = '{{ url($book->book_file) }}';
+
+        // Loaded via <script> tag, create shortcut to access PDF.js exports.
+        var {
+            pdfjsLib
+        } = globalThis;
+
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ url('assets/js/vendor/pdf.worker.mjs') }}";
+
+        var pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 0.8,
+            canvas = document.getElementById('the-canvas'),
+            ctx = canvas.getContext('2d');
+
+        /**
+         * Get page info from document, resize canvas accordingly, and render page.
+         * @param num Page number.
+         */
+        function renderPage(num) {
+            pageRendering = true;
+            // Using promise to fetch the page
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({
+                    scale: scale
+                });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+
+                // Wait for rendering to finish
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        // New page rendering is pending
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+
+            // Update page counters
+            document.getElementById('page_num').textContent = num;
         }
-        
-        @media only screen and (max-width: 768px) {
-          /* For mobile phones: */
-            .banner-img{
-                margin-top: 60px;
-                background-image: url({{ 'assets/img/hero/banner.jpg' }});
-                object-fit: contain;
-                width: auto;
-                height: 250px;
+
+        /**
+         * If another page rendering in progress, waits until the rendering is
+         * finised. Otherwise, executes rendering immediately.
+         */
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
             }
         }
-    </style>
+
+        /**
+         * Displays previous page.
+         */
+        function onPrevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('prev').addEventListener('click', onPrevPage);
+
+        /**
+         * Displays next page.
+         */
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('next').addEventListener('click', onNextPage);
+
+        /**
+         * Asynchronously downloads PDF.
+         */
+        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            document.getElementById('page_count').textContent = pdfDoc.numPages;
+
+            // Initial/first page rendering
+            renderPage(pageNum);
+        });
+    </script>
 </head>
 
 <body>
@@ -108,6 +197,7 @@
                                             <li>
                                                 <a href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i></a>
                                             </li>
+                                            
                                             @if (!session()->has('user'))
                                             <li><a href="{{ route('login') }}" class="btn header-btn">Sign in</a></li>
                                             @endif
@@ -152,19 +242,7 @@
                                                     </ul>
                                                 </li>
                                             @endif
-                                            
-                                            @if (count($subjects) > 0)
-                                                <li><a href="#">Videos</a>
-                                                    <ul class="submenu">
-                                                        @foreach ($subjects as $subject)
-                                                            <li><a
-                                                                    href="{{ route('video.subject', $subject->id) }}">{{ $subject->subject_name }}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            @endif
-                                            
+                                            <li><a href="{{ route('video') }}">Videos</a></li>
                                             <li><a href="{{ route('contact') }}">Contact</a></li>
                                             <li><a href="{{ route('about') }}">About</a></li>
                                         </ul>
@@ -196,14 +274,13 @@
 
                                     <div class="footer-logo mb-25">
                                         <a href="{{ route('home') }}"><img
-                                                src="{{ url('assets/img/logo/logo2_footer_bg.png') }}" alt></a>
+                                                src="{{ url('assets/img/logo/logo2_footer.png') }}" alt></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">
                                             <p>Otumudia Publishers Limited is a publishing firm. The series 'Hidden facts books' is solely owned and published by the company, Otumudia Publishers Limited.</p>
                                         </div>
                                     </div>
-                                    
 
                                     <div class="footer-social">
                                         <a href="https://web.facebook.com/profile.php?id=61561631919045"><i class="fab fa-facebook"></i></a>
@@ -313,9 +390,8 @@
     <script src="{{ url('assets/js/blockUI.js') }}"></script>
     <script src="{{ url('assets/js/iziToast.min.js') }}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 

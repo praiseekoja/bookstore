@@ -8,9 +8,10 @@
                     <div class="col-lg-7 col-md-6 col-sm-12">
                         <h2>Class Edit</h2>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="zmdi zmdi-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="zmdi zmdi-home"></i> Home</a></li>
                             <li class="breadcrumb-item">Class</li>
                             <li class="breadcrumb-item active">Edit</li>
+                            <li><a href="#" id="delete_action" class="btn btn-danger btn-icon float-right mobile_menu2"><i class="zmdi zmdi-delete"></i></a></li>
                         </ul>
                         <button class="btn btn-primary btn-icon mobile_menu" type="button"><i
                                 class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -18,8 +19,6 @@
                     <div class="col-lg-5 col-md-6 col-sm-12">
                         <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i
                                 class="zmdi zmdi-arrow-right"></i></button>
-                        <a href="#" id="delete_action" class="btn btn-danger btn-icon float-right" data-id="class"><i
-                                class="zmdi zmdi-delete"></i></a>
                         <input type="hidden" name="delete_type" value="class">
                         <input type="hidden" name="delete_id" value="{{ $class->id }}">
                     </div>
