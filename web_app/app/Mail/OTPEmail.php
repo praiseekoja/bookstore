@@ -31,7 +31,7 @@ class OTPEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reset Password',
+            subject: $this->data['title'],
             from: new Address('no-reply@hiddenfactsbooks.com', 'Hidden Facts Books'),
         );
     }

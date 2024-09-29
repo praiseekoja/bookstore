@@ -58,7 +58,7 @@ class RegisterController extends Controller
         }
 
         return response()->json([
-            'message' => $request->cookie('browser_tracker')
+            'message' => 'An error occurred'
         ], 400);
     }
 }
