@@ -45,8 +45,10 @@ class RegisterController extends Controller
         $content = json_decode($res->getContent());
 
         if($res->getStatusCode() == 200){
-            // $request->session()->regenerate();
-            // $request->session()->put('user', $content->user->userId);
+            $user = User::whereRaw('auth.username = ?', array($data['username']))
+            ->first();
+            $request->session()->regenerate();
+            $request->session()->put('user', $user->userId);
 
             return response()->json([
                 'message' => "success",

@@ -40,10 +40,10 @@
                         <div class="best-selling p-0">
                             <div class="row">
                                 @foreach ($videos as $video)
-                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" style="margin-right: 200px;">
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6" style="margin-right: 90px;">
                                         <div class="properties pb-30">
                                             <div class="properties-card">
-                                                <iframe width="460" height="315"
+                                                <iframe width="360" height="215"
                                                     src="{{ $video->video_link }}"
                                                     frameborder="0"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

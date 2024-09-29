@@ -36,8 +36,8 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken($credentials['username'], ['*'], now()->addYear());
-        $request->session()->regenerate();
-        $request->session()->put('user', $user->userId);
+        // $request->session()->regenerate();
+        // $request->session()->put('user', $user->userId);
 
         return response([
             'User' => $user,

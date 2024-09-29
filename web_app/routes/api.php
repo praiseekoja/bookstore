@@ -37,6 +37,7 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [UserController::class, 'getUsers']);
+    Route::get('/catalog', [UserController::class, 'getCatalog']);
     Route::get('/{userId}', [UserController::class, 'getUser'])->whereUuid("userId");
     Route::patch('', [UserController::class, 'UpdateUser']);
     // Route::patch('/{userId}', [UserController::class, 'UpdateUser'])->whereUuid("userId");
@@ -45,16 +46,18 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
 
 Route::prefix('class')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [ClassController::class, 'getClasses']);
-    Route::get('/{id}', [ClassController::class, 'getClass']);
+
     Route::post('', [ClassController::class, 'create']);
+    Route::get('/{id}', [ClassController::class, 'getClass']);
     Route::patch('/{id}', [ClassController::class, 'UpdateClass']);
     Route::delete('/{id}', [ClassController::class, 'deleteClass']);
 });
 
 Route::prefix('subject')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [SubjectController::class, 'getSubjects']);
-    Route::get('/{id}', [SubjectController::class, 'getSubject']);
+
     Route::post('', [SubjectController::class, 'create']);
+    Route::get('/{id}', [SubjectController::class, 'getSubject']);
     Route::patch('/{id}', [SubjectController::class, 'UpdateSubject']);
     Route::delete('/{id}', [SubjectController::class, 'deleteSubject']);
 });
@@ -74,11 +77,12 @@ Route::prefix('saved-items')->middleware(['auth:sanctum'])->group(function () {
 
 Route::prefix('book')->middleware(['auth:sanctum'])->group(function () {
     Route::get('', [BookController::class, 'getBooks']);
-    Route::get('{id}', [BookController::class, 'getBook']);
     Route::get('/search', [BookController::class, 'findBooks']);
+    Route::get('/popular', [BookController::class, 'getPopular']);
     Route::post('', [BookController::class, 'create']);
-    Route::patch('/{id}', [BookController::class, 'updateBook']);
-    Route::delete('/{id}', [BookController::class, 'deleteBook']);
+    Route::get('{id}', [BookController::class, 'getBook'])->whereUuid("id");
+    Route::patch('/{id}', [BookController::class, 'updateBook'])->whereUuid("id");
+    Route::delete('/{id}', [BookController::class, 'deleteBook'])->whereUuid("id");
 });
 
 

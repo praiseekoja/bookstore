@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -72,5 +73,23 @@ class UserController extends Controller
         }
 
         return response(['message' => 'An unknown error occured'], 500);
+    }
+    
+    function getCatalog(Request $request) {
+        return response([
+            'books' => $this->getBooks($request->user()->userId),
+            'message' => 'cataglog fetched!'
+        ]);
+        
+    }
+    
+    private function getBooks($userId)
+    {
+        return DB::table('user_collections')
+            ->whereRaw('user_collections.userId = ? and book.book_id <> ?', array($userId, null))
+            ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
+            ->orderBy('user_collections.created_at', 'desc')
+            ->take(100)
+            ->get();
     }
 }

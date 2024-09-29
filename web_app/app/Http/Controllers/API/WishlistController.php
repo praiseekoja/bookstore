@@ -40,7 +40,7 @@ class WishlistController extends Controller
     }
 
     function deleteWishlist(Request $request, $id) {
-        $row = DB::table('book')
+        $row = DB::table('wishlist')
         ->where('id', $id)
         ->delete();
 

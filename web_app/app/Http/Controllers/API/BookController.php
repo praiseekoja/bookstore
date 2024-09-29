@@ -81,31 +81,33 @@ class BookController extends Controller
     }
 
     function findBooks(Request $request) {
-        $query = $request->query('query', '');
-
+        $query = $request->input('query');
+        $subj = $request->input('subject');
+        $class = $request->input('class');
+        
         $books = Book::where('book.title', 'LIKE', "%{$query}%")
-        ->orWhere('subject.subject_name', 'LIKE', "%{$query}%")
-        ->orWhere('class.class_name', 'LIKE', "%{$query}%")
-        ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
-        ->leftjoin('class', 'book.class_id', '=', 'class.id')
-        ->take(100)
-        ->get();
+                ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+                ->leftjoin('class', 'book.class_id', '=', 'class.id')
+                ->take(20)
+                ->get();
 
-        if($books == null)
-            return response(['message' => 'No book found'], 404);
-
-        return response(['message' => 'Books found', 'data' => $books], 200);
+        return response(['message' => 'Books found', 'book' => $books, 'class' => $this->getClass($class), 'subject' => $this->getSubject($subj)], 200);
     }
 
     function getBook(Request $request, $id) {
-        $book = Book::leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+        $book = Book::where('book_id', $id)
+        ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
         ->leftjoin('class', 'book.class_id', '=', 'class.id')
-        ->find($id);
+        ->get();
 
         if($book == null)
             return response(['message' => 'No book found'], 404);
 
         return response(['message' => 'Book found', 'data' => $book], 200);
+    }
+    
+    function getPopular(Request $request) {
+        return response(['message' => 'Book found', 'data' => $this->getBestSelling()], 200);
     }
 
     function updateBook(Request $request, $id) {
@@ -155,7 +157,7 @@ class BookController extends Controller
 
     function deleteBook(Request $request, $id) {
         $book = DB::table('book')
-        ->where('id', $id)
+        ->where('book_id', $id)
         ->delete();
 
         if ($book > 0) {
@@ -163,5 +165,33 @@ class BookController extends Controller
         }
 
         return response(['message' => 'Book does not exist'], 400);
+    }
+    
+    private function getBestSelling()
+    {
+        return DB::table('book')
+            ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'book.class_id', '=', 'class.id')
+            ->orderBy('book.created_at', 'desc')
+            ->take(8)
+            ->get();
+    }
+    
+    private function getClass($query)
+    {
+        return Book::leftjoin('class', 'book.class_id', '=', 'class.id')
+                ->leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+                ->Where('class.class_name', 'LIKE', "%{$query}%")
+                ->take(15)
+                ->get();
+    }
+
+    private function getSubject($query)
+    {
+        return Book::leftjoin('subject', 'book.subject_id', '=', 'subject.id')
+            ->leftjoin('class', 'book.class_id', '=', 'class.id')
+            ->Where('subject.subject_name', 'LIKE', "%{$query}%")
+            ->take(15)
+            ->get();
     }
 }
