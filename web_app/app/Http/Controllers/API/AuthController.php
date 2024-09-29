@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Mail;
+use App\Mail\OTPEmail;
 
 class AuthController extends Controller
 {
@@ -19,7 +21,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:auth,email',
             'username' => 'required|unique:auth,username',
             'password' => 'required|min:8',
-            'deviceId' => 'required_without'
+            'deviceId' => 'required|min:5'
         ]);
 
         $userId = Str::orderedUuid();
@@ -48,7 +50,8 @@ class AuthController extends Controller
     function login(Request $request) {
         $credentials = $request->validate([
             'user' => 'required',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'deviceId' => 'required|min:5'
         ]);
 
         $user = User::whereRaw('auth.username = ? or auth.email = ?', array($credentials['user'], $credentials['user']))
@@ -59,9 +62,26 @@ class AuthController extends Controller
             return response(['message' => 'User not found'], 404);
 
         if (Hash::check($credentials['password'], $user->password)) {
+            if($user['deviceId'] != $credentials['deviceId']){
+                $otp = mt_rand(1000000, 9999999);
+
+                User::where('userId', $user->userId)
+                ->update([
+                    'otp' => $otp,
+                ]);
+
+                Mail::to($user->email)->send(new OTPEmail([
+                    'title' => 'Verify New Device',
+                    'body' => "Use this code to verify your new device\nOTP Code: ".$otp
+                ]));
+
+                return response([
+                    'message' => 'verify user OTP sent!',
+                    'user' => $user,
+                ], 201);
+            }
 
             $token = $user->createToken($user->username, ['*'], now()->addYear());
-            // $profile = Profile::where('userId', $user->userId)->first();
 
             return response([
                 'user' => $user,
@@ -137,6 +157,53 @@ class AuthController extends Controller
 
         return response(['Username changed successfully'], 200);
 
+    }
+
+    function resendOTP(Request $request, $id){
+        $user = User::whereRaw('auth.userid = ?', array($id))
+        ->first();
+
+        if($user == null)
+            return response(['message' => 'User not found'], 404);
+
+        $otp = mt_rand(1000000, 9999999);
+
+        User::where('userId', $user->userId)
+        ->update([
+            'otp' => $otp,
+        ]);
+
+        Mail::to($user->email)->send(new OTPEmail([
+            'title' => 'Verify New Device',
+            'body' => "Use this code to verify your new device\nOTP Code: ".$otp
+        ]));
+
+        return response([
+            'message' => 'OTP sent!'
+        ], 200);
+    }
+
+    function verifyOTP(Request $request, $id){
+        $data = $request->validate([
+            'otp' => 'required|min:7|max:7',
+        ]);
+
+        $user = User::whereRaw('auth.userid = ?', array($id))
+        ->first();
+
+        if($user == null)
+            return response(['message' => 'User not found'], 404);
+
+        if($user->otp == $data['otp']){
+            $token = $user->createToken($user->username, ['*'], now()->addYear());
+
+            return response([
+                'User' => $user,
+                'token' => $token->plainTextToken
+            ], 200);
+        }
+
+        return response(['message' => 'Invalid OTP!', 400]);
     }
 
     // function createDev(Request $request) {

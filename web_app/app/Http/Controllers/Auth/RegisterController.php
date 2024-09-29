@@ -28,6 +28,7 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:auth,username',
             'email' => 'required|email|max:255|unique:auth,email',
             'password' => 'required|string|min:8|confirmed',
+            'deviceId' => 'required|string|min:5'
         ]);
 
         $req = Request::create(self::$url."register", 'POST', [
@@ -36,7 +37,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'deviceId' => '6787'
+            'deviceId' => $data['deviceId']
         ], [], [], [
             'HTTP_AUTHORIZATION' => "bearer ".self::$token
         ]);

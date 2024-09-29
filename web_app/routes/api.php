@@ -26,9 +26,11 @@ use App\Http\Controllers\API\TransactionController;
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/device/otp/{user}', [AuthController::class, 'verifyOTP']);
     Route::get('/email/{email}', [AuthController::class, 'checkEmail']);
     Route::get('/username/{username}', [AuthController::class, 'checkUsername']);
     Route::get('/forget-password/{user}', [AuthController::class, 'forgetPassword']);
+    Route::get('/device/otp/{user}', [AuthController::class, 'resendOTP']);
     Route::patch('/change-password', [AuthController::class, 'changePassword']);
     Route::patch('/change-email', [AuthController::class, 'changeEmail']);
     Route::patch('/chamge-username', [AuthController::class, 'changeUsername']);
