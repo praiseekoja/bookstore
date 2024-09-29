@@ -74,19 +74,19 @@ class UserController extends Controller
 
         return response(['message' => 'An unknown error occured'], 500);
     }
-    
+
     function getCatalog(Request $request) {
         return response([
             'books' => $this->getBooks($request->user()->userId),
             'message' => 'cataglog fetched!'
         ]);
-        
+
     }
-    
+
     private function getBooks($userId)
     {
         return DB::table('user_collections')
-            ->whereRaw('user_collections.userId = ? and book.book_id <> ?', array($userId, null))
+            ->whereRaw('user_collections.userId = ?', array($userId))
             ->leftjoin('book', 'user_collections.book_id', '=', 'book.book_id')
             ->orderBy('user_collections.created_at', 'desc')
             ->take(100)

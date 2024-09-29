@@ -26,7 +26,7 @@ use App\Http\Controllers\API\TransactionController;
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/device/otp/{user}', [AuthController::class, 'verifyOTP']);
+    Route::post('/device/otp/{userId}', [AuthController::class, 'verifyOTP']);
     Route::get('/email/{email}', [AuthController::class, 'checkEmail']);
     Route::get('/username/{username}', [AuthController::class, 'checkUsername']);
     Route::get('/forget-password/{user}', [AuthController::class, 'forgetPassword']);

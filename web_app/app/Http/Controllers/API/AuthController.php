@@ -183,12 +183,13 @@ class AuthController extends Controller
         ], 200);
     }
 
-    function verifyOTP(Request $request, $id){
+    function verifyOTP(Request $request, $userId){
         $data = $request->validate([
             'otp' => 'required|min:7|max:7',
+            'deviceId' => 'required|min:5',
         ]);
 
-        $user = User::whereRaw('auth.userid = ?', array($id))
+        $user = User::whereRaw('auth.userid = ?', array($userId))
         ->first();
 
         if($user == null)
@@ -196,6 +197,11 @@ class AuthController extends Controller
 
         if($user->otp == $data['otp']){
             $token = $user->createToken($user->username, ['*'], now()->addYear());
+
+            User::where('userId', $user->userId)
+            ->update([
+                'deviceId' => $data['deviceId'],
+            ]);
 
             return response([
                 'User' => $user,

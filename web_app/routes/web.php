@@ -95,10 +95,12 @@ Route::get('/overseer/logout', [LogoutController::class, 'logoutAdmin'])->name('
 
 Route::get('/forget-password', [PasswordResetController::class, 'showForget'])->name('forget');
 Route::get('/auth/otp', [PasswordResetController::class, 'showOtp'])->name('otp');
+Route::get('/auth/mfa/otp', [LoginController::class, 'showOtp']);
 Route::get('/auth/change-password', [PasswordResetController::class, 'showChangePassword'])->name('change.password');
 
 Route::post('/auth/find-user', [PasswordResetController::class, 'findUser']);
 Route::get('/auth/verify/{id}', [PasswordResetController::class, 'verifyOtp']);
+Route::post('/auth/device/verify/{otp}', [LoginController::class, 'verifyOtp']);
 Route::post('/auth/change-password', [PasswordResetController::class, 'changePassword']);
 
 /**

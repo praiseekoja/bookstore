@@ -28,8 +28,9 @@ class RegisterController extends Controller
             'username' => 'required|string|max:255|unique:auth,username',
             'email' => 'required|email|max:255|unique:auth,email',
             'password' => 'required|string|min:8|confirmed',
-            'deviceId' => 'required|string|min:5'
+            'deviceId' => 'required|min:25'
         ]);
+
 
         $req = Request::create(self::$url."register", 'POST', [
             'first_name' => $data['first_name'],
@@ -37,7 +38,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'deviceId' => $data['deviceId']
+            'deviceId' => $data['deviceId'],
         ], [], [], [
             'HTTP_AUTHORIZATION' => "bearer ".self::$token
         ]);
@@ -57,7 +58,7 @@ class RegisterController extends Controller
         }
 
         return response()->json([
-            'message' => "An error occurred"
+            'message' => $request->cookie('browser_tracker')
         ], 400);
     }
 }
