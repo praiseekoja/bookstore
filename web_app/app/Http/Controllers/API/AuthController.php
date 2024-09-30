@@ -159,8 +159,8 @@ class AuthController extends Controller
 
     }
 
-    function resendOTP(Request $request, $id){
-        $user = User::whereRaw('auth.userid = ?', array($id))
+    function resendOTP(Request $request, $user){
+        $user = User::whereRaw('auth.userid = ?', array($user))
         ->first();
 
         if($user == null)

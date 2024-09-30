@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 
 class LoginController extends Controller
 {
@@ -53,6 +54,7 @@ class LoginController extends Controller
             $request->session()->forget('user');
             $request->session()->regenerate();
             $request->session()->put('user', $content->user->userId);
+            $request->session()->put('deviceId', $data['deviceId']);
 
             return response()->json([
                 'message' => "success", 'status' => 200
@@ -119,6 +121,7 @@ class LoginController extends Controller
         $request->session()->forget('user');
         $request->session()->regenerate();
         $request->session()->put('user', $user->userId);
+        Cookie::queue('deviceId', $data['deviceId']);
 
         return response()->json(['message' => 'OTP Verified'], 200);
 

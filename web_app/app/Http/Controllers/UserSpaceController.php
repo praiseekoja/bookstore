@@ -249,10 +249,10 @@ class UserSpaceController extends Controller
 
             $subjects = Subject::take(30)
             ->get();
-    
+
             $classes = ClassModel::take(30)
             ->get();
-            
+
             return view('user.read')->with([
                 'subjects' => $subjects,
                 'classes' => $classes,
@@ -342,7 +342,7 @@ class UserSpaceController extends Controller
             ->take(20)
             ->get();
     }
-    
+
     private function countCart($userId)
     {
         return DB::table('cart')
