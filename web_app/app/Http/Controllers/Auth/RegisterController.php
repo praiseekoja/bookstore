@@ -52,7 +52,7 @@ class RegisterController extends Controller
             ->first();
             $request->session()->regenerate();
             $request->session()->put('user', $user->userId);
-            Cookie::forever('deviceId', $data['deviceId']);
+            $request->session()->put('deviceId', $data['deviceId']);
 
             return response()->json([
                 'message' => "success",
